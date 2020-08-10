@@ -2,4 +2,4 @@
 
 Ecole Polytechnique // Institut Polytechnique de Paris
 
-Description: This is an 8-hour introductory course to learn the basics of coding in econometrics. 
+This is an 8-hour introductory course to learn the basics of coding for applied econometrics. 
