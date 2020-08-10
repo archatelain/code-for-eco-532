@@ -1,3 +1,5 @@
 # Code for Econometrics 101
 
-Introductory course for coding in econometrics.
+Ecole Polytechnique // Institut Polytechnique de Paris
+
+Description: This is an 8-hour introductory course to learn the basics of coding in econometrics. 
