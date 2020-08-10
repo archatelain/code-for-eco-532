@@ -1,0 +1,102 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\germa\Desktop\code-for-econometrics-101\output/logs/main_log.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}10 Aug 2020, 17:49:53
+{txt}
+{com}. 
+. do "./code/basics/hello_world.do"
+{txt}
+{com}. display "Hello human. Thank you for creating me."
+{res}Hello human. Thank you for creating me.
+{txt}
+{com}. 
+. sleep 5000
+{txt}
+{com}. 
+. display "I will now proceed to destroy the world."
+{res}I will now proceed to destroy the world.
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "./code/basics/farewell.do"
+{txt}
+{com}. display "..."
+{res}...
+{txt}
+{com}. 
+. sleep 5000
+{txt}
+{com}. 
+. display "Just kidding. See you around, human."
+{res}Just kidding. See you around, human.
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "./code/basics/fibonacci.do"
+{txt}
+{com}. /* 
+> In this do-file, I show two implementations of the Fibonacci sequence.  
+> The Fibonacci sequence is defined as follows:
+> U_0 = 1 
+> U_1 = 1
+> U_n = U_[n-1] + U_[n-2] if n > 1
+> */
+. 
+. * POOR CODE
+. 
+. clear all
+{txt}
+{com}. program f
+{txt}  1{com}. args n
+{txt}  2{com}. clear
+{txt}  3{com}. qui set obs `n'
+{txt}  4{com}. qui gen a=1
+{txt}  5{com}. qui replace a=a[_n-1]+a[_n-2] in 3/l
+{txt}  6{com}. end
+{txt}
+{com}. 
+. f 100
+{txt}
+{com}. 
+. * NEAT CODE
+. 
+. /*
+> The Fibonacci sequence is defined as follows:
+> U_0 = 1 
+> U_1 = 1
+> U_n = U_[n-1] + U_[n-2] if n > 1
+> 
+> This program computes the Fibonacci sequence up to a specified value of n.
+> Input = value of n (integer)
+> Output = variable 'fibonacci' with n ordered values of Fibonacci's sequence. 
+> */
+. 
+. clear all
+{txt}
+{com}. program compute_fibonacci_sequence
+{txt}  1{com}. args n
+{txt}  2{com}. clear 
+{txt}  3{com}. qui set obs `n'
+{txt}  4{com}. qui gen fibonacci = 1
+{txt}  5{com}. qui replace fibonacci=fibonacci[_n-1]+fibonacci[_n-2] in 3/l
+{txt}  6{com}. end
+{txt}
+{com}. 
+. compute_fibonacci_sequence 100
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. 
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\germa\Desktop\code-for-econometrics-101\output/logs/main_log.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}10 Aug 2020, 17:50:03
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}
