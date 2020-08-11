@@ -1,0 +1,47 @@
+{smcl}
+{txt}{sf}{ul off}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\germa\Desktop\code-for-econometrics-101\basics\logs/main_log.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}11 Aug 2020, 10:43:17
+{txt}
+{com}. 
+. do "hello_world.do"
+{txt}
+{com}. display "Hello human. Thank you for creating me."
+{res}Hello human. Thank you for creating me.
+{txt}
+{com}. 
+. sleep 5000
+{txt}
+{com}. 
+. display "I will now proceed to destroy the world."
+{res}I will now proceed to destroy the world.
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "farewell.do"
+{txt}
+{com}. display "..."
+{res}...
+{txt}
+{com}. 
+. sleep 5000
+{txt}
+{com}. 
+. display "Just kidding. See you around, human."
+{res}Just kidding. See you around, human.
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. 
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\germa\Desktop\code-for-econometrics-101\basics\logs/main_log.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}11 Aug 2020, 10:43:27
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

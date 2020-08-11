@@ -46,7 +46,7 @@ Here's a smarter, more efficient way to do this.
 
 timer on 1
 
-postfile buffer mhat using "../../temp/mcs.dta", replace
+postfile buffer mhat using "./temp/monte_carlo_simulations.dta", replace
 
 forvalues i=1/1000 {
 quietly drop _all
@@ -58,7 +58,7 @@ post buffer (_b[y])
 
 postclose buffer
 
-use "../../temp/mcs.dta", clear
+use "./temp/monte_carlo_simulations.dta", clear
 
 summarize
 

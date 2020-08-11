@@ -1,5 +1,5 @@
 /* 
-In this do-file, I show two implementations of the Fibonacci sequence 
+In this do-file, I show different implementations of the Fibonacci sequence 
 and the hexagonal sequence.
 
 The Fibonacci sequence is defined as follows:
@@ -14,13 +14,15 @@ U_n = 2*n^2 - n for all n >= 0
 
 clear all
 
+*************************************************************************
 * POOR CODE
+*************************************************************************
 
 program f_sequ /* makes program */
 args n /* argument of the program */
 qui set obs `n'
 qui gen a=1 /* initialize */
-qui replace a=a[_n-1]+a[_n-2] in 3/l /* compute fibonacci sequence based on the formula */
+qui replace a=a[_n-1]+a[_n-2] in 3/l /* compute sequence based on the formula */
 end
 
 f_sequ 100
@@ -28,12 +30,14 @@ f_sequ 100
 program sequ_h /* makes program */
 args n /* argument of the program */
 qui set obs `n'
-gen b = 2*_n^2 - _n /* compute hexagonal sequence based on the formula */
+gen b = 2*_n^2 - _n /* compute sequence based on the formula */
 end
 
 sequ_h 100
 
+*************************************************************************
 * NEAT CODE
+*************************************************************************
 
 /*
 This program computes the Fibonacci sequence up to a specified value of n.

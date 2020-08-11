@@ -2,19 +2,47 @@
 
 ## Introduction
 
-Why we work with data: theory and empirics in economics
+As for most scientific endeavors, the accumulation of knowledge in economics is based on three steps. 
+First, researchers observe an empirical pattern. 
+Second, they try to build a theory which explains this stylized fact. In doing so, the theory is likely to imply
+several predictions which may be tested.
+Third, one may empirically test these predictions. If the predictions happen to be right, this comforts us in thinking 
+that the model does a good job and understands well the underlying mechanisms. If the predictions are false, 
+then it's time to come up with a better model.
 
-The importance of transparency and replication 
-- https://www.aeaweb.org/journals/policies/data-code
-- Examples: Matthew Gentzkow's replication folders
+A SIMPLE EXAMPLE
 
-Objectives of the course:
-- provide you with a general overview of how an applied econometric project is conducted/structured
-- provide you with general advice on writing and thinking about code
-- get you going with the simplest and most used statistical programming software: Stata
+Stylized fact = Many countries have implemented subsidies on the rental of flats. In France, they are called the APL (Aides Pour le Logement).
+At the same time, rental prices for flats have increased.
 
-Software used: Stata
-Data used: Global Social Unrest Episodes (SPEED Database)
+Theoretical explanation = In the market for rentals, subsidizing the rental of flats shifts the demand curve upwards, 
+which in turn increases rental prices. The economic incidence of the subsidy will actually depend on the shape of the 
+supply and demand curves, and on the specifics of the subsidy 
+(e.g. is it given to everyone or under specific conditions).
+
+Empirical test = In fact, several studies have confirmed the diagnosis in different countries at different time periods.
+For more information, you may refer to "L'impact des aides au logement sur le secteur locatif privé" (Céline Grislain-Letrémy et Corentin Trevien (2014)).
+
+Research in economics implies a permanent "back and forth" movement between economic theory and empirical observations. 
+With the surge of computational power, the amount of data at our disposal has drastically increased
+in the past decades, opening many new avenues to (i) find surprising stylized facts and (ii) test past theories. 
+In turn, this means you are more than likely to work with data at some point in your career as an economist. 
+
+Unsurprisingly, as more and more academics work with observational data, standards and best practices are progressively 
+emerging to ensure the transparency and replicability of research papers. In fact, an increasing number of top-journals
+require academics to provide detailed replication folders prior to publication (https://www.aeaweb.org/journals/policies/data-code).
+
+Fascinating research questions, dizzling amounts of data and ever increasing scientific standards... it's a brave new world! The purpose of
+this short lecture is to provide you with a gentle introduction to working with data in economics. 
+
+In this course, you will:
+1. Get a general overview of how an applied econometric project is conducted/structured;
+2. Find general advice on writing and thinking about code;
+3. Learn to work with the simplest (and commonly used) statistical programming software, namely Stata.
+
+We'll start with a brief introduction to coding in general and stata in particular. Then we will explore together the SPEED database 
+(i.e. a large record of global social unrest episodes) and attempt to formulate research questions on the determinants of social unrest. 
+Hopefully, at the end this lecture, you'll have learned a bunch, formulated many questions and found fragile answers... They call it research!
 
 ## I. Getting Started
 
@@ -28,13 +56,16 @@ KEY CONCEPTS
 
 A WORKING EXAMPLE
 
---> "./code/basics/hello_world.do"
---> "./code/basics/farewell.do"
+--> "./basics/hello_world.do"
+
+--> "./basics/farewell.do"
+
 --> Wrap both scripts in a "main.do" script
 
 ------------------------------------------------
 
 RULES TO LIVE BY
+
 Important stuff
 - Clarity (good variable names, good comments: don't comment obvious stuff!, good documentation if needed)
 - Consistency (keep variable and function names consistent)
@@ -44,21 +75,21 @@ Important stuff
 
 More advanced considerations
 - Automation (it's OK to be lazy, but in a smart way)
+
 --> DRY principle (don't repeat yourself), also known as DIE (duplication is evil) 
+
 --> reusability
 
-/!\ Example: Monte Carlo simulations /!\
-
 - Efficiency (try to reduce the time to solution) 
+
 --> scalability
 
-/!\ Example: Monte Carlo simulations with multiple cores /!\
+/!\ Example: Monte Carlo simulations /!\
 
 ADDITIONAL ADVICE
 - Write small chunks of code and test them before moving on.
 - Keep in mind that a machine is DUMB. Be rigorous when naming variables and functions. 
 - You'll never know all the commands, so learn to search efficiently. --> help 
-- Read other people's code to get better.
 
 ## II. Exploring a Dataset
 
@@ -119,9 +150,8 @@ Finding Data Sources
 
 Stata
 - User manual (https://www.stata.com/manuals13/u.pdf)
-- Other introductory courses (Antoine Bozio)
 
 Common (slightly more advanced) programming languages
-- Python for data science (https://tanthiamhuat.files.wordpress.com/2018/04/pythondatasciencehandbook.pdf)
-- R for Econometrics (https://www.econometrics-with-r.org/)
+- Python (https://tanthiamhuat.files.wordpress.com/2018/04/pythondatasciencehandbook.pdf)
+- R (https://www.econometrics-with-r.org/)
 - Matlab
