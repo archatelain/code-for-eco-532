@@ -42,21 +42,29 @@ They call that research!
 
 ## I. Getting Started
 
+So how do we work with data? Well, if your Rainman, I guess you could use a piece of paper. 
+For all the others, I would recommend to have a computer do the work for you. 
+In order to that, you need to know how to interact with the computer. 
+Let's review some key concepts to get us started.
+
 ### Key Concepts
 
+- **Command line**: *"A command-line interface (CLI) processes commands to a computer program in the form of lines of text." (Wikipedia)* 
+The command line is the interface which translates the operations you would like the computer to perform, which you write as text, 
+into something the computer can understand.
+- **Scripts**: You will want to have the computer do many things sequentially. Scripts help you keep track of the commands sent to the 
+computer through the command line. A script is a text file in which are written series of ordered commands for the command line. 
+- **Directories**: You will also want to store your work somewhere. Directories are precisely folders in which you store various files 
+(such as data sources, scripts and results).
+- **Log files**: More often than not, things will go wrong. Log files help you keep track of what the computer did and whether it flagged some errors.
 
-
-- Directories = Folders in which you wish to store various files (such as data sources, codes and results).
-- Command line = "A command-line interface (CLI) processes commands to a computer program in the form of lines of text." (Wikipedia)
-- Scripts = Series of ordered commands for the command line. 
-- Log files = Helps you keep track of what went wrong.
-
+Let's put these concepts in practice, now.
 
 > **Training Exercise**
 > 
-> 1. Open Stata
+> 1. Create a folder named "basics". This will be your main directory.
 >
-> 2. At the top on the left of the interface, click on "Open a do-file".
+> 2. Open stata. At the top on the left of the interface, click on "New Do-File Editor".
 >
 > 3. Write the following chunk of code:
 >
@@ -99,34 +107,48 @@ They call that research!
 
 ### Rules to live by 
 
+Getting the computer to do what you want it to do is good, but you also take many other factors into consideration. 
+Here are the core rules you should always have in mind when you write some code.
+
 #### The basics 
 
-- Clarity (good variable names, good comments: don't comment obvious stuff!, good documentation if needed)
-- Consistency (keep variable and function names consistent)
-- Simplicity (I want to understand your code) --> remove anything superfluous
+Anyone should be able to read your code without reading the documentation. Your code should be clear, consistent and simple. This may sound ridiculous 
+at first, but consider this: 
+1. You will be working in teams in the future, and that many colleagues may have to fix your code at some point. 
+2. Sometimes, you will go back to code you wrote months or years before, and wish you had not called all your economic variables "x","y" and "z", 
+instead of "gdp", "population" and "gini_index". 
+ 
+- **Clarity**: Name your variables, functions and classes with explicit titles. 
+- **Consistency**: Be consistent in your coding style (e.g. If all the sequences you have coded up-to-now are named "sequ_fibonacci", "sequ_hexagonal", etc. 
+Don't name the next sequence "quadratic_sequ"!)
+- **Simplicity**: Add comments when needed, but do not comment obvious operations as this will 
+overburden the reader with superfluous information.
 
 > ** Example: Computing Sequences **
 
 #### More advanced considerations
 
-- Automation (it's OK to be lazy, but in a smart way)
+- **Automation**: It's OK to be lazy, but in a smart way. You should always follow the DRY principle (don't repeat yourself), also known as DIE 
+(duplication is evil). This will allow your code to be *reusable* for other projects by yourself and other people. What looks like a waste of time at first
+becomes a fruitful investment.
 
---> DRY principle (don't repeat yourself), also known as DIE (duplication is evil) 
-
---> reusability
-
-- Efficiency (try to reduce the time to solution) 
-
---> scalability
+- **Efficiency**: Some projects will require very large computational power. There are many ways to do the same task, try to go for the most efficient 
+solution whenever possible, as this will increase the *scalability* of your code. 
 
 > ** Example: Monte Carlo Simulations **
 
 ### Additional advice
-- Write small chunks of code and test them before moving on.
-- Keep in mind that a machine is DUMB. Be rigorous when naming variables and functions. 
-- You'll never know all the commands, so learn to search efficiently. --> help 
+- Write small chunks of code and test them before moving on. Think of coding as LEGOs. You need to tear every piece apart before putting them back together.
+- Keep in mind that a machine is DUMB. Be rigorous when naming variables and functions, as the command line will usually not tolerate approximative naming
+and throw an error. 
+- You'll never know all the commands, so learn to search efficiently. In stata, you may type "help *your_command*" to access the documentation.  
 
 ## II. Exploring a Dataset
+
+We are now ready to work with a real data set and explore stata's functionalities. We will work with the Social, Political and Economic Event Database Project (SPEED), which you will find in "./social_unrest_project/data/ssp_public.csv".
+
+> The SPEED Database according to its authors
+> *"SPEED is a technology-intensive effort to extract event data from a global archive of news reports covering the Post WWII era. It is designed to provide insights into key behavioral patterns and relationships that are valid across countries and over time. Within SPEED, event data is generated by human analysts using a suite of sophisticated tools to implement carefully structured and pretested protocols. These protocols are category-specific electronic documents that are tailored to the information needs of a particular category of events (civil unrest, property rights, electoral processes, etc.). SPEED data will produce insights that complement those generated by other components of the SID project (constitutional data, archival data, survey-based data, etc.) because event data generates "bottom-up" observations from news reports. In generating these event data SPEED leverages tens of billions of dollars that have been invested in compiling news reports from throughout the world."*
 
 Data 
 - reading data
