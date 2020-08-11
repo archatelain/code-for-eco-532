@@ -42,7 +42,7 @@ They call that research!
 
 ## I. Getting Started
 
-So how do we work with data? Well, if your Rain Man, I guess you could use a piece of paper. 
+So how do we work with data? Well, if you're Rain Man, I guess you could use a piece of paper. 
 For all the others, I would recommend to have a computer do the work for you. 
 In order to that, you need to know how to interact with the computer. 
 Let's review some key concepts to get us started.
