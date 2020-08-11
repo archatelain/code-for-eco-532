@@ -2,28 +2,12 @@
 
 ## Introduction
 
-As for most scientific endeavors, the accumulation of knowledge in economics is based on three steps. 
-First, researchers observe an empirical pattern. 
-Second, they try to build a theory which explains this stylized fact. In doing so, the theory is likely to imply
-several predictions which may be tested.
-Third, one may empirically test these predictions. If the predictions happen to be right, this comforts us in thinking 
-that the model does a good job and understands well the underlying mechanisms. If the predictions are false, 
-then it's time to come up with a better model.
+As for most scientific endeavors, the accumulation of knowledge in economics is based on a permanent "back and forth" 
+movement between economic theory and empirical observations. Researchers typically:
+1. Observe an empirical pattern;
+2. Try to build a theory which explains this stylized fact;
+3. Empirically test the theory's predictions to confirm or invalidate their understanding of the phenomenon.
 
-A SIMPLE EXAMPLE
-
-Stylized fact = Many countries have implemented subsidies on the rental of flats. In France, they are called the APL (Aides Pour le Logement).
-At the same time, rental prices for flats have increased.
-
-Theoretical explanation = In the market for rentals, subsidizing the rental of flats shifts the demand curve upwards, 
-which in turn increases rental prices. The economic incidence of the subsidy will actually depend on the shape of the 
-supply and demand curves, and on the specifics of the subsidy 
-(e.g. is it given to everyone or under specific conditions).
-
-Empirical test = In fact, several studies have confirmed the diagnosis in different countries at different time periods.
-For more information, you may refer to "L'impact des aides au logement sur le secteur locatif privé" (Céline Grislain-Letrémy et Corentin Trevien (2014)).
-
-Research in economics implies a permanent "back and forth" movement between economic theory and empirical observations. 
 With the surge of computational power, the amount of data at our disposal has drastically increased
 in the past decades, opening many new avenues to (i) find surprising stylized facts and (ii) test past theories. 
 In turn, this means you are more than likely to work with data at some point in your career as an economist. 
@@ -42,11 +26,25 @@ In this course, you will:
 
 We'll start with a brief introduction to coding in general and stata in particular. Then we will explore together the SPEED database 
 (i.e. a large record of global social unrest episodes) and attempt to formulate research questions on the determinants of social unrest. 
-Hopefully, at the end this lecture, you'll have learned a bunch, formulated many questions and found fragile answers... They call it research!
+Hopefully, at the end this lecture, you'll have learned a bunch, formulated many questions and found fragile answers... And we call that research!
+
+
+> **An Example of Economic Research in Practice**
+>
+> **Stylized fact** = Many countries have implemented subsidies on the rental of flats. In France, they are called the APL (Aides Pour le Logement).
+> At the same time, rental prices for flats have increased.
+> 
+> **Theoretical explanation** = In the market for rentals, subsidizing the rental of flats shifts the demand curve upwards, 
+> which in turn increases rental prices. The economic incidence of the subsidy will actually depend on the shape of the 
+> supply and demand curves, and on the specifics of the subsidy 
+> (e.g. is it given to everyone or under specific conditions).
+>
+> **Empirical test** = In fact, several studies have confirmed this diagnosis in different countries at different time periods.
+> For more information, you may refer to *"L'impact des aides au logement sur le secteur locatif privé"* (Céline Grislain-Letrémy et Corentin Trevien (2014)).
 
 ## I. Getting Started
 
-KEY CONCEPTS
+### KEY CONCEPTS
 - Directories = Folders in which you wish to store various files (such as data sources, codes and results).
 - Command line = "A command-line interface (CLI) processes commands to a computer program in the form of lines of text." (Wikipedia)
 - Scripts = Series of ordered commands for the command line. 
