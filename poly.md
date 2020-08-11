@@ -205,7 +205,7 @@ gen hexagonal = 2*_n^2 - _n
 end
 
 compute_hexagonal_sequence 100
-```
+> ```
 
 #### More advanced considerations
 
@@ -317,7 +317,7 @@ second solution.
 timer list 1
 timer list 2
 
-```
+> ```
 
 ### Additional advice
 - Write small chunks of code and test them before moving on. Think of coding as LEGOs. You need to tear every piece apart before putting them back together.
