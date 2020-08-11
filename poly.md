@@ -9,25 +9,22 @@ movement between economic theory and empirical observations. Researchers typical
 3. Empirically test the theory's predictions to confirm or invalidate their understanding of the phenomenon.
 
 With the surge of computational power, the amount of data at our disposal has drastically increased
-in the past decades, opening many new avenues to (i) find surprising stylized facts and (ii) test past theories. 
-In turn, this means you are more than likely to work with data at some point in your career as an economist. 
+in the past decades, opening many new avenues to find surprising stylized facts and test past theories. 
+**In turn, this means you are more than likely to work with data at some point in your career as an economist.**
 
 Unsurprisingly, as more and more academics work with observational data, standards and best practices are progressively 
 emerging to ensure the transparency and replicability of research papers. In fact, an increasing number of top-journals
 require academics to provide detailed replication folders prior to publication (https://www.aeaweb.org/journals/policies/data-code).
 
-Fascinating research questions, dizzling amounts of data and ever increasing scientific standards... it's a brave new world! The purpose of
-this short lecture is to provide you with a gentle introduction to working with data in economics. 
-
-In this course, you will:
+The purpose of this short lecture is to provide you with a gentle introduction to working with data in economics. In this course, you will:
 1. Get a general overview of how an applied econometric project is conducted/structured;
 2. Find general advice on writing and thinking about code;
 3. Learn to work with the simplest (and commonly used) statistical programming software, namely Stata.
 
 We'll start with a brief introduction to coding in general and stata in particular. Then we will explore together the SPEED database 
 (i.e. a large record of global social unrest episodes) and attempt to formulate research questions on the determinants of social unrest. 
-Hopefully, at the end this lecture, you'll have learned a bunch, formulated many questions and found fragile answers... And we call that research!
-
+Hopefully, at the end this lecture, you'll have learned technical skills, formulated many questions and found fragile answers... 
+They call that research!
 
 > **An Example of Economic Research in Practice**
 >
@@ -40,38 +37,46 @@ Hopefully, at the end this lecture, you'll have learned a bunch, formulated many
 > (e.g. is it given to everyone or under specific conditions).
 >
 > **Empirical test** = In fact, several studies have confirmed this diagnosis in different countries at different time periods.
-> For more information, you may refer to *"L'impact des aides au logement sur le secteur locatif privé"* (Céline Grislain-Letrémy et Corentin Trevien (2014)).
+> For a study on the French market, you may refer in the folder references to 
+*"L'impact des aides au logement sur le secteur locatif privé"* (Céline Grislain-Letrémy et Corentin Trevien (2014)).
 
 ## I. Getting Started
 
-### KEY CONCEPTS
+### Key Concepts
+
+
+
 - Directories = Folders in which you wish to store various files (such as data sources, codes and results).
 - Command line = "A command-line interface (CLI) processes commands to a computer program in the form of lines of text." (Wikipedia)
 - Scripts = Series of ordered commands for the command line. 
 - Log files = Helps you keep track of what went wrong.
 
-------------------------------------------------
 
-A WORKING EXAMPLE
+> **Training Exercise**
+> 
+> Open Stata
+> At the top on the left of the interface, click on "Open a do-file".
+> Write the following chunk of code:
+> ```
+> display "Hello human. Thank you for creating me."
+> sleep 5000
+> display "I will now proceed to destroy the world."
+> ```
+> Save the do-file as "hello_world.do".
 
---> "./basics/hello_world.do"
 
---> "./basics/farewell.do"
+### Rules to live by 
 
---> Wrap both scripts in a "main.do" script
+#### The basics 
 
-------------------------------------------------
-
-RULES TO LIVE BY
-
-Important stuff
 - Clarity (good variable names, good comments: don't comment obvious stuff!, good documentation if needed)
 - Consistency (keep variable and function names consistent)
 - Simplicity (I want to understand your code) --> remove anything superfluous
 
-/!\ Example: computing sequences /!\
+> ** Example: Computing Sequences **
 
-More advanced considerations
+#### More advanced considerations
+
 - Automation (it's OK to be lazy, but in a smart way)
 
 --> DRY principle (don't repeat yourself), also known as DIE (duplication is evil) 
@@ -82,9 +87,9 @@ More advanced considerations
 
 --> scalability
 
-/!\ Example: Monte Carlo simulations /!\
+> ** Example: Monte Carlo Simulations **
 
-ADDITIONAL ADVICE
+### Additional advice
 - Write small chunks of code and test them before moving on.
 - Keep in mind that a machine is DUMB. Be rigorous when naming variables and functions. 
 - You'll never know all the commands, so learn to search efficiently. --> help 
