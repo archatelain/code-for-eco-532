@@ -54,15 +54,47 @@ They call that research!
 
 > **Training Exercise**
 > 
-> Open Stata
-> At the top on the left of the interface, click on "Open a do-file".
-> Write the following chunk of code:
+> 1. Open Stata
+>
+> 2. At the top on the left of the interface, click on "Open a do-file".
+>
+> 3. Write the following chunk of code:
+>
 > ```
 > display "Hello human. Thank you for creating me."
 > sleep 5000
 > display "I will now proceed to destroy the world."
 > ```
-> Save the do-file as "hello_world.do".
+>
+> 4. Save the do-file as "hello_world.do".
+>
+> 5. Run the do-file by clicking on "Execute (do)".
+>
+> 6. Open another do-file and write the following chunk of code:
+>
+> ```
+> display "..."
+> sleep 5000
+> display "Just kidding. See you around, human."
+> ```
+>
+> 7. Save the do-file as "farewell.do".
+>
+> 8. Run the do-file by clicking on "Execute (do)".
+>
+> 9. Now create one last do-file, which we will save as "main.do":
+>
+> ```
+> clear all 
+> log using "./logs/main_log", replace
+> do "hello_world.do"
+> do "farewell.do"
+> log close
+> ```
+>
+> 10. Run the do-file by clicking on "Execute (do)".
+>
+> Congrats! You've just written your first fully automated code pipeline.
 
 
 ### Rules to live by 
