@@ -126,85 +126,85 @@ overburden the reader with superfluous information.
 
 > **Example: Computing Sequences**
 > ```
-/* 
-In this do-file, I show different implementations of the Fibonacci sequence 
-and the hexagonal sequence.
-
-The Fibonacci sequence is defined as follows:
-U_0 = 1 
-U_1 = 1
-U_n = U_[n-1] + U_[n-2] if n > 1
-
-The hexagonal sequence is defined as follows:
-U_n = 2*n^2 - n for all n >= 0
-
-*/
-
-clear all
-
-*************************************************************************
-* POOR CODE
-*************************************************************************
-
-program f_sequ /* makes program */
-args n /* argument of the program */
-qui set obs `n'
-qui gen a=1 /* initialize */
-qui replace a=a[_n-1]+a[_n-2] in 3/l /* compute sequence based on the formula */
-end
-
-f_sequ 100
-
-program sequ_h /* makes program */
-args n /* argument of the program */
-qui set obs `n'
-gen b = 2*_n^2 - _n /* compute sequence based on the formula */
-end
-
-sequ_h 100
-
-*************************************************************************
-* NEAT CODE
-*************************************************************************
-
-/*
-This program computes the Fibonacci sequence up to a specified value of n.
-
-The Fibonacci sequence is defined as follows:
-U_0 = 1 
-U_1 = 1
-U_n = U_[n-1] + U_[n-2] if n > 1
-
-Input = value of n (integer)
-Output = variable 'fibonacci' with n ordered values of Fibonacci's sequence. 
-*/
-
-program compute_fibonacci_sequence
-args n
-qui set obs `n'
-qui gen fibonacci = 1
-qui replace fibonacci=fibonacci[_n-1]+fibonacci[_n-2] in 3/l
-end
-
-compute_fibonacci_sequence 100
-
-/*
-This program computes the hexagonal sequence up to a specified value of n.
-
-The hexagonal sequence is defined as follows:
-U_n = 2*n^2 - n for all n >= 0
-
-Input = value of n (integer)
-Output = variable 'hexagonal' with n ordered values of the hexagonal sequence. 
-*/
-
-program compute_hexagonal_sequence 
-args n 
-qui set obs `n'
-gen hexagonal = 2*_n^2 - _n 
-end
-
-compute_hexagonal_sequence 100
+> /* 
+> In this do-file, I show different implementations of the Fibonacci sequence 
+> and the hexagonal sequence.
+>
+> The Fibonacci sequence is defined as follows:
+> U_0 = 1 
+> U_1 = 1
+> U_n = U_[n-1] + U_[n-2] if n > 1
+>
+> The hexagonal sequence is defined as follows:
+> U_n = 2*n^2 - n for all n >= 0
+>
+> */
+>
+> clear all
+> 
+> *************************************************************************
+> * POOR CODE
+> *************************************************************************
+> 
+> program f_sequ /* makes program */
+> args n /* argument of the program */
+> qui set obs `n'
+> qui gen a=1 /* initialize */
+> qui replace a=a[_n-1]+a[_n-2] in 3/l /* compute sequence based on the formula */
+> end
+> 
+> f_sequ 100
+> 
+> program sequ_h /* makes program */
+> args n /* argument of the program */
+> qui set obs `n'
+> gen b = 2*_n^2 - _n /* compute sequence based on the formula */
+> end
+> 
+> sequ_h 100
+> 
+> *************************************************************************
+> * NEAT CODE
+> *************************************************************************
+> 
+> /*
+> This program computes the Fibonacci sequence up to a specified value of n.
+> 
+> The Fibonacci sequence is defined as follows:
+> U_0 = 1 
+> U_1 = 1
+> U_n = U_[n-1] + U_[n-2] if n > 1
+> 
+> Input = value of n (integer)
+> Output = variable 'fibonacci' with n ordered values of Fibonacci's sequence. 
+> */
+> 
+> program compute_fibonacci_sequence
+> args n
+> qui set obs `n'
+> qui gen fibonacci = 1
+> qui replace fibonacci=fibonacci[_n-1]+fibonacci[_n-2] in 3/l
+> end
+> 
+> compute_fibonacci_sequence 100
+> 
+> /*
+> This program computes the hexagonal sequence up to a specified value of n.
+> 
+> The hexagonal sequence is defined as follows:
+> U_n = 2*n^2 - n for all n >= 0
+> 
+> Input = value of n (integer)
+> Output = variable 'hexagonal' with n ordered values of the hexagonal sequence. 
+> */
+> 
+> program compute_hexagonal_sequence 
+> args n 
+> qui set obs `n'
+> gen hexagonal = 2*_n^2 - _n 
+> end
+> 
+> compute_hexagonal_sequence 100
 > ```
 
 #### More advanced considerations
@@ -218,105 +218,105 @@ solution whenever possible, as this will increase the *scalability* of your code
 
 > **Example: Monte Carlo Simulations**
 > ```
-/* 
+> /* 
+> 
+> In this script, I perform Monte Carlo Simulations to check that the average of 
+> a sample is a good estimator for the mean when the true DGP is a normal 
+> distribution N(0,1).
+> 
+> To this end, I follow the steps below: 
+> - Step 1: I draw k = 1000 observations from a normal distribution N(0,1).
+> - Step 2: I take the sample average and store the value.
+> - Step 3: I repeat this process n = 1000 times.
+> - Step 4: I then look at the average of the sample averages. 
+> 
+> If the average of the sample averages is is close to zero, this indicates 
+> the the sample average is a good estimator of the mean.
+> 
+> */
+> 
+> clear all
+> set seed 12345
+> 
+> /* 
+> 
+> Step 1: I draw k = 1000 observations from a normal distribution N(0,1).
+> Step 2: I take the sample average and store the value.
+> 
+> */
+> 
+> quietly drop _all
+> quietly set obs 1000
+> quietly generate y = rnormal(0,1)
+> quietly mean y
+> display _b[y]
+> 
+> /* 
+> 
+> Step 3: I repeat this process n = 1000 times.
+> 
+> Of course, to repeat steps 1 and 2 n = 1000 times, I could simply copy paste
+> the piece of code above 1000 times. 
+> 
+> A bit cumbersome, don't you think?
+> 
+> Here's a smarter, more efficient way to do this.
+> 
+> */ 
+> 
+> timer on 1
+> 
+> postfile buffer mhat using "./temp/monte_carlo_simulations.dta", replace
+> 
+> forvalues i=1/1000 {
+> quietly drop _all
+> quietly set obs 1000
+> quietly generate y = rnormal(0,1)
+> quietly mean y
+> post buffer (_b[y])
+> }
+> 
+> postclose buffer
+> 
+> use "./temp/monte_carlo_simulations.dta", clear
+> 
+> summarize
+> 
+> timer off 1
+> 
+> /* 
+> 
+> And here's an even smarter way to do this! 
+> 
+> */
+> 
+> timer on 2
 
-In this script, I perform Monte Carlo Simulations to check that the average of 
-a sample is a good estimator for the mean when the true DGP is a normal 
-distribution N(0,1).
-
-To this end, I follow the steps below: 
-- Step 1: I draw k = 1000 observations from a normal distribution N(0,1).
-- Step 2: I take the sample average and store the value.
-- Step 3: I repeat this process n = 1000 times.
-- Step 4: I then look at the average of the sample averages. 
-
-If the average of the sample averages is is close to zero, this indicates 
-the the sample average is a good estimator of the mean.
-
-*/
-
-clear all
-set seed 12345
-
-/* 
-
-Step 1: I draw k = 1000 observations from a normal distribution N(0,1).
-Step 2: I take the sample average and store the value.
-
-*/
-
-quietly drop _all
-quietly set obs 1000
-quietly generate y = rnormal(0,1)
-quietly mean y
-display _b[y]
-
-/* 
-
-Step 3: I repeat this process n = 1000 times.
-
-Of course, to repeat steps 1 and 2 n = 1000 times, I could simply copy paste
-the piece of code above 1000 times. 
-
-A bit cumbersome, don't you think?
-
-Here's a smarter, more efficient way to do this.
-
-*/ 
-
-timer on 1
-
-postfile buffer mhat using "./temp/monte_carlo_simulations.dta", replace
-
-forvalues i=1/1000 {
-quietly drop _all
-quietly set obs 1000
-quietly generate y = rnormal(0,1)
-quietly mean y
-post buffer (_b[y])
-}
-
-postclose buffer
-
-use "./temp/monte_carlo_simulations.dta", clear
-
-summarize
-
-timer off 1
-
-/* 
-
-And here's an even smarter way to do this! 
-
-*/
-
-timer on 2
-
-capture program drop make_simulation
-program define make_simulation, rclass
-	quietly drop _all
-	quietly set obs 1000
-	quietly generate y = rnormal(0,1)
-	summarize y
-	return scalar mean = r(mean)
-end
-
-simulate ymean=r(mean), reps(1000): make_simulation
-
-summarize
-
-timer off 2
-
-/* 
-
-You don't believe me? Check out the computation times for the first and the
-second solution.
-
-*/
-
-timer list 1
-timer list 2
-
+> capture program drop make_simulation
+> program define make_simulation, rclass
+> 	quietly drop _all
+> 	quietly set obs 1000
+> 	quietly generate y = rnormal(0,1)
+> 	summarize y
+> 	return scalar mean = r(mean)
+> end
+> 
+> simulate ymean=r(mean), reps(1000): make_simulation
+> 
+> summarize
+> 
+> timer off 2
+> 
+> /* 
+> 
+> You don't believe me? Check out the computation times for the first and the
+> second solution.
+> 
+> */
+> 
+> timer list 1
+> timer list 2
+> 
 > ```
 
 ### Additional advice
