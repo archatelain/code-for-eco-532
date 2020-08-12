@@ -29,6 +29,7 @@ in the past decades, opening new avenues to find surprising stylized facts and t
 Unsurprisingly, as more and more academics work with observational data, standards and best practices are progressively 
 emerging to ensure the transparency and replicability of research papers. In fact, an increasing number of top journals
 require academics to provide detailed replication folders prior to publication (https://www.aeaweb.org/journals/policies/data-code).
+**Our job is also to help you meet these standards.**
 
 The purpose of this short lecture is to provide you with a gentle introduction to working with data in economics. In this course, you will:
 1. Get a general overview of how an applied econometric project is structured;
@@ -38,8 +39,8 @@ The purpose of this short lecture is to provide you with a gentle introduction t
 Note that this lecture is not intended as an econometrics course. Though a basic understanding of statistics is required, we will not spend time 
 on econometric theory. Note also that this lecture does not pretend to be comprehensive. Among the material which is not covered, 
 several object-oriented programming languages have gained traction in the private sector as well as in academic circles (in particular Python and R), 
-and you will likely stumble upon such languages during your education and career. In the Master of Economics, several courses are taught in R
-or Python, which will allow you to get acquainted with these languages. Keep in mind that most of the concepts and advice in this lecture may be 
+and you will likely stumble upon such languages during your education and career. In the Master in Economics, several courses are taught in R
+or Python, which will allow you to get acquainted with these languages. Keep in mind that most of the concepts and tips in this lecture may be 
 transposed to more advanced programming languages.
 
 We will start with a brief introduction to coding in general and stata in particular. Then we will explore together the SPEED database 
@@ -52,17 +53,22 @@ They call that research!
 > *"Stata is a general-purpose statistical software package created in 1985 by StataCorp. Most of its users work in research, especially in the fields of economics, sociology, political science, biomedicine, and epidemiology.[2] Stata's capabilities include data management, statistical analysis, graphics, simulations, regression, and custom programming. It also has a system to disseminate user-written programs that lets it grow continuously. The name Stata is a syllabic abbreviation of the words statistics and data." (Wikipedia)*
 >
 > It makes sense to begin with Stata for several reasons: 
-> - It is widely used by economists.
+> - It is widely used by economists, so you need to understand do-files if you want to read most replication files in the past decades.
 > - It is super easy-to-use.
 > - The documentation is neat, and commands as well as additional packages are very reliable.
 > - Most cutting edge econometric techniques are already implemented (which is not necessarily the case in other languages/softwares).	
-
+>
+> Nonetheless, Stata does have some limitations:
+> - Stata is a software, not a programming language. It is more limited than R or Python. For web-scraping, machine learning, developing apps... 
+You have knocked on the wrong door.
+> - Stata has its own logic for data manipulation, which makes it easy-to-use but rather counter-intuitive once you look at more advanced alternatives.
+> - Stata is built to analyze structured datasets. If you want to recover unstructured data to later clean it up, output a structured dataset, and analyze 
+it, then you need to consider alternatives (examples of unstructured data: social media posts, google queries, online purchases, text data in general, ...). 
 
 ## I. Getting Started
 
 You get why you're here now. So how do we work with data? Well, if you're Rain Man, I guess you could use a piece of paper. 
 For all the others, I would recommend to have a computer do the work for you. 
-In order to that, you need to know how to interact with the computer. 
 Let's review some key concepts to get us started.
 
 ### Key Concepts
@@ -132,7 +138,7 @@ Here are the core rules you should always have in mind when you write some code.
 
 Anyone should be able to read your code without reading the documentation. Your code should be clear, consistent and simple. This may sound ridiculous 
 at first, but consider this: 
-1. You will be working in teams in the future, and that many colleagues may have to fix your code at some point. 
+1. You will be working in teams in the future, and many colleagues may have to fix your code at some point. 
 2. Sometimes, you will go back to code you wrote months or years before, and wish you had not called all your economic variables "x","y" and "z", 
 instead of "gdp", "population" and "gini_index". 
  
@@ -140,7 +146,19 @@ instead of "gdp", "population" and "gini_index".
 - **Consistency**: Be consistent in your coding style (e.g. If all the sequences you have coded up-to-now are named "sequ_fibonacci", "sequ_hexagonal", etc. 
 Don't name the next sequence "quadratic_sequ".)
 - **Simplicity**: Add comments when needed, but do not comment obvious operations as this will 
-overburden the reader with superfluous information.
+overburden the reader with superfluous information. To write a comment within your script:
+
+```
+/* 
+This is a comment. 
+
+It will not be considered as a command for the command line, but may clarify what your code does for the reader. 
+
+Comments can be written over multiple lines and be as long as you wish (but please be concise!).
+*/
+
+* This is also a comment for one-liners.
+```
 
 > **Example: Computing Sequences**
 > ```
@@ -230,6 +248,8 @@ overburden the reader with superfluous information.
 - **Automation**: It's OK to be lazy, but in a smart way. You should always follow the DRY principle (don't repeat yourself), also known as DIE 
 (duplication is evil). This will allow your code to be *reusable* for other projects by yourself and other people. What looks like a waste of time at first
 becomes a fruitful investment.
+
+> **Examples: Programs and Loops**
 
 - **Efficiency**: Some projects will require very large computational power. There are many ways to do the same task, try to go for the most efficient 
 solution whenever possible, as this will increase the *scalability* of your code. 
@@ -383,7 +403,6 @@ As you can see, each column represents a variable, and each row an observation. 
 
 ```
 describe
-
 ```
 
 There are 62,141 observations in the database and 106 variables. Each variable has a name, a type and a label. The variable name is 
@@ -393,10 +412,9 @@ but only one of the two. For more information on variable storage types:
 
 ```
 help data_types
-
 ```
 
-Finally, the variable's label is for human comprehension. You want variable names to be clear, but rather short, so you can add more information if 
+The variable's label is for human comprehension. You want variable names to be clear, but rather short, so you can add more information if 
 needed in the variable's label. 
 
 ```
@@ -414,7 +432,19 @@ To look at specific variables:
 ```
 tabulate country
 summarize N_INJURD
+```
+
+Sometimes, you might want to look at the options for each command:
+
+```
+help summarize
 summarize N_INJURD, detail
+```
+
+You can also combine tabulate and summarize if you need to:
+
+```
+tabulate country, summarize(N_INJURD)
 ```
 
 ### Cleaning/Preserving/Filtering Data
@@ -453,65 +483,59 @@ There's nothing like a good graph to get your point across. To have a look at th
 help graph
 ```
 
-I will let you read this at home. In the meantime, here are some examples.
+I will let you read this at home. In the meantime, here are two examples.
 
 ```
+* Correlation Between Violence and Number of Injured People
+
+
+
+* Bar plot of Event Location Types
+
 
 ``` 
 
 > **Training Exercise**
 >
 > 1. How many incidents are recorded for France? 
-> 2. What is the average number of incidents per year over the period?
-> 3. Which country had the most incidents?
-> 4. What is the distribution of the type of incidents?
-> 5. To what extent do people get injured?
-> 6. Plot the number of recorded incidents per year.
-> 7. Plot the number of recorded incidents per year for the United States.
-> 8. On average, how many people get injured depending on the type of incident? Make a barplot to summarize your results.
-> 9. Plot the distribution of the number of injured people in the database.
-> 10. Make a histogram of the number of incidents for the top-20 countries with the most incidents.
+> 2. Which country had the most incidents? which region?
+> 3. What is the average number of incidents per year over the period?
+> 4. Plot the number of recorded incidents per year.
+> 5. Plot the number of recorded incidents per year for the United States.
+> 6. Plot the number of recorded incidents per year for each country (Hint: use a loop!).
+> 7. How many injured people were there per country according to the database?
+> 8. Plot the distribution of the number of injured people (Hint: use the command "kdensity").
+> 9. Make a histogram of the number of incidents for the top-10 countries with the most incidents.
 
 
 ## III. Thinking About Data
 
-Formulating research questions and trying to find preliminary answers
+- What country characteristics could explain social unrest? (merge with socio-economic data for each country)
 
-- How does social unrest relate to the business cycle?
-- How does social unrest relate to fiscal policies?
-- How does social unrest relate to a neighbouring country's social unrest episodes?
-
-Merge
-- merge with socio-economic data for each country
+- How does social unrest relate to the business cycle? (make them install a hp filter program)
 
 --> To seriously answer these questions, you need to pay attention in your econometrics lecture!
 
 ## Conclusion
 
 
-
-## Other Useful Stata Commands
-
-- 
-
 ## Additional Material 
 
-Coding in General 
+**Coding in General** 
 - http://web.stanford.edu/~gentzkow/research/CodeAndData.pdf
 - http://www.danielmsullivan.com/pages/tutorial_workflow_3bestpractice.html
 - 99,9% of the questions you're asking yourself have already been asked by someone on stackoverflow (www.stackoverflow.com).
 - Keeping track of different versions of your code may be cumbersome. Thankfully, very nice solutions exist and take half a day to get used to. Half a day against struggling for eternity... your choice! (www.github.com OR www.gitlab.com)
 
-Finding Data Sources
+**Finding Data Sources**
 - Réseau Quetelet (http://quetelet.progedo.fr/)
 - ICPSR (https://www.icpsr.umich.edu/icpsrweb/)
 - INSEE (https://www.insee.fr/)
 - Other options: social media, newspapers, congress records, e-commerce platforms, etc. But you'll have to work a bit harder to get those!
 
-Stata
+**Stata**
 - User manual (https://www.stata.com/manuals13/u.pdf)
 
-Common (slightly more advanced) programming languages
+**Common (slightly more advanced) programming languages**
 - Python (https://tanthiamhuat.files.wordpress.com/2018/04/pythondatasciencehandbook.pdf)
 - R (https://www.econometrics-with-r.org/)
-- Matlab
