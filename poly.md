@@ -1,4 +1,4 @@
-# Code for Econometrics 101
+# A Gentle Introduction to Working with Data
 
 ## Introduction
 
@@ -38,7 +38,7 @@ The purpose of this short lecture is to provide you with a gentle introduction t
 Note that this lecture is not intended as an econometrics course. Though a basic understanding of statistics is required, we will not spend time 
 on econometric theory. Note also that this lecture does not pretend to be comprehensive. Among the material which is not covered, 
 several object-oriented programming languages have gained traction in the private sector as well as in academic circles (in particular Python and R), 
-and students will likely stumble upon such languages during their education and career. In the Master of Economics, several courses are taught in R
+and you will likely stumble upon such languages during your education and career. In the Master of Economics, several courses are taught in R
 or Python, which will allow you to get acquainted with these languages. Keep in mind that most of the concepts and advice in this lecture may be 
 transposed to more advanced programming languages.
 
@@ -377,7 +377,7 @@ browse
 
 ```
 
-### Descriptive Tables
+### Variables, Labels and Types
 
 As you can see, each column represents a variable, and each row an observation. To get a general overview of the database, type:
 
@@ -453,7 +453,24 @@ There's nothing like a good graph to get your point across. To have a look at th
 help graph
 ```
 
-I will let you read this at home, with a cup of tea. In the meantime, I will show you some of these functiunalities. 
+I will let you read this at home. In the meantime, here are some examples.
+
+```
+
+``` 
+
+> **Training Exercise**
+>
+> 1. How many incidents are recorded for France? 
+> 2. What is the average number of incidents per year over the period?
+> 3. Which country had the most incidents?
+> 4. What is the distribution of the type of incidents?
+> 5. To what extent do people get injured?
+> 6. Plot the number of recorded incidents per year.
+> 7. Plot the number of recorded incidents per year for the United States.
+> 8. On average, how many people get injured depending on the type of incident? Make a barplot to summarize your results.
+> 9. Plot the distribution of the number of injured people in the database.
+> 10. Make a histogram of the number of incidents for the top-20 countries with the most incidents.
 
 
 ## III. Thinking About Data
@@ -471,15 +488,9 @@ Merge
 
 ## Conclusion
 
-## Lexicon
 
-- Algorithm
-- Object
-- Class
-- Variable
-- Type
 
-## Useful Stata Commands
+## Other Useful Stata Commands
 
 - 
 

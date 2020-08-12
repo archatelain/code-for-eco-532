@@ -55,4 +55,12 @@ To keep specific values:
 
 keep if country == "United States"
 
+/* 
+To plot graphs:
+*/
+
+use "../data/ssp_public.dta", clear
+graph twoway 
+
+
 
