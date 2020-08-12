@@ -8,22 +8,29 @@ movement between economic theory and empirical observations. Researchers typical
 2. Try to build a theory which explains this stylized fact;
 3. Empirically test the theory's predictions to confirm or invalidate their understanding of the phenomenon.
 
-With the surge of computational power, the amount of data at our disposal has drastically increased
-in the past decades, opening many new avenues to find surprising stylized facts and test past theories. 
+With the digital era, the amount of data at our disposal has drastically increased
+in the past decades, opening new avenues to find surprising stylized facts and test past theories. 
 **In turn, this means you are more than likely to work with data at some point in your career as an economist.**
 
 Unsurprisingly, as more and more academics work with observational data, standards and best practices are progressively 
-emerging to ensure the transparency and replicability of research papers. In fact, an increasing number of top-journals
+emerging to ensure the transparency and replicability of research papers. In fact, an increasing number of top journals
 require academics to provide detailed replication folders prior to publication (https://www.aeaweb.org/journals/policies/data-code).
 
 The purpose of this short lecture is to provide you with a gentle introduction to working with data in economics. In this course, you will:
-1. Get a general overview of how an applied econometric project is conducted/structured;
+1. Get a general overview of how an applied econometric project is structured;
 2. Find general advice on writing and thinking about code;
 3. Learn to work with the simplest (and commonly used) statistical programming software, namely Stata.
 
-We'll start with a brief introduction to coding in general and stata in particular. Then we will explore together the SPEED database 
+Note that this lecture is not intended as an econometrics course. Though a basic understanding of statistics is required, we will not spend time 
+on econometric theory. Note also that this lecture does not pretend to be comprehensive. Among the material which is not covered, 
+several object-oriented programming languages have gained traction in the private sector as well as in academic circles (in particular Python and R), 
+and students will likely stumble upon such languages during their education and career. In the Master of Economics, several courses are taught in R
+or Python, which will allow you to get acquainted with these languages. Keep in mind that most of the concepts and advice in this lecture may be 
+transposed to more advanced programming languages.
+
+We will start with a brief introduction to coding in general and stata in particular. Then we will explore together the SPEED database 
 (i.e. a large record of global social unrest episodes) and attempt to formulate research questions on the determinants of social unrest. 
-Hopefully, at the end this lecture, you'll have learned technical skills, formulated many questions and found fragile answers... 
+Hopefully, at the end this lecture, you will have learned technical skills, formulated many questions and found fragile answers... 
 They call that research!
 
 > **An Example of Economic Research in Practice**
@@ -37,12 +44,23 @@ They call that research!
 > (e.g. is it given to everyone or under specific conditions).
 >
 > **Empirical test** = In fact, several studies have confirmed this diagnosis in different countries at different time periods.
-> For a study on the French market, you may refer in the folder references to 
-*"L'impact des aides au logement sur le secteur locatif privé"* (Céline Grislain-Letrémy et Corentin Trevien (2014)).
+> For a study on the French market, you may refer in the folder "references" to 
+> *"L'impact des aides au logement sur le secteur locatif privé"* (Céline Grislain-Letrémy et Corentin Trevien (2014)).
+
+> **What is Stata?**
+> 
+> *"Stata is a general-purpose statistical software package created in 1985 by StataCorp. Most of its users work in research, especially in the fields of economics, sociology, political science, biomedicine, and epidemiology.[2] Stata's capabilities include data management, statistical analysis, graphics, simulations, regression, and custom programming. It also has a system to disseminate user-written programs that lets it grow continuously. The name Stata is a syllabic abbreviation of the words statistics and data." (Wikipedia)*
+>
+> It makes sense to begin with Stata for several reasons: 
+> - It is widely used by economists.
+> - It is super easy-to-use.
+> - The documentation is neat, and commands as well as additional packages are very reliable.
+> - Most cutting edge econometric techniques are already implemented (which is not necessarily the case in other languages/softwares).	
+
 
 ## I. Getting Started
 
-So how do we work with data? Well, if you're Rain Man, I guess you could use a piece of paper. 
+You get why you're here now. So how do we work with data? Well, if you're Rain Man, I guess you could use a piece of paper. 
 For all the others, I would recommend to have a computer do the work for you. 
 In order to that, you need to know how to interact with the computer. 
 Let's review some key concepts to get us started.
@@ -58,13 +76,13 @@ computer through the command line. A script is a text file in which are written 
 (such as data sources, scripts and results).
 - **Log files**: More often than not, things will go wrong. Log files help you keep track of what the computer did and whether it flagged some errors.
 
-Let's put these concepts in practice, now.
+Let's put these concepts in practice.
 
 > **Training Exercise**
 > 
 > 1. Create a folder named "basics". This will be your main directory.
 >
-> 2. Open stata. At the top on the left of the interface, click on "New Do-File Editor".
+> 2. Open Stata. At the top on the left of the interface, click on "New Do-File Editor".
 >
 > 3. Write the following chunk of code:
 >
@@ -323,13 +341,24 @@ solution whenever possible, as this will increase the *scalability* of your code
 - Write small chunks of code and test them before moving on. Think of coding as LEGOs. You need to tear every piece apart before putting them back together.
 - Keep in mind that a machine is DUMB. Be rigorous when naming variables and functions, as the command line will usually not tolerate approximative naming
 and throw an error. 
-- You'll never know all the commands, so learn to search efficiently. In stata, you may type "help *your_command*" to access the documentation.  
+- You will never know all the commands, so learn to search efficiently. In Stata, you may type "help *your_command*" to access the documentation for 
+this command.  
+
+> **The Stata "help" command*
+>
+> Open a do-file in stata and type the following piece of code:
+>
+> ```
+> help rnormal
+> ```
+>
 
 ## II. Exploring a Dataset
 
-We are now ready to work with a real data set and explore stata's functionalities. We will work with the Social, Political and Economic Event Database Project (SPEED).
+We are now ready to work with a real data set and explore stata's functionalities. We will work with the Social, Political and Economic Event 
+Database Project (SPEED).
 
-> ** The SPEED Database according to its authors **
+> **The SPEED Database according to its authors**
 >
 > *"SPEED is a technology-intensive effort to extract event data from a global archive of news reports covering the Post WWII era. It is designed to provide insights into key behavioral patterns and relationships that are valid across countries and over time. Within SPEED, event data is generated by human analysts using a suite of sophisticated tools to implement carefully structured and pretested protocols. These protocols are category-specific electronic documents that are tailored to the information needs of a particular category of events (civil unrest, property rights, electoral processes, etc.). SPEED data will produce insights that complement those generated by other components of the SID project (constitutional data, archival data, survey-based data, etc.) because event data generates "bottom-up" observations from news reports. In generating these event data SPEED leverages tens of billions of dollars that have been invested in compiling news reports from throughout the world."*
 
@@ -337,21 +366,11 @@ Data
 - reading data
 - variables and types
 
-Merge
-- merge with socio-economic data for each country
-
 Tables
 - summarize, tabulate, describe
 
 Graphs
 - graph syntax 
-
-------------------------------------------------
-
-Related scripts
---> "./code/social_unrest/exploring_data.do"
-
-------------------------------------------------
 
 ## III. Thinking About Data
 
@@ -361,18 +380,24 @@ Formulating research questions and trying to find preliminary answers
 - How does social unrest relate to fiscal policies?
 - How does social unrest relate to a neighbouring country's social unrest episodes?
 
+Merge
+- merge with socio-economic data for each country
+
 --> To seriously answer these questions, you need to pay attention in your econometrics lecture!
-
-------------------------------------------------
-
-Related scripts
---> "./code/social_unrest/digging_deeper.do"
-
-------------------------------------------------
 
 ## Conclusion
 
+## Lexicon
 
+- Algorithm
+- Object
+- Class
+- Variable
+- Type
+
+## Useful Stata Commands
+
+- 
 
 ## Additional Material 
 
