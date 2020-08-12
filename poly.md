@@ -356,7 +356,7 @@ this command.
 ## II. Exploring a Dataset
 
 We are now ready to work with a real data set and explore stata's functionalities. We will work with the Social, Political and Economic Event 
-Database Project (SPEED).
+Database Project (SPEED). The complete code for section II may be found here: "./social_unrest_project/code/exploring_data.do".
 
 > **The SPEED Database according to its authors**
 >
@@ -377,9 +377,84 @@ browse
 
 ```
 
-### Tables
+### Descriptive Tables
+
+As you can see, each column represents a variable, and each row an observation. To get a general overview of the database, type:
+
+```
+describe
+
+```
+
+There are 62,141 observations in the database and 106 variables. Each variable has a name, a type and a label. The variable name is 
+the name you should use to perform operations on the variable. The variable's type determines how the data will be stored (e.g. integer, 
+float, string, etc.). This is somewhat constraining: for instance, a variable cannot jointly display character and numeric values, 
+but only one of the two. For more information on variable storage types:
+
+```
+help data_types
+
+```
+
+Finally, the variable's label is for human comprehension. You want variable names to be clear, but rather short, so you can add more information if 
+needed in the variable's label. 
+
+```
+/*
+I generate draws from a normal distribution with mean 0 and standard deviation 1.
+I name the variable X, and I label it "draws from a normal distribution N(0,1)"
+*/
+
+generate X = rnormal(0,1)
+label variable X "draws from a normal distribution N(0,1)"
+```
+
+To look at specific variables:
+
+```
+tabulate country
+summarize N_INJURD
+summarize N_INJURD, detail
+```
+
+### Cleaning/Preserving/Filtering Data
+
+To drop a variable, you can simply type:
+
+```
+drop X
+```
+
+To keep specific variables:
+
+``` 
+keep country year month
+```
+
+To keep specific observations:
+
+```
+keep if country == "United States"
+```
+
+Sometimes, you will want to do several operations on a database (which will mess it up), but keep a copy of the original data. To do that:
+
+```
+preserve 
+*some operations
+restore
+```
 
 ### Graphs
+
+There's nothing like a good graph to get your point across. To have a look at the complete documentation on graphs in Stata, type:
+
+```
+help graph
+```
+
+I will let you read this at home, with a cup of tea. In the meantime, I will show you some of these functiunalities. 
+
 
 ## III. Thinking About Data
 
