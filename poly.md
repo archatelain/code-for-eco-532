@@ -146,7 +146,7 @@ instead of "gdp", "population" and "gini_index".
 - **Consistency**: Be consistent in your coding style (e.g. If all the sequences you have coded up-to-now are named "sequ_fibonacci", "sequ_hexagonal", etc. 
 Don't name the next sequence "quadratic_sequ".)
 - **Simplicity**: Add comments when needed, but do not comment obvious operations as this will 
-overburden the reader with superfluous information. To write a comment within your script:
+overburden the reader with superfluous information. To write a comment within your script, use "/* ... */" or "*":
 
 ```
 /* 
@@ -249,7 +249,9 @@ Comments can be written over multiple lines and be as long as you wish (but plea
 (duplication is evil). This will allow your code to be *reusable* for other projects by yourself and other people. What looks like a waste of time at first
 becomes a fruitful investment.
 
-> **Examples: Programs and Loops**
+> **Example: Making a Loop**
+
+> **Example: Making a Program**
 
 - **Efficiency**: Some projects will require very large computational power. There are many ways to do the same task, try to go for the most efficient 
 solution whenever possible, as this will increase the *scalability* of your code. 
@@ -506,6 +508,8 @@ I will let you read this at home. In the meantime, here are two examples.
 > 7. How many injured people were there per country according to the database?
 > 8. Plot the distribution of the number of injured people (Hint: use the command "kdensity").
 > 9. Make a histogram of the number of incidents for the top-10 countries with the most incidents.
+>
+> Solutions are here: "./social_unrest_project/code/exploring_data.do"
 
 
 ## III. Thinking About Data
