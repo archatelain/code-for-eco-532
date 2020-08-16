@@ -60,8 +60,8 @@ Open Stata to get started.
 
 > A directory is a folder in which you store various files related to your project.
 
-You will need to store your work somewhere (e.g. your data sources, scripts and results). Create a folder called "code-for-econometrics-101"
-on your computer. This will be the main directory of this mini-course. Then create a subfolder named "basics" in the main directory. 
+You will need to store your work somewhere (e.g. your data sources, scripts and results). Download the folder code-for-econometrics-101 from this git repo. 
+This will be the main directory of this mini-course. Then create a subfolder named "basics" in the main directory. 
 We will work in this  subdirectory for part I.
 
 #### 1.2. The command line
@@ -158,7 +158,7 @@ this command.
 ## II. Exploring a Dataset
 
 We are now ready to work with a real data set and explore stata's functionalities. We will work with the Social, Political and Economic Event 
-Database Project (SPEED). Create a folder named "social_unrest_project" in your main directory. We will work in this subdirectory for part II. 
+Database Project (SPEED). We will work in the subdirectory "social_unrest_project" for part II. 
 
 To follow along, please create a do-file "part_2_explanations.do" and save it in "./social_unrest_project/codes/".
 
@@ -317,7 +317,7 @@ Here are the core rules you should always have in mind when you write some code.
 
 ##### Your code should not be hieroglyphs!
 
-Anyone should be able to read your code without reading the documentation. Your code should be clear, consistent and simple. 
+Anyone should be able to read your code without reading the documentation. 
  
 - **Clarity**: Name your variables, functions and classes with explicit titles. 
 - **Consistency**: Be consistent in your coding style (e.g. If all the sequences you have coded up-to-now are named "sequ_fibonacci", "sequ_hexagonal", etc. 
@@ -337,7 +337,7 @@ Comments can be written over multiple lines and be as long as you wish (but plea
 * This is also a comment, but for one-liners.
 ```
 
-This advice may sound ridiculous at first, but consider this: 
+All this may sound ridiculous at first, but consider this: 
 1. You will be working in teams in the future, and many colleagues may have to fix your code at some point. 
 2. Sometimes, you will go back to code you wrote months or years before, and wish you had not called all your economic variables "x","y" and "z", 
 instead of "gdp", "population" and "gini_index". 
