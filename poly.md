@@ -158,8 +158,9 @@ this command.
 ## II. Exploring a Dataset
 
 We are now ready to work with a real data set and explore stata's functionalities. We will work with the Social, Political and Economic Event 
-Database Project (SPEED). Create a folder named "social_unrest_project" in your main directory. We will work in this subdirectory for part II. To 
-follow along, please create a do-file "part_2_explanations.do" and save it in "./social_unrest_project/codes/".
+Database Project (SPEED). Create a folder named "social_unrest_project" in your main directory. We will work in this subdirectory for part II. 
+
+To follow along, please create a do-file "part_2_explanations.do" and save it in "./social_unrest_project/codes/".
 
 > **The SPEED Database according to its authors**
 >
@@ -309,12 +310,12 @@ reg y x
 >
 > Solutions are here: "./social_unrest_project/code/part_2_solutions.do"
 
-### III. More Advanced Considerations
-
-#### Rules to live by 
+### III. Rules to live by
 
 Getting the computer to do what you want is good, but you should also take many other factors into consideration. 
 Here are the core rules you should always have in mind when you write some code.
+
+##### Your code should not be hieroglyphs!
 
 Anyone should be able to read your code without reading the documentation. Your code should be clear, consistent and simple. 
  
@@ -341,12 +342,19 @@ This advice may sound ridiculous at first, but consider this:
 2. Sometimes, you will go back to code you wrote months or years before, and wish you had not called all your economic variables "x","y" and "z", 
 instead of "gdp", "population" and "gini_index". 
 
+##### More advanced considerations
+
 - **Automation**: It's OK to be lazy, but in a smart way. You should always follow the DRY principle (don't repeat yourself), also known as DIE 
 (duplication is evil). This will allow your code to be *reusable* for other projects by yourself and other people. What looks like a waste of time at first
 becomes a fruitful investment.
 
 - **Efficiency**: Some projects will require very large computational power. There are many ways to do the same task, try to go for the most efficient 
 solution whenever possible, as this will increase the *scalability* of your code. 
+
+> **Some Examples**
+>
+>
+
 
 ## Additional Material 
 
