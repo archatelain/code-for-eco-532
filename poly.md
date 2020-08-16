@@ -8,32 +8,17 @@ movement between economic theory and empirical observations. Researchers typical
 2. Try to build a theory which explains this stylized fact;
 3. Empirically test the theory's predictions to confirm or invalidate their understanding of the phenomenon.
 
-> **An Example of Economic Research in Practice**
->
-> **Stylized fact** = Many countries have implemented subsidies on the rental of flats. In France, they are called the APL (Aides Pour le Logement).
-> At the same time, rental prices for flats have increased.
-> 
-> **Theoretical explanation** = In the market for rentals, subsidizing the rental of flats shifts the demand curve upwards, 
-> which in turn increases rental prices. The economic incidence of the subsidy will actually depend on the shape of the 
-> supply and demand curves, and on the specifics of the subsidy 
-> (e.g. is it given to everyone or under specific conditions).
->
-> **Empirical test** = In fact, several studies have confirmed this diagnosis in different countries at different time periods.
-> For a study on the French market, you may refer in the folder "references" to 
-> *"L'impact des aides au logement sur le secteur locatif privé"* (Céline Grislain-Letrémy et Corentin Trevien (2014)).
-
-With the digital era, the amount of data at our disposal has drastically increased
-in the past decades, opening new avenues to find surprising stylized facts and test past theories. 
+Since the 1990s, the amount of data at our disposal has drastically increased, opening new avenues to find surprising stylized facts and test past theories. 
 **In turn, this means you are more than likely to work with data at some point in your career as an economist.**
 
 Unsurprisingly, as more and more academics work with observational data, standards and best practices are progressively 
 emerging to ensure the transparency and replicability of research papers. In fact, an increasing number of top journals
 require academics to provide detailed replication folders prior to publication (https://www.aeaweb.org/journals/policies/data-code).
-**Our job is also to help you meet these standards.**
+**In the future, you will need meet these standards.**
 
-The purpose of this short lecture is to provide you with a gentle introduction to working with data in economics. In this course, you will:
-1. Get a general overview of how an applied econometric project is structured;
-2. Find general advice on writing and thinking about code;
+The purpose of this mini-lecture is to provide you with a gentle introduction to working with data in economics. In this course, you will:
+1. Find general advice on writing and thinking about code;
+2. Get a general overview of how an applied econometric project is structured;
 3. Learn to work with the simplest (and commonly used) statistical programming software, namely Stata.
 
 Note that this lecture is not intended as an econometrics course. Though a basic understanding of statistics is required, we will not spend time 
@@ -44,18 +29,16 @@ or Python, which will allow you to get acquainted with these languages. Keep in 
 transposed to more advanced programming languages.
 
 We will start with a brief introduction to coding in general and stata in particular. Then we will explore together the SPEED database 
-(i.e. a large record of global social unrest episodes) and attempt to formulate research questions on the determinants of social unrest. 
-Hopefully, at the end this lecture, you will have learned technical skills, formulated many questions and found fragile answers... 
-They call that research!
+(i.e. a large record of global social unrest episodes). 
 
 > **What is Stata?**
 > 
 > *"Stata is a general-purpose statistical software package created in 1985 by StataCorp. Most of its users work in research, especially in the fields of economics, sociology, political science, biomedicine, and epidemiology.[2] Stata's capabilities include data management, statistical analysis, graphics, simulations, regression, and custom programming. It also has a system to disseminate user-written programs that lets it grow continuously. The name Stata is a syllabic abbreviation of the words statistics and data." (Wikipedia)*
 >
 > It makes sense to begin with Stata for several reasons: 
-> - It is widely used by economists, so you need to understand do-files if you want to read most replication files in the past decades.
+> - It is widely used by economists, so you need to understand its logic if you want to read most replication folders in the past decades.
 > - It is super easy-to-use.
-> - The documentation is neat, and commands as well as additional packages are very reliable.
+> - The documentation is neat, and commands as well as add-on packages are very reliable.
 > - Most cutting edge econometric techniques are already implemented (which is not necessarily the case in other languages/softwares).	
 >
 > Nonetheless, Stata does have some limitations:
@@ -63,71 +46,85 @@ They call that research!
 You have knocked on the wrong door.
 > - Stata has its own logic for data manipulation, which makes it easy-to-use but rather counter-intuitive once you look at more advanced alternatives.
 > - Stata is built to analyze structured datasets. If you want to recover unstructured data to later clean it up, output a structured dataset, and analyze 
-it, then you need to consider alternatives (examples of unstructured data: social media posts, google queries, online purchases, text data in general, ...). 
+it, then you need to consider alternatives (examples of unstructured data: social media data, google queries, online purchases, text data in general). 
 
 ## I. Getting Started
 
 You get why you're here now. So how do we work with data? Well, if you're Rain Man, I guess you could use a piece of paper. 
 For all the others, I would recommend to have a computer do the work for you. 
-Let's review some key concepts to get us started.
+Open Stata to get started.
 
 ### Key Concepts
 
-- **Command line**: *"A command-line interface (CLI) processes commands to a computer program in the form of lines of text." (Wikipedia)* 
-The command line is the interface which translates the operations you would like the computer to perform, which you write as text, 
-into something the computer can understand.
-- **Scripts**: You will want to have the computer do many things sequentially. Scripts help you keep track of the commands sent to the 
-computer through the command line. A script is a text file in which are written series of ordered commands for the command line. 
-- **Directories**: You will also want to store your work somewhere. Directories are precisely folders in which you store various files 
-(such as data sources, scripts and results).
-- **Log files**: More often than not, things will go wrong. Log files help you keep track of what the computer did and whether it flagged some errors.
+#### Directories 
 
-Let's put these concepts in practice.
+You will need to store your work somewhere (e.g. your data sources, scripts and results). **Directories** are precisely folders in which you store 
+various files. Create a folder named "basics" on your computer. This will be your main directory for part I.
 
-> **Training Exercise**
-> 
-> 1. Create a folder named "basics". This will be your main directory.
->
-> 2. Open Stata. At the top on the left of the interface, click on "New Do-File Editor".
->
-> 3. Write the following chunk of code:
->
-> ```
-> display "Hello human. Thank you for creating me."
-> sleep 5000
-> display "I will now proceed to destroy the world."
-> ```
->
-> 4. Save the do-file as "hello_world.do".
->
-> 5. Run the do-file by clicking on "Execute (do)".
->
-> 6. Open another do-file and write the following chunk of code:
->
-> ```
-> display "..."
-> sleep 5000
-> display "Just kidding. See you around, human."
-> ```
->
-> 7. Save the do-file as "farewell.do".
->
-> 8. Run the do-file by clicking on "Execute (do)".
->
-> 9. Now create one last do-file, which we will save as "main.do":
->
-> ```
-> clear all 
-> log using "./logs/main_log", replace
-> do "hello_world.do"
-> do "farewell.do"
-> log close
-> ```
->
-> 10. Run the do-file by clicking on "Execute (do)".
->
-> Congrats! You've just written your first fully automated code pipeline.
+#### The command line
 
+> *"A command-line interface (CLI) processes commands to a computer program in the form of lines of text." (Wikipedia)*
+
+You interact with the computer through the **command line**. The command line is the interface which translates the operations you would like the 
+computer to perform into something the computer can understand. 
+
+In Stata, the command line is a box at the bottom of the interface. Type the following command and see what happens:
+
+```
+display "This is a test."
+```
+
+#### Scripts
+
+In most projects, you will likely ask many things to the computer (e.g. format the data, compute things, output the results, etc.), which will result into
+multiple commands. **Scripts** help you keep track of the commands sent to the computer through the command line. A script is a text file in which are written 
+series of ordered commands to the command line. 
+
+In Stata, scripts are called "do-files". At the top on the left of the interface, click on "New Do-File Editor" and write the following chunk of code:
+
+```
+display "Hello human. Thank you for creating me."
+sleep 5000
+display "I will now proceed to destroy the world."
+display "..."
+display "1"
+sleep 1000
+display "2"
+sleep 1000
+display "3"
+sleep 1000
+display "4"
+sleep 1000
+display "5"
+sleep 1000
+display "Just kidding. See you around, human."
+```
+
+Now save your do-file as  "killer_robot.do" in your directory, and then run the do-file by clicking on "Execute (do)".
+
+As you are likely to write multiple scripts for multiple subtasks in your project, it is good practice to have one script call all the other scripts
+of your project. In this way, instead of executing manually your n scripts, you can simply execute this overarching script.
+
+Create a script called "main.do" in your directory, and write this chunk of code:
+
+```
+do "killer_robot.do"
+```
+
+In this do-file, you simply call your "killer_robot.do" file. Of course, if you had multiple do-files, you could call them sequentially.
+
+#### Log files
+
+I hate to break it out to you, but more often than not, things will go wrong. **Log files** help you keep track of what the computer did and 
+whether it flagged some errors. Edit your "main.do" file in the following way and run the script:
+
+```
+log using "./logs/main_log", replace
+do "killer_robot.do"
+log close
+```
+
+Congrats! You've just written your first fully automated code pipeline.
 
 ### Rules to live by 
 
@@ -136,17 +133,13 @@ Here are the core rules you should always have in mind when you write some code.
 
 #### The basics 
 
-Anyone should be able to read your code without reading the documentation. Your code should be clear, consistent and simple. This may sound ridiculous 
-at first, but consider this: 
-1. You will be working in teams in the future, and many colleagues may have to fix your code at some point. 
-2. Sometimes, you will go back to code you wrote months or years before, and wish you had not called all your economic variables "x","y" and "z", 
-instead of "gdp", "population" and "gini_index". 
+Anyone should be able to read your code without reading the documentation. Your code should be clear, consistent and simple. 
  
 - **Clarity**: Name your variables, functions and classes with explicit titles. 
 - **Consistency**: Be consistent in your coding style (e.g. If all the sequences you have coded up-to-now are named "sequ_fibonacci", "sequ_hexagonal", etc. 
 Don't name the next sequence "quadratic_sequ".)
 - **Simplicity**: Add comments when needed, but do not comment obvious operations as this will 
-overburden the reader with superfluous information. To write a comment within your script, use "/* ... */" or "*":
+overburden the reader with superfluous information. To write a comment within your script, combine asterisks and forward slashes:
 
 ```
 /* 
@@ -157,8 +150,14 @@ It will not be considered as a command for the command line, but may clarify wha
 Comments can be written over multiple lines and be as long as you wish (but please be concise!).
 */
 
-* This is also a comment for one-liners.
+* This is also a comment, but for one-liners.
 ```
+
+This advice may sound ridiculous at first, but consider this: 
+1. You will be working in teams in the future, and many colleagues may have to fix your code at some point. 
+2. Sometimes, you will go back to code you wrote months or years before, and wish you had not called all your economic variables "x","y" and "z", 
+instead of "gdp", "population" and "gini_index". 
+
 
 > **Example: Computing Sequences**
 > ```
@@ -249,9 +248,31 @@ Comments can be written over multiple lines and be as long as you wish (but plea
 (duplication is evil). This will allow your code to be *reusable* for other projects by yourself and other people. What looks like a waste of time at first
 becomes a fruitful investment.
 
-> **Example: Making a Loop**
-
 > **Example: Making a Program**
+> 
+> /* 
+> This program repeats the phrase it is provided with.
+> */
+>
+> capture program drop echo
+> program define echo
+>    display as text "`0'"
+> end
+>
+> echo Taiooho Taiooho Taioohohohohoho
+>
+> /*
+> This program takes a number as input and outputs its square.
+> */
+>
+> capture program drop square
+> program define square
+> 	display `0'^2
+> end
+>
+> square 9
+
+> **Example: Making Loops**
 
 - **Efficiency**: Some projects will require very large computational power. There are many ways to do the same task, try to go for the most efficient 
 solution whenever possible, as this will increase the *scalability* of your code. 
@@ -378,7 +399,7 @@ this command.
 ## II. Exploring a Dataset
 
 We are now ready to work with a real data set and explore stata's functionalities. We will work with the Social, Political and Economic Event 
-Database Project (SPEED). The complete code for section II may be found here: "./social_unrest_project/code/exploring_data.do".
+Database Project (SPEED). The complete code for the explanations in section II may be found here: "./social_unrest_project/code/part_2_explanations.do".
 
 > **The SPEED Database according to its authors**
 >
@@ -509,7 +530,7 @@ I will let you read this at home. In the meantime, here are two examples.
 > 8. Plot the distribution of the number of injured people (Hint: use the command "kdensity").
 > 9. Make a histogram of the number of incidents for the top-10 countries with the most incidents.
 >
-> Solutions are here: "./social_unrest_project/code/exploring_data.do"
+> Solutions are here: "./social_unrest_project/code/part_2_solutions.do"
 
 
 ## III. Thinking About Data
@@ -539,6 +560,7 @@ I will let you read this at home. In the meantime, here are two examples.
 
 **Stata**
 - User manual (https://www.stata.com/manuals13/u.pdf)
+- A more comprehensive and detailed course on Stata (https://data.princeton.edu/stata)
 
 **Common (slightly more advanced) programming languages**
 - Python (https://tanthiamhuat.files.wordpress.com/2018/04/pythondatasciencehandbook.pdf)
