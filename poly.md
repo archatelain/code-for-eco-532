@@ -14,7 +14,7 @@ Since the 1990s, the amount of data at our disposal has drastically increased, o
 Unsurprisingly, as more and more academics work with observational data, standards and best practices are progressively 
 emerging to ensure the transparency and replicability of research papers. In fact, an increasing number of top journals
 require academics to provide detailed replication folders prior to publication (https://www.aeaweb.org/journals/policies/data-code).
-**In the future, you will need meet these standards.**
+**In the future, you will need to meet these standards.**
 
 The purpose of this mini-lecture is to provide you with a gentle introduction to working with data in economics. In this course, you will:
 1. Find general advice on writing and thinking about code;
@@ -58,8 +58,10 @@ Open Stata to get started.
 
 #### 1.1. Directories 
 
-You will need to store your work somewhere (e.g. your data sources, scripts and results). **Directories** are precisely folders in which you store 
-various files. Create a folder named "basics" on your computer. This will be your main directory for part I.
+> A directory is a folder in which you store various files related to your project.
+
+You will need to store your work somewhere (e.g. your data sources, scripts and results). Create a folder named "basics" on your computer. 
+This will be your **main directory** for part I.
 
 #### 1.2. The command line
 
@@ -76,9 +78,10 @@ display "This is a test."
 
 #### 1.3 Scripts
 
+> A script is a text file in which are written series of ordered commands to the command line. 
+
 In most projects, you will likely ask many things to the computer (e.g. format the data, compute things, output the results, etc.), which will result into
-multiple commands. **Scripts** help you keep track of the commands sent to the computer through the command line. A script is a text file in which are written 
-series of ordered commands to the command line. 
+multiple commands. **Scripts** help you keep track of the commands sent to the computer through the command line. 
 
 In Stata, scripts are called "do-files". At the top on the left of the interface, click on "New Do-File Editor" and write the following chunk of code:
 
@@ -121,6 +124,8 @@ do "and_so_on_and_so_forth.do"
 ```
 
 #### 1.4 Log files
+
+> *"In computing, a log file is a file that records [...] events that occur in an operating system or other software runs." (Wikipedia)*
 
 I hate to break it out to you, but more often than not, things will go wrong. **Log files** help you keep track of what the computer did and 
 whether it flagged some errors. Edit your "main.do" file to look like this:
