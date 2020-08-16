@@ -60,8 +60,9 @@ Open Stata to get started.
 
 > A directory is a folder in which you store various files related to your project.
 
-You will need to store your work somewhere (e.g. your data sources, scripts and results). Create a folder named "basics" on your computer. 
-This will be your **main directory** for part I.
+You will need to store your work somewhere (e.g. your data sources, scripts and results). Create a folder called "code-for-econometrics-101"
+on your computer. This will be the main directory of this mini-course. Then create a subfolder named "basics" in the main directory. 
+We will work in this  subdirectory for part I.
 
 #### 1.2. The command line
 
@@ -142,8 +143,6 @@ Congrats! You've just written your first fully automated code pipeline.
 
 ### 2. Additional advice
 - Write small chunks of code and test them before moving on. Think of coding as LEGOs. You need to tear every piece apart before putting them back together.
-- Keep in mind that a machine is DUMB. Be rigorous when naming variables and functions, as the command line will usually not tolerate approximative naming
-and throw an error. 
 - You will never know all the commands, so learn to search efficiently. In Stata, you may type "help *your_command*" to access the documentation for 
 this command.  
 
@@ -153,13 +152,13 @@ this command.
 >
 > ```
 > help rnormal
-> ```
->
+> ```	
 
 ## II. Exploring a Dataset
 
 We are now ready to work with a real data set and explore stata's functionalities. We will work with the Social, Political and Economic Event 
-Database Project (SPEED). 
+Database Project (SPEED). Create a folder named "social_unrest_project" in your main directory. We will work in this subdirectory for part II. To 
+follow along, please create a do-file "part_2_explanations.do" and save it in "./social_unrest_project/codes/".
 
 > **The SPEED Database according to its authors**
 >
@@ -198,7 +197,7 @@ help data_types
 ```
 
 The variable's label is for human comprehension. You want variable names to be clear, but rather short, so you can add more information if 
-needed in the variable's label. 
+needed in the variable's label. Variables may be easily created and labeled using the "generate" and "label" commands:
 
 ```
 /*
@@ -254,11 +253,17 @@ Sometimes, you will want to do several operations on a database (which will mess
 
 ```
 preserve 
-*some operations
+*your operations
 restore
 ```
 
-### 4. Graphs
+### 4. Combining Multiple Datasets
+
+```
+merge
+```
+
+### 5. Graphs
 
 There's nothing like a good graph to get your point across. To have a look at the complete documentation on graphs in Stata, type:
 
@@ -278,7 +283,14 @@ I will let you read this at home. In the meantime, here are two examples.
 
 ``` 
 
-### 5. Regression Analysis
+### 6. Regression Analysis
+
+Regression analysis is at the core of econometric theory. You will see the ins and outs of this tool in your econometrics courses. Let me simply 
+provide you with the commands to estimate regression models in Stata:
+
+```
+reg y x
+```
 
 > **Training Exercise**
 >
@@ -291,17 +303,10 @@ I will let you read this at home. In the meantime, here are two examples.
 > 7. How many injured people were there per country according to the database?
 > 8. Plot the distribution of the number of injured people (Hint: use the command "kdensity").
 > 9. Make a histogram of the number of incidents for the top-10 countries with the most incidents.
+> 10. What country characteristics could explain social unrest? 
+> 11. How does social unrest relate to the business cycle? (Hint: install hp-filter!)
 >
 > Solutions are here: "./social_unrest_project/code/part_2_solutions.do"
-
-
-## III. Thinking About Data
-
-- What country characteristics could explain social unrest? (merge with socio-economic data for each country)
-
-- How does social unrest relate to the business cycle? (make them install a hp filter program)
-
---> To seriously answer these questions, you need to pay attention in your econometrics lecture!
 
 ### III. More Advanced Considerations
 
