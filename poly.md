@@ -297,7 +297,9 @@ help graph
 
 I will let you read this at home. In the meantime, here are some examples:
 
----
+<details>
+<summary>Click here to see examples.</summary>
+
 **Example: Graphs Related to Social Unrest**
 
 ```
@@ -313,7 +315,7 @@ I will let you read this at home. In the meantime, here are some examples:
 
 ``` 
 
----
+</details>
 
 ### 6. Regression Analysis
 
