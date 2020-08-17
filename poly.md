@@ -390,9 +390,10 @@ All this may sound ridiculous at first, but consider this:
 1. You will be working in teams in the future, and many colleagues may have to fix your code at some point. 
 2. Sometimes, you will go back to code you wrote months or years before, and wish you had not called all your economic variables "x","y" and "z", instead of "gdp", "population" and "gini_index". 
 
-> **Example: Computing Sequences**
->
->
+~~~
+**Example: Computing Sequences**
+~~~
+
 
 ##### 2. More advanced considerations
 
