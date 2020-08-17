@@ -276,11 +276,14 @@ If you want to enrich your database with complementary information, you need to 
 help merge
 ```
 
-> **Example: Add Each Country's Yearly GDP**
+---
+**Example: Add Each Country's Yearly GDP**
 
 ```
 merge
 ```
+
+---
 
 ### 5. Graphs
 
@@ -294,7 +297,8 @@ help graph
 
 I will let you read this at home. In the meantime, here are some examples:
 
-> **Example: Graphs Related to Social Unrest**
+---
+**Example: Graphs Related to Social Unrest**
 
 ```
 * Number of recorded incidents per year
@@ -309,6 +313,8 @@ I will let you read this at home. In the meantime, here are some examples:
 
 ``` 
 
+---
+
 ### 6. Regression Analysis
 
 <span style="color:#59afe1"> Create a do-file "part_2_regressions.do". </span>
@@ -321,7 +327,10 @@ help regress
 
 I will let you read this for your econometrics class. In the meantime, here is a complete working example:
 
-> **Example: Estimating a Regression Model**
+---
+**Example: Estimating a Regression Model**
+
+---
 
 ```
 * What country characteristics could explain social unrest? 
@@ -340,7 +349,10 @@ To install such packages:
 help ssc install 
 ```
 
-> **Example: Computing Business Cycles**
+---
+**Example: Computing Business Cycles**
+
+---
 
 ```
 ssc install hprescott
@@ -400,22 +412,24 @@ All this may sound ridiculous at first, but consider this:
 
 - **Automation**: It's OK to be lazy, but in a smart way. You should always follow the DRY principle (don't repeat yourself), also known as DIE (duplication is evil). This will allow your code to be *reusable* for other projects by yourself and other people. What looks like a waste of time at first becomes a fruitful investment.
 
-> **Example: Writing a Program**
->
->
+---
+**Example: Writing a Program**
 
+---
 
-> **Example: Looping**
->
->
+---
+**Example: Looping**
+
+---
 
 
 - **Efficiency**: Some projects will require very large computational power. There are many ways to do the same task, try to go for the most efficient 
 solution whenever possible, as this will increase the *scalability* of your code. 
 
-> **Example: Monte Carlo Simulations**
->
->
+---
+**Example: Monte Carlo Simulations**
+
+---
 
 
 ## Additional Material 
