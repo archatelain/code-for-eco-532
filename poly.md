@@ -298,6 +298,12 @@ In some cases, you will want to enrich your database with complementary informat
 help merge
 ```
 
+> **Example: Add Each Country's Yearly GDP**
+
+```
+merge
+```
+
 ### 5. Graphs
 
 Create a do-file "part_2_graphs.do".
@@ -309,6 +315,8 @@ help graph
 ```
 
 I will let you read this at home. In the meantime, here are some examples:
+
+> **Example: Graphs Related to Social Unrest**
 
 ```
 * Number of recorded incidents per year
@@ -336,6 +344,8 @@ help regress
 
 I will let you read this for your econometrics class. In the meantime, here is a complete working example:
 
+> **Example: Estimating a Regression Model**
+
 ```
 * What country characteristics could explain social unrest? 
 
@@ -353,7 +363,7 @@ To install such packages:
 help ssc install 
 ```
 
-Say for instance that I would like to apply the Hodrick-Prescott filter to get a sense of business cycle fluctuations:
+> **Example: Computing Business Cycles**
 
 ```
 ssc install hprescott
