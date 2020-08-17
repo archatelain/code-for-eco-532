@@ -89,7 +89,7 @@ display "Just kidding. See you around, human."
 
 You can run the do-file by clicking on "Execute (do)".
 
-As you are likely to write multiple scripts for multiple subtasks in your project, it is good practice to have one script call all the other scripts of your project. In this way, instead of executing manually all your scripts one by one, you can simply execute this overarching script.
+As you are likely to write multiple scripts for multiple subtasks in your project, it is good practice to have one script call all the other scripts of your project. In this way, instead of executing manually all your scripts one by one, you can simply execute this overarching script to replicate your results.
 
 <span style="color:#59afe1"> Create a script called "main.do" in your directory. </span>
 
@@ -276,8 +276,7 @@ If you want to enrich your database with complementary information, you need to 
 help merge
 ```
 
----
-**Example: Add Each Country's Yearly GDP**
+In the code snippet below, I enrich the SPEED database with yearly GDP measures for each country:
 
 ```
 merge
@@ -360,12 +359,12 @@ log close
 
 Congrats! You have just conducted and fully automated your first econometric project!
 
-### III. Rules to live by
+## III. Rules to live by
 
 Getting the computer to do what you want is good, but you should also take other factors into consideration. 
 Here are the core rules to have in mind when you write some code.
 
-##### 1. Your code should not be hieroglyphs!
+#### 1. Your code should not be hieroglyphs!
 
 Anyone should be able to get a grasp of your code without reading the documentation. 
  
@@ -477,7 +476,7 @@ compute_hexagonal_sequence 100
 
 </details>
 
-##### 2. More advanced considerations
+#### 2. More advanced considerations
 
 - **Automation**: It's OK to be lazy, but in a smart way. You should always follow the DRY principle (don't repeat yourself), also known as DIE (duplication is evil). This will allow your code to be *reusable* for other projects by yourself and other people. What looks like a waste of time at first becomes a fruitful investment.
 
@@ -561,6 +560,7 @@ killer_robot 10
 <details>
 <summary>Click here to see a detailed higher level example.</summary>
 
+```
 /* 
 
 In this script, I perform Monte Carlo Simulations to check that the average of 
@@ -659,6 +659,7 @@ second solution.
 
 timer list 1
 timer list 2
+```
 
 </details>
 
