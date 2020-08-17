@@ -164,15 +164,20 @@ Database Project (SPEED).
 
 In part I, the subdirectory "./basics" looked like this:
 
+```
+
 |-- basics
    |-- killer_robot.do
    |-- main.do
    |-- logs
        |-- main_log.smcl
+```
 
 Now that we are going to work with real data, we are likely to create much more files than previously (e.g. graphs, tables, etc.).
 Keeping track of all files will require some extra bookkeeping. 
 The subdirectory for part II is "./social_unrest_project/" and it will eventually look like this:
+
+```
 
 |-- social_unrest_project
    |-- data
@@ -188,7 +193,7 @@ The subdirectory for part II is "./social_unrest_project/" and it will eventuall
        |-- graphs
    |-- logs
        |-- main_log.smcl
-
+```
 
 To follow along, create a do-file "part_2_essentials.do" and save it in "./social_unrest_project/code/".
 
