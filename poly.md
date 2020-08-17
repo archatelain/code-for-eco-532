@@ -1,38 +1,26 @@
 # A Gentle Introduction to Working with Data
 
-## Introduction
+## Why Are We Here?
 
-As for most scientific endeavors, the accumulation of knowledge in economics is based on a permanent "back and forth" 
-movement between economic theory and empirical observations. Researchers typically:
+As for most scientific endeavors, the accumulation of knowledge in economics is based on a permanent "back and forth" movement between economic theory and empirical observations. Researchers typically:
 1. Observe an empirical pattern;
 2. Try to build a theory which explains this stylized fact;
 3. Empirically test the theory's predictions to confirm or invalidate their understanding of the phenomenon.
 
-Since the 1990s, the amount of data at our disposal has drastically increased, opening new avenues to find surprising stylized facts and test past theories. 
-**In turn, this means you are more than likely to work with data at some point in your career as an economist.**
+Since the 1990s, the amount of data at our disposal has drastically increased, opening new avenues to find surprising stylized facts and test past theories. **In turn, this means you are more than likely to work with data at some point in your career as an economist.**
 
-Unsurprisingly, as more and more academics work with observational data, standards and best practices are progressively 
-emerging to ensure the transparency and replicability of research papers. In fact, an increasing number of top journals
-require academics to provide detailed replication folders prior to publication (https://www.aeaweb.org/journals/policies/data-code).
-**In the future, you will need to meet these standards.**
+Unsurprisingly, as more and more academics work with observational data, standards and best practices are progressively emerging to ensure the transparency and replicability of research papers. In fact, an increasing number of top journals require academics to provide detailed replication folders prior to publication (https://www.aeaweb.org/journals/policies/data-code). **In the future, you will need to meet these standards.**
 
 The purpose of this mini-lecture is to provide you with a gentle introduction to working with data in economics. In this course, you will:
 1. Find general advice on writing and thinking about code;
 2. Get a general overview of how an applied econometric project is structured;
 3. Learn to work with the simplest (and commonly used) statistical programming software, namely Stata.
 
-Note that this lecture is not intended as an econometrics course. Though a basic understanding of statistics is required, we will not spend time 
-on econometric theory. Note also that this lecture does not pretend to be comprehensive. Among the material which is not covered, 
-several object-oriented programming languages have gained traction in the private sector as well as in academic circles (in particular Python and R), 
-and you will likely stumble upon such languages during your education and career. In the Master in Economics, several courses are taught in R
-or Python, which will allow you to get acquainted with these languages. Keep in mind that most of the concepts and tips in this lecture may be 
-transposed to more advanced programming languages.
+Note that this lecture is not intended as an econometrics course. Though a basic understanding of statistics is required, we will not spend time on econometric theory. Note also that this lecture does not pretend to be comprehensive. Among the material which is not covered,  several object-oriented programming languages have gained traction in the private sector as well as in academic circles (in particular Python and R), and you will likely stumble upon such languages during your education and career. In the Master in Economics, several courses are taught in R or Python, which will allow you to get acquainted with these languages. Keep in mind that most of the concepts and tips in this lecture may be transposed to more advanced programming languages.
 
 ## I. The Basics
 
-You get why you're here now. So how do we work with data? Well, if you're Rain Man, I guess you could use a piece of paper. 
-For all the others, I would recommend to have a computer do the work for you. 
-Open Stata to get started.
+You get why you're here now. So how do we work with data? Well, if you're Rain Man, I guess you could use a piece of paper. For all the others, I would recommend to have a computer do the work for you. Open Stata to get started.
 
 > **What is Stata?**
 > 
@@ -57,16 +45,13 @@ it, then you need to consider alternatives (examples of unstructured data: socia
 
 > A directory is a folder in which you store various files related to your project.
 
-You will need to store your work somewhere (e.g. your data sources, scripts and results). Download the folder code-for-econometrics-101 from this git repo. 
-This will be the main directory of this mini-course. Then create a subfolder named "basics" in the main directory. 
-We will work in this subdirectory for part I.
+You will need to store your work somewhere (e.g. your data sources, scripts and results). Download the folder code-for-econometrics-101 from this git repo. This will be the main directory of this mini-course. Then create a subfolder named "basics" in the main directory. We will work in this subdirectory for part I.
 
 #### 1.2. The command line
 
 > *"A command-line interface (CLI) processes commands to a computer program in the form of lines of text." (Wikipedia)*
 
-You interact with the computer through the **command line**. The command line is the interface which translates the operations you would like the 
-computer to perform into something the computer can understand. 
+You interact with the computer through the **command line**. The command line is the interface which translates the operations you would like the computer to perform into something the computer can understand. 
 
 In Stata, the command line is a box at the bottom of the interface. Type the following command and see what happens:
 
@@ -78,10 +63,9 @@ display "This is a test."
 
 > A script is a text file in which are written series of ordered commands to the command line. 
 
-In most projects, you will likely ask many things to the computer (e.g. format the data, compute things, output the results, etc.), which will result into
-multiple commands. **Scripts** help you keep track of the commands sent to the computer through the command line. 
+In most projects, you will likely ask many things to the computer (e.g. format the data, compute things, output the results, etc.), which will result into multiple commands. **Scripts** help you keep track of the commands sent to the computer through the command line. In Stata, scripts are called "do-files". 
 
-In Stata, scripts are called "do-files". At the top on the left of the interface, click on "New Do-File Editor" and write the following chunk of code:
+At the top on the left of the interface, click on "New Do-File Editor" and write the following chunk of code:
 
 ```
 display "Hello human. Thank you for creating me."
@@ -101,12 +85,15 @@ sleep 1000
 display "Just kidding. See you around, human."
 ```
 
-Now save your do-file as  "killer_robot.do" in your directory, and then run the do-file by clicking on "Execute (do)".
+<span style="color:#59afe1"> Now save your do-file as  "killer_robot.do" in your directory. </span> 
 
-As you are likely to write multiple scripts for multiple subtasks in your project, it is good practice to have one script call all the other scripts
-of your project. In this way, instead of executing manually all your scripts one by one, you can simply execute this overarching script.
+You can run the do-file by clicking on "Execute (do)".
 
-Create a script called "main.do" in your directory, and write this chunk of code:
+As you are likely to write multiple scripts for multiple subtasks in your project, it is good practice to have one script call all the other scripts of your project. In this way, instead of executing manually all your scripts one by one, you can simply execute this overarching script.
+
+<span style="color:#59afe1"> Create a script called "main.do" in your directory. </span>
+
+Write this chunk of code:
 
 ```
 do "killer_robot.do"
@@ -125,8 +112,7 @@ do "and_so_on_and_so_forth.do"
 
 > *"In computing, a log file is a file that records [...] events that occur in an operating system or other software runs." (Wikipedia)*
 
-I hate to break it out to you, but more often than not, things will go wrong. **Log files** help you keep track of what the computer did and 
-whether it flagged some errors. Edit your "main.do" file to look like this:
+I hate to break it out to you, but more often than not, things will go wrong. **Log files** help you keep track of what the computer did and whether it flagged some errors. Edit your "main.do" file to look like this:
 
 ```
 log using "./logs/main_log", replace
@@ -140,8 +126,7 @@ Congrats! You've just written your first fully automated code pipeline!
 
 ### 2. Asking for Help
 
-You will never know all the commands, so learn to search efficiently. Most programming languages or script-based softwares have a dedicated command to 
-access the documentation.
+You will never know all the commands, so learn to search efficiently. Most programming languages or script-based softwares have a dedicated command to access the documentation.
 
 In Stata, you may type "help *your_command*" to access the documentation for *your_command*.  
 
@@ -155,8 +140,7 @@ In Stata, you may type "help *your_command*" to access the documentation for *yo
 
 ## II. Exploring a Dataset
 
-We are now ready to work with a real data set and explore Stata's functionalities. We will work with the Social, Political and Economic Event 
-Database Project (SPEED).  
+We are now ready to work with a real data set and explore Stata's functionalities. We will work with the Social, Political and Economic Event Database Project (SPEED).  
 
 > **The SPEED Database**
 >
@@ -172,9 +156,7 @@ In part I, the subdirectory "./part_1_basics" looked like this:
        |-- main_log.smcl
 ```
 
-Now that we are going to work with real data, we are likely to create much more files than previously (e.g. graphs, tables, etc.).
-Keeping track of all files will require some extra bookkeeping. 
-The subdirectory for part II is "./part_2_social_unrest_project/" and it will eventually look like this:
+Now that we are going to work with real data, we are likely to create much more files than previously (e.g. graphs, tables, etc.). Keeping track of all files will require some extra bookkeeping. The subdirectory for part II is "./part_2_social_unrest_project/" and it will eventually look like this:
 
 ```
 |-- part_2_social_unrest_project
@@ -194,9 +176,12 @@ The subdirectory for part II is "./part_2_social_unrest_project/" and it will ev
        |-- main_log.smcl
 ```
 
-To follow along, create a do-file "part_2_essentials.do" and save it in "./part_2_social_unrest_project/code/".
+<span style="color:#59afe1"> To follow along, create a do-file "part_2_essentials.do" </span>
+
+Save it in "./part_2_social_unrest_project/code/".
 
 ### 1. Loading Data 
+
 You first need to load the database into Stata. In order to do this, run the following command:
 
 ```
@@ -217,24 +202,17 @@ As you can see, each column represents a variable, and each row an observation. 
 describe
 ```
 
-There are 62,141 observations in the database and 106 variables. Each variable has a name, a type and a label. The variable name is 
-the name you should use to perform operations on the variable. The variable's type determines how the data will be stored (e.g. integer, 
-float, string, etc.). This is somewhat constraining: for instance, a variable cannot jointly display character and numeric values, 
-but only one of the two. For more information on variable storage types:
+There are 62,141 observations in the database and 106 variables. Each variable has a name, a type and a label. The variable name is the name you should use to perform operations on the variable. The variable's type determines how the data will be stored (e.g. integer, float, string, etc.). This is somewhat constraining: for instance, a variable cannot jointly display character and numeric values, but only one of the two. For more information on variable storage types:
 
 ```
 help data_types
 ```
 
-The variable's label is for human comprehension. You want variable names to be clear, but rather short, so you can add more information if 
-needed in the variable's label. Variables may be easily created and labeled using the "generate" and "label" commands:
+The variable's label is for human comprehension. You want variable names to be clear, but rather short, so you can add more information if needed in the variable's label. Variables may be easily created and labeled. 
+
+For example, in the code snippet below, I generate draws from a normal distribution with mean 0 and standard deviation 1. I name the variable X, and I label it "draws from a normal distribution N(0,1)":
 
 ```
-/*
-I generate draws from a normal distribution with mean 0 and standard deviation 1.
-I name the variable X, and I label it "draws from a normal distribution N(0,1)"
-*/
-
 generate X = rnormal(0,1)
 label variable X "draws from a normal distribution N(0,1)"
 ```
@@ -246,7 +224,7 @@ tabulate country
 summarize N_INJURD
 ```
 
-Sometimes, you might want to look at the options for each command. Options are specified with a comma:
+Commands usually come with options detailed in the documentation. Options are specified with a comma:
 
 ```
 help tabulate
@@ -292,7 +270,7 @@ restore
 
 ### 4. Combining Multiple Datasets
 
-In some cases, you will want to enrich your database with complementary information. To merge two datasets:
+If you want to enrich your database with complementary information, you need to merge datasets:
 
 ```
 help merge
@@ -306,7 +284,7 @@ merge
 
 ### 5. Graphs
 
-Create a do-file "part_2_graphs.do".
+<span style="color:#59afe1"> Create a do-file "part_2_graphs.do". </span>
 
 There's nothing like a good graph to get your point across. To have a look at the complete documentation on graphs in Stata, type:
 
@@ -333,10 +311,9 @@ I will let you read this at home. In the meantime, here are some examples:
 
 ### 6. Regression Analysis
 
-Create a do-file "part_2_regressions.do".
+<span style="color:#59afe1"> Create a do-file "part_2_regressions.do". </span>
 
-Regression analysis is at the core of econometric theory. You will see the ins and outs of this tool in your econometrics courses. To estimate 
-regression models in Stata:
+Regression analysis is at the core of econometric theory. You will see the ins and outs of this tool in your econometrics courses. To estimate regression models in Stata:
 
 ```
 help regress
@@ -371,7 +348,7 @@ ssc install hprescott
 
 ### Putting the Pieces Together
 
-We've done a bunch of scripts, let's wrap all these do-files into a "main.do":
+We've done a bunch of scripts. <span style="color:#59afe1"> To automate the replication of results, let's wrap all these do-files into a "main.do": </span>
 
 ```
 clear all 
@@ -391,13 +368,11 @@ Here are the core rules to have in mind when you write some code.
 
 ##### 1. Your code should not be hieroglyphs!
 
-Anyone should be able to read your code without reading the documentation. 
+Anyone should be able to get a grasp of your code without reading the documentation. 
  
 - **Clarity**: Name your variables, functions and classes with explicit titles. 
-- **Consistency**: Be consistent in your coding style (e.g. If all the sequences you have coded up-to-now are named "sequ_fibonacci", "sequ_hexagonal", etc. 
-Don't name the next sequence "quadratic_sequ".)
-- **Simplicity**: Add comments when needed, but do not comment obvious operations as this will 
-overburden the reader with superfluous information. To write a comment within your script, combine asterisks and forward slashes:
+- **Consistency**: Be consistent in your coding style (e.g. If all the sequences you have coded up-to-now are named "sequ_fibonacci", "sequ_hexagonal", etc. Don't name the next sequence "quadratic_sequ".)
+- **Simplicity**: Add comments when needed, but do not comment obvious operations as this will overburden the reader with superfluous information. In Stata, to write a comment within your script, combine asterisks and forward slashes:
 
 ```
 /* 
@@ -413,8 +388,7 @@ Comments can be written over multiple lines and be as long as you wish (but plea
 
 All this may sound ridiculous at first, but consider this: 
 1. You will be working in teams in the future, and many colleagues may have to fix your code at some point. 
-2. Sometimes, you will go back to code you wrote months or years before, and wish you had not called all your economic variables "x","y" and "z", 
-instead of "gdp", "population" and "gini_index". 
+2. Sometimes, you will go back to code you wrote months or years before, and wish you had not called all your economic variables "x","y" and "z", instead of "gdp", "population" and "gini_index". 
 
 > **Example: Computing Sequences**
 >
@@ -422,9 +396,7 @@ instead of "gdp", "population" and "gini_index".
 
 ##### 2. More advanced considerations
 
-- **Automation**: It's OK to be lazy, but in a smart way. You should always follow the DRY principle (don't repeat yourself), also known as DIE 
-(duplication is evil). This will allow your code to be *reusable* for other projects by yourself and other people. What looks like a waste of time at first
-becomes a fruitful investment.
+- **Automation**: It's OK to be lazy, but in a smart way. You should always follow the DRY principle (don't repeat yourself), also known as DIE (duplication is evil). This will allow your code to be *reusable* for other projects by yourself and other people. What looks like a waste of time at first becomes a fruitful investment.
 
 > **Example: Writing a Program**
 >
