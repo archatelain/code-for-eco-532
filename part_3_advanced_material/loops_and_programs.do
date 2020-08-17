@@ -7,6 +7,26 @@ efficiently.
 
 /* WRITING A PROGRAM */
 
+/*
+Killer robot 
+*/
+
+capture program drop killer_robot
+program killer_robot 
+    display "Hello human. Thank you for creating me."
+    sleep 5000
+    display "I will now proceed to destroy the world."
+    display "..."
+    foreach i of num 1/`1'{
+        display "`i'"
+        sleep 1000
+    } 
+    display "Just kidding. See you around, human."
+end
+
+killer_robot 10
+
+
 /* 
 This program repeats the phrase it is provided with.
 */

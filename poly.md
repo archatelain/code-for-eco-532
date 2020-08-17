@@ -297,11 +297,6 @@ help graph
 
 I will let you read this at home. In the meantime, here are some examples:
 
-<details>
-<summary>Click here to see examples.</summary>
-
-**Example: Graphs Related to Social Unrest**
-
 ```
 * Number of recorded incidents per year
 
@@ -315,8 +310,6 @@ I will let you read this at home. In the meantime, here are some examples:
 
 ``` 
 
-</details>
-
 ### 6. Regression Analysis
 
 <span style="color:#59afe1"> Create a do-file "part_2_regressions.do". </span>
@@ -328,11 +321,6 @@ help regress
 ```
 
 I will let you read this for your econometrics class. In the meantime, here is a complete working example:
-
----
-**Example: Estimating a Regression Model**
-
----
 
 ```
 * What country characteristics could explain social unrest? 
@@ -351,10 +339,7 @@ To install such packages:
 help ssc install 
 ```
 
----
-**Example: Computing Business Cycles**
-
----
+Here is a complete working example:
 
 ```
 ssc install hprescott
@@ -404,34 +389,278 @@ All this may sound ridiculous at first, but consider this:
 1. You will be working in teams in the future, and many colleagues may have to fix your code at some point. 
 2. Sometimes, you will go back to code you wrote months or years before, and wish you had not called all your economic variables "x","y" and "z", instead of "gdp", "population" and "gini_index". 
 
----
-**Example: Computing Sequences**
 
----
+<details>
+<summary>Click here to see a detailed higher level example.</summary>
 
+```
+/* 
+In this do-file, I show different implementations of the Fibonacci sequence 
+and the hexagonal sequence.
+
+The Fibonacci sequence is defined as follows:
+U_0 = 1 
+U_1 = 1
+U_n = U_[n-1] + U_[n-2] if n > 1
+
+The hexagonal sequence is defined as follows:
+U_n = 2*n^2 - n for all n >= 0
+
+*/
+
+clear all
+
+*************************************************************************
+* POOR CODE (do not try this at home!)
+*************************************************************************
+
+program f_sequ /* makes program */
+args n /* argument of the program */
+qui set obs `n'
+qui gen a=1 /* initialize */
+qui replace a=a[_n-1]+a[_n-2] in 3/l /* compute sequence based on the formula */
+end
+
+f_sequ 100
+
+program sequ_h /* makes program */
+args n /* argument of the program */
+qui set obs `n'
+gen b = 2*_n^2 - _n /* compute sequence based on the formula */
+end
+
+sequ_h 100
+
+*************************************************************************
+* NEAT CODE (I already feel better!)
+*************************************************************************
+
+/*
+This program computes the Fibonacci sequence up to a specified value of n.
+
+The Fibonacci sequence is defined as follows:
+U_0 = 1 
+U_1 = 1
+U_n = U_[n-1] + U_[n-2] if n > 1
+
+Input = value of n (integer)
+Output = variable 'fibonacci' with n ordered values of Fibonacci's sequence. 
+*/
+
+program compute_fibonacci_sequence
+args n
+qui set obs `n'
+qui gen fibonacci = 1
+qui replace fibonacci=fibonacci[_n-1]+fibonacci[_n-2] in 3/l
+end
+
+compute_fibonacci_sequence 100
+
+/*
+This program computes the hexagonal sequence up to a specified value of n.
+
+The hexagonal sequence is defined as follows:
+U_n = 2*n^2 - n for all n >= 0
+
+Input = value of n (integer)
+Output = variable 'hexagonal' with n ordered values of the hexagonal sequence. 
+*/
+
+program compute_hexagonal_sequence 
+args n 
+qui set obs `n'
+gen hexagonal = 2*_n^2 - _n 
+end
+
+compute_hexagonal_sequence 100
+```
+
+</details>
 
 ##### 2. More advanced considerations
 
 - **Automation**: It's OK to be lazy, but in a smart way. You should always follow the DRY principle (don't repeat yourself), also known as DIE (duplication is evil). This will allow your code to be *reusable* for other projects by yourself and other people. What looks like a waste of time at first becomes a fruitful investment.
 
----
-**Example: Writing a Program**
+Loops are a useful tool to avoid repeating yourself:
 
----
+```
+help foreach
+```
 
----
-**Example: Looping**
+Remember our killer robot which counts to five? We could write a loop instead of manually writing the counting 
+process:
 
----
+```
+display "Hello human. Thank you for creating me."
+sleep 5000
+display "I will now proceed to destroy the world."
+display "..."
+foreach i of num 1/5{
+	display "`i'"
+	sleep 1000
+} 
+display "Just kidding. See you around, human."
+```
 
+A more hands-on example with the SPEED database: 
 
-- **Efficiency**: Some projects will require very large computational power. There are many ways to do the same task, try to go for the most efficient 
-solution whenever possible, as this will increase the *scalability* of your code. 
+```
+/*
+In this do-file, I plot the number of recorded incidents per year for each country in the SPEED database.
+*/
 
----
-**Example: Monte Carlo Simulations**
+clear all
 
----
+use "../data/ssp_public.dta", clear
+
+replace country = subinstr(country, "(", "", .) 
+replace country = subinstr(country, ")", "", .) 
+replace country = subinstr(country, ",", "", .) 
+replace country = subinstr(country, " ", "", .) 
+replace country = subinstr(country, ".", "", .) 
+
+levelsof country, local (lev) 
+foreach mycountry in `lev' {
+	preserve
+	display "`mycountry'"
+	keep if country == "`mycountry'"
+	bysort year: gen n_events = _N
+	graph twoway (line n_events year), ytitle("Number of Events") xtitle("Year") note("Source: SPEED Database") 
+	graph export "../output/graphs/yearly_events_`mycountry'.pdf", replace
+	restore
+}
+```
+
+You can also write user-defined functions in Stata which take arguments as inputs:
+
+```
+help program
+```
+
+For example, we could make a program out of our killer robot, which takes as input the integer up to which the robot will count to:
+
+```
+capture program drop killer_robot
+program killer_robot 
+    display "Hello human. Thank you for creating me."
+    sleep 5000
+    display "I will now proceed to destroy the world."
+    display "..."
+    foreach i of num 1/`1'{
+        display "`i'"
+        sleep 1000
+    } 
+    display "Just kidding. See you around, human."
+end
+
+killer_robot 10
+```
+
+- **Efficiency**: Some projects will require very large computational power. There are many ways to do the same task, try to go for the most efficient solution whenever possible, as this will increase the *scalability* of your code. 
+
+<details>
+<summary>Click here to see a detailed higher level example.</summary>
+
+/* 
+
+In this script, I perform Monte Carlo Simulations to check that the average of 
+a sample is a good estimator for the mean when the true DGP is a normal 
+distribution N(0,1).
+
+To this end, I follow the steps below: 
+- Step 1: I draw k = 1000 observations from a normal distribution N(0,1).
+- Step 2: I take the sample average and store the value.
+- Step 3: I repeat this process n = 1000 times.
+- Step 4: I then look at the average of the sample averages. 
+
+If the average of the sample averages is is close to zero, this indicates 
+the the sample average is a good estimator of the mean.
+
+*/
+
+clear all
+set seed 12345
+
+/* 
+
+Step 1: I draw k = 1000 observations from a normal distribution N(0,1).
+Step 2: I take the sample average and store the value.
+
+*/
+
+quietly drop _all
+quietly set obs 1000
+quietly generate y = rnormal(0,1)
+quietly mean y
+display _b[y]
+
+/* 
+
+Step 3: I repeat this process n = 1000 times.
+
+Of course, to repeat steps 1 and 2 n = 1000 times, I could simply copy paste
+the piece of code above 1000 times. 
+
+A bit cumbersome, don't you think?
+
+Here's a smarter, more efficient way to do this.
+
+*/ 
+
+timer on 1
+
+postfile buffer mhat using "./temp/monte_carlo_simulations.dta", replace
+
+forvalues i=1/1000 {
+quietly drop _all
+quietly set obs 1000
+quietly generate y = rnormal(0,1)
+quietly mean y
+post buffer (_b[y])
+}
+
+postclose buffer
+
+use "./temp/monte_carlo_simulations.dta", clear
+
+summarize
+
+timer off 1
+
+/* 
+
+And here's an even smarter way to do this! 
+
+*/
+
+timer on 2
+
+capture program drop make_simulation
+program define make_simulation, rclass
+	quietly drop _all
+	quietly set obs 1000
+	quietly generate y = rnormal(0,1)
+	summarize y
+	return scalar mean = r(mean)
+end
+
+simulate ymean=r(mean), reps(1000): make_simulation
+
+summarize
+
+timer off 2
+
+/* 
+
+You don't believe me? Check out the computation times for the first and the
+second solution.
+
+*/
+
+timer list 1
+timer list 2
+
+</details>
 
 
 ## Additional Material 
