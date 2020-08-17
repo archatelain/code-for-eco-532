@@ -1,6 +1,4 @@
 # A Gentle Introduction to Working with Data
-## Institutions: Ecole Polytechnique // Institut Polytechnique de Paris
-## Teacher: Germain Gauthier
 
 ## Why Are We Here?
 
@@ -347,7 +345,7 @@ Regression analysis is at the core of econometric theory. You will see the ins a
 help regress
 ```
 
-I will let you read this for your econometrics class. In the meantime, here is a complete working example:
+I will let you read this for your econometrics class. In the meantime, here is a working example:
 
 ```
 * What country characteristics could explain social unrest? 
@@ -409,12 +407,12 @@ duplicates drop
 drop if hpres == 0
 
 graph twoway (line hpres year) (line hpsm year) ///
-if country == "United States", ytitle ("Trend and Cycle") ///
-xtitle ("Year") note("Penn World Table Database")
+if country == "United States", ytitle ("Trend and Cycle") /// 
+note("Penn World Table Database")
 graph export "../output/graphs/US_hp_filter.pdf", replace
 
 graph twoway (scatter hpres n_events) (lfit hpres n_events), ///
-ytitle ("Business Cycle") xtitle ("Number of Social Unrest Episodes") ///
+ytitle ("Business Cycle") ///
 note("Penn World Table Database")
 graph export "../output/graphs/hp_filter_social_unrest.pdf", replace
 ```

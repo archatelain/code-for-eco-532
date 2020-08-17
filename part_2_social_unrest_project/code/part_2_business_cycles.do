@@ -28,12 +28,14 @@ keep country group_country year hpres hpsm n_events
 duplicates drop
 drop if hpres == 0
 
-graph twoway (line hpres year) (line hpsm year) ///
-if country == "United States", ytitle ("Trend and Cycle") ///
-xtitle ("Year") note("Penn World Table Database")
+graph twoway (line hpres year)(line hpsm year) if country == "United States", ///
+ytitle ("Trend and Cycle") ///
+xtitle ("Year") /// 
+note("Penn World Table Database")
 graph export "../output/graphs/US_hp_filter.pdf", replace
 
-graph twoway (scatter hpres n_events) (lfit hpres n_events), ///
-ytitle ("Business Cycle") xtitle ("Number of Social Unrest Episodes") ///
-note("Penn World Table Database")
+graph twoway (scatter hpres n_events)(lfit hpres n_events), ///
+ytitle ("Business Cycle") /// 
+xtitle ("Number of Social Unrest Episodes") ///
+note("Penn World Table Database") 
 graph export "../output/graphs/hp_filter_social_unrest.pdf", replace
