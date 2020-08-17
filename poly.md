@@ -14,7 +14,7 @@ Unsurprisingly, as more and more academics work with observational data, standar
 The purpose of this mini-lecture is to provide you with a gentle introduction to working with data in economics. In this course, you will:
 1. Find general advice on writing and thinking about code;
 2. Get a general overview of how an applied econometric project is structured;
-3. Learn to work with the simplest (and commonly used) statistical programming software, namely Stata.
+3. Learn to work with the simplest (and commonly used) statistical software, namely Stata.
 
 Note that this lecture is not intended as an econometrics course. Though a basic understanding of statistics is required, we will not spend time on econometric theory. Note also that this lecture does not pretend to be comprehensive. Among the material which is not covered,  several object-oriented programming languages have gained traction in the private sector as well as in academic circles (in particular Python and R), and you will likely stumble upon such languages during your education and career. In the Master in Economics, several courses are taught in R or Python, which will allow you to get acquainted with these languages. Keep in mind that most of the concepts and tips in this lecture may be transposed to more advanced programming languages.
 
@@ -24,7 +24,7 @@ You get why you're here now. So how do we work with data? Well, if you're Rain M
 
 > **What is Stata?**
 > 
-> *"Stata is a general-purpose statistical software package created in 1985 by StataCorp. Most of its users work in research, especially in the fields of economics, sociology, political science, biomedicine, and epidemiology.[2] Stata's capabilities include data management, statistical analysis, graphics, simulations, regression, and custom programming. It also has a system to disseminate user-written programs that lets it grow continuously. The name Stata is a syllabic abbreviation of the words statistics and data." (Wikipedia)*
+> *"Stata is a general-purpose statistical software package created in 1985 by StataCorp. Most of its users work in research, especially in the fields of economics, sociology, political science, biomedicine, and epidemiology. Stata's capabilities include data management, statistical analysis, graphics, simulations, regression, and custom programming. It also has a system to disseminate user-written programs that lets it grow continuously. The name Stata is a syllabic abbreviation of the words statistics and data." (Wikipedia)*
 >
 > It makes sense to begin with Stata for several reasons: 
 > - It is widely used by economists, so you need to understand its logic if you want to read most replication folders in the past decades.
@@ -32,12 +32,11 @@ You get why you're here now. So how do we work with data? Well, if you're Rain M
 > - The documentation is neat, and commands as well as add-on packages are very reliable.
 > - Most cutting edge econometric techniques are already implemented (which is not necessarily the case in other languages/softwares).	
 >
-> Nonetheless, Stata does have some limitations:
-> - Stata is a software, not a programming language. It is more limited than R or Python. For web-scraping, machine learning, developing apps... 
-You have knocked on the wrong door.
+> Nonetheless, Stata does have some limitations/drawbacks:
+> - Stata is not open-source and costs money.
+> - Stata is a software, not a programming language. It is more limited than R or Python. For web-scraping, machine learning, developing apps... You have knocked on the wrong door.
 > - Stata has its own logic for data manipulation, which makes it easy-to-use but rather counter-intuitive once you look at more advanced alternatives.
-> - Stata is built to analyze structured datasets. If you want to recover unstructured data to later clean it up, output a structured dataset, and analyze 
-it, then you need to consider alternatives (examples of unstructured data: social media data, google queries, online purchases, text data in general). 
+> - Stata is built to analyze structured datasets. If you want to recover unstructured data to later clean it up, output a structured dataset, and analyze it, then you need to consider alternatives (examples of unstructured data: social media data, google queries, online purchases, text data in general). 
 
 ### 1. Key Concepts 
 
@@ -85,13 +84,13 @@ sleep 1000
 display "Just kidding. See you around, human."
 ```
 
-<span style="color:#59afe1"> Now save your do-file as  "killer_robot.do" in your directory. </span> 
+Now save your do-file as  "killer_robot.do" in your directory. 
 
 You can run the do-file by clicking on "Execute (do)".
 
 As you are likely to write multiple scripts for multiple subtasks in your project, it is good practice to have one script call all the other scripts of your project. In this way, instead of executing manually all your scripts one by one, you can simply execute this overarching script to replicate your results.
 
-<span style="color:#59afe1"> Create a script called "main.do" in your directory. </span>
+Create a script called "main.do" in your directory. 
 
 Write this chunk of code:
 
@@ -128,15 +127,11 @@ Congrats! You've just written your first fully automated code pipeline!
 
 You will never know all the commands, so learn to search efficiently. Most programming languages or script-based softwares have a dedicated command to access the documentation.
 
-In Stata, you may type "help *your_command*" to access the documentation for *your_command*.  
+In Stata, you may type "help *your_command*" to access the documentation for *your_command*. For example:
 
-> **The Stata "help" command**
->
-> Open a do-file in stata and type the following piece of code:
->
-> ```
-> help rnormal
-> ```	
+```
+help rnormal
+```	
 
 ## II. Exploring a Dataset
 
@@ -163,7 +158,8 @@ Now that we are going to work with real data, we are likely to create much more 
    |-- data
        |-- SPEED-Codebook.pdf
        |-- ssp_public.dta
-       |-- country_gdps.dta
+       |-- pwt91_user_guide_to_data_files.pdf
+       |-- pwt91.dta
    |-- code
        |-- part_2_essentials.do
        |-- part_2_graphs.do
@@ -176,7 +172,7 @@ Now that we are going to work with real data, we are likely to create much more 
        |-- main_log.smcl
 ```
 
-<span style="color:#59afe1"> To follow along, create a do-file "part_2_essentials.do" </span>
+To follow along, create a do-file "part_2_essentials.do".
 
 Save it in "./part_2_social_unrest_project/code/".
 
@@ -260,11 +256,13 @@ To keep specific observations:
 keep if country == "United States"
 ```
 
-Sometimes, you will want to do several operations on a database (which will mess it up), but keep a copy of the original data:
+Sometimes, you will want to do several operations on a database (which will mess it up), but keep a copy of the original data. Here's an example:
 
 ```
-preserve 
-*your operations
+preserve
+bysort year: gen n_yearly_incidents = _N
+collapse (mean) n_yearly_incidents, by(year)
+summarize n_yearly_incidents
 restore
 ```
 
@@ -279,14 +277,12 @@ help merge
 In the code snippet below, I enrich the SPEED database with yearly GDP measures for each country:
 
 ```
-merge
+merge n:1 country year using "../data/pwt91.dta" 
 ```
-
----
 
 ### 5. Graphs
 
-<span style="color:#59afe1"> Create a do-file "part_2_graphs.do". </span>
+Create a do-file "part_2_graphs.do". 
 
 There's nothing like a good graph to get your point across. To have a look at the complete documentation on graphs in Stata, type:
 
@@ -311,7 +307,7 @@ I will let you read this at home. In the meantime, here are some examples:
 
 ### 6. Regression Analysis
 
-<span style="color:#59afe1"> Create a do-file "part_2_regressions.do". </span>
+Create a do-file "part_2_regressions.do".
 
 Regression analysis is at the core of econometric theory. You will see the ins and outs of this tool in your econometrics courses. To estimate regression models in Stata:
 
@@ -346,7 +342,7 @@ ssc install hprescott
 
 ### Putting the Pieces Together
 
-We've done a bunch of scripts. <span style="color:#59afe1"> To automate the replication of results, let's wrap all these do-files into a "main.do": </span>
+We've done a bunch of scripts. To automate the replication of results, let's wrap all these do-files into a "main.do":
 
 ```
 clear all 
@@ -484,6 +480,7 @@ Loops are a useful tool to avoid repeating yourself:
 
 ```
 help foreach
+help forvalues
 ```
 
 Remember our killer robot which counts to five? We could write a loop instead of manually writing the counting 
@@ -539,6 +536,14 @@ help program
 For example, we could make a program out of our killer robot, which takes as input the integer up to which the robot will count to:
 
 ```
+/*
+This program mimicks a killer robot which comes to life. 
+The robot threatens to destroy the world, counts up to a given integer, and finally says it is actually kidding.
+
+Input: an integer
+Output: a bad joke
+*/
+
 capture program drop killer_robot
 program killer_robot 
     display "Hello human. Thank you for creating me."
@@ -663,6 +668,20 @@ timer list 2
 
 </details>
 
+## Conclusion
+
+The key take-aways of this crash course:
+
+1. Don't work directly from the command line: use scripts to keep track of your work.
+2. Projects can be complex: organize your directory accordingly.
+3. For the sake of your future self and of your colleages, write decent, human readable code.
+
+Finally, though data manipulation is at the core of the economist's toolkit, keep in mind that:
+1. Data is not the absolute, immaculate, objective truth of the world. Always check your data sources and try to understand your database's limitations.
+2. Data by itself is absolutely meaningless. To extract meaningful insights from data, you will need a solid understanding of economic theory and econometrics.
+
+I hope you found this tutorial interesting. Feel free to send me any comments/questions by mail:
+germain.gauthier[at]polytechnique.edu
 
 ## Additional Material 
 
@@ -680,7 +699,7 @@ timer list 2
 
 **Stata**
 - User manual (https://www.stata.com/manuals13/u.pdf)
-- A more comprehensive and detailed course on Stata (https://data.princeton.edu/stata)
+- A comprehensive and detailed course on Stata (https://data.princeton.edu/stata)
 
 **Common (slightly more advanced) programming languages**
 - Python (https://tanthiamhuat.files.wordpress.com/2018/04/pythondatasciencehandbook.pdf)
