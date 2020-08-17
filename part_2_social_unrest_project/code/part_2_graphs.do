@@ -6,6 +6,11 @@ clear all
 
 use "../data/ssp_public.dta", clear
 
+graph twoway (scatter POL_VIOL N_INJURD)(lfit POL_VIOL N_INJURD) /// 
+if N_INJURD < 10000, ytitle("Political Violence") ///
+xtitle("# of People Injured") note("Source: SPEED Database") 
+
+/*
 * Questions 1 and 2
 tabulate country, plot
 tabulate region, sort

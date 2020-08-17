@@ -1,4 +1,6 @@
 # A Gentle Introduction to Working with Data
+## Institutions: Ecole Polytechnique // Institut Polytechnique de Paris
+## Teacher: Germain Gauthier
 
 ## Why Are We Here?
 
@@ -16,7 +18,17 @@ The purpose of this mini-lecture is to provide you with a gentle introduction to
 2. Get a general overview of how an applied econometric project is structured;
 3. Learn to work with the simplest (and commonly used) statistical software, namely Stata.
 
-Note that this lecture is not intended as an econometrics course. Though a basic understanding of statistics is required, we will not spend time on econometric theory. Note also that this lecture does not pretend to be comprehensive. Among the material which is not covered,  several object-oriented programming languages have gained traction in the private sector as well as in academic circles (in particular Python and R), and you will likely stumble upon such languages during your education and career. In the Master in Economics, several courses are taught in R or Python, which will allow you to get acquainted with these languages. Keep in mind that most of the concepts and tips in this lecture may be transposed to more advanced programming languages.
+A few disclaimers before we begin:
+- This lecture is not intended as an econometrics course. Though a basic understanding of statistics is required, we will not spend time on econometric theory. 
+- This lecture does not pretend to be comprehensive. Among the material which is not covered,  several object-oriented programming languages have gained traction in the private sector as well as in academic circles (in particular Python and R), and you will likely stumble upon such languages during your education and career. In the Master in Economics, several courses are taught in R or Python, which will allow you to get acquainted with these languages. Furthermore, most of the concepts and tips in this lecture may be transposed to more advanced programming languages.
+- Some of the code snippets in this tutorial are **hard** for beginners. They are here to give you a sense of what can be achieved with some experience. These scripts are hidden from the text, but may be consulted by clicking on them:
+
+<details>
+<summary>Click here to see a detailed higher level example.</summary>
+
+"Hard" code snippet in here!
+
+</details>
 
 ## I. The Basics
 
@@ -225,6 +237,7 @@ Commands usually come with options detailed in the documentation. Options are sp
 ```
 help tabulate
 tabulate country, plot
+tabulate region, sort
 
 help summarize
 summarize N_INJURD, detail
@@ -256,7 +269,7 @@ To keep specific observations:
 keep if country == "United States"
 ```
 
-Sometimes, you will want to do several operations on a database (which will mess it up), but keep a copy of the original data. Here's an example:
+Sometimes, you will want to do several operations on a database (which will mess it up), but keep a copy of the original data. Two examples:
 
 ```
 preserve
@@ -264,23 +277,14 @@ bysort year: gen n_yearly_incidents = _N
 collapse (mean) n_yearly_incidents, by(year)
 summarize n_yearly_incidents
 restore
+
+preserve
+collapse (sum) N_INJURD, by(country)
+summarize N_INJURD
+restore
 ```
 
-### 4. Combining Multiple Datasets
-
-If you want to enrich your database with complementary information, you need to merge datasets:
-
-```
-help merge
-```
-
-In the code snippet below, I enrich the SPEED database with yearly GDP measures for each country:
-
-```
-merge n:1 country year using "../data/pwt91.dta" 
-```
-
-### 5. Graphs
+### 4. Graphs
 
 Create a do-file "part_2_graphs.do". 
 
@@ -295,17 +299,45 @@ I will let you read this at home. In the meantime, here are some examples:
 ```
 * Number of recorded incidents per year
 
+preserve
+bysort year: gen n_events = _N
+graph twoway (line n_events year), ytitle("Number of Events") xtitle("Year") note("Source: SPEED Database") 
+graph export "../output/graphs/yearly_events.pdf", replace
+restore
+
 * Number of recorded incidents per year for the United States
 
-* Bar plot of event location types
+preserve
+bysort country year: gen n_events = _N
+graph twoway (line n_events year) if country == "United States", ytitle("Number of Events") xtitle("Year") note("Source: SPEED Database")
+graph export "../output/graphs/yearly_events_US.pdf", replace
+restore
+
+* Bar plot of event types
+
+preserve
+bysort EV_TYPE: gen n_events = _N
+keep EV_TYPE n_events
+duplicates drop
+graph bar (mean) n_events, over(EV_TYPE) ytitle("Number of Events") note("Source: SPEED Database")
+graph export "../output/graphs/event_types.pdf", replace
+restore
 
 * Distribution of injured people
 
-* Correlation between violence and number of injured people
+kdensity N_INJURD, ytitle("Density") xtitle ("# of Injured People") 
+graph export "../output/graphs/density_injured.pdf", replace
+
+* Correlation between political violence and number of injured people
+
+graph twoway (scatter POL_VIOL N_INJURD)(lfit POL_VIOL N_INJURD) /// 
+if N_INJURD < 10000, ytitle("Political Violence") ///
+xtitle("# of People Injured") note("Source: SPEED Database") 
+graph export "../output/graphs/corr_violence_injured.pdf", replace
 
 ``` 
 
-### 6. Regression Analysis
+### 5. Regression Analysis
 
 Create a do-file "part_2_regressions.do".
 
@@ -325,7 +357,7 @@ reg y x
 output table
 ```
 
-### 7. Add-on Packages
+### 6. Add-on Packages
 
 Some users propose add-on packages to use specific commands which were not originally implemented in Stata. 
 To install such packages:
@@ -334,10 +366,57 @@ To install such packages:
 help ssc install 
 ```
 
-Here is a complete working example:
+Create a do-file "computing_business_cycles.do" and write this working example:
 
 ```
 ssc install hprescott
+help hprescott
+
+egen group_country=group(country)
+
+replace rgdpe=subinstr(rgdpe,",",".",.)
+destring rgdpe, force replace 
+ 
+xtset group_country year
+bys group_country: hprescott rgdpe, stub(hp) smooth(6.25)
+
+egen double hpsm = rowtotal(hp_rgdpe_sm_*)
+drop hp_rgdpe_sm_*
+egen double hpres = rowtotal(hp_rgdpe_*)
+drop hp_rgdpe_*
+```
+
+### 7. Combining Multiple Datasets
+
+If you want to enrich your database with complementary information, you need to merge datasets:
+
+```
+help merge
+```
+
+In the code snippet below, I enrich the SPEED database with yearly GDP measures for each country:
+
+```
+merge n:1 country year using "../data/pwt91.dta" 
+```
+
+Is civil unrest correlated to business cycle fluctuations?
+
+```
+bysort group_country year: gen n_events = _N
+keep country group_country year hpres hpsm n_events
+duplicates drop
+drop if hpres == 0
+
+graph twoway (line hpres year) (line hpsm year) ///
+if country == "United States", ytitle ("Trend and Cycle") ///
+xtitle ("Year") note("Penn World Table Database")
+graph export "../output/graphs/US_hp_filter.pdf", replace
+
+graph twoway (scatter hpres n_events) (lfit hpres n_events), ///
+ytitle ("Business Cycle") xtitle ("Number of Social Unrest Episodes") ///
+note("Penn World Table Database")
+graph export "../output/graphs/hp_filter_social_unrest.pdf", replace
 ```
 
 ### Putting the Pieces Together
@@ -350,6 +429,7 @@ log using "../logs/main_log", replace
 do "part_2_essentials.do"
 do "part_2_graphs.do"
 do "part_2_regressions.do"
+do "part_2_business_cycles.do"
 log close
 ```
 
@@ -498,7 +578,8 @@ foreach i of num 1/5{
 display "Just kidding. See you around, human."
 ```
 
-A more hands-on example with the SPEED database: 
+<details>
+<summary>Click here to see a detailed higher level example.</summary>
 
 ```
 /*
@@ -526,6 +607,8 @@ foreach mycountry in `lev' {
 	restore
 }
 ```
+
+</details>
 
 You can also write user-defined functions in Stata which take arguments as inputs:
 

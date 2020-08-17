@@ -7,7 +7,13 @@ from the Penn World Table (PWT) database.
 
 clear all
 
+* 1. Loading Data 
+
 use "../data/ssp_public.dta", clear
+
+browse
+
+* 2. Variables, labels and types
 
 describe
 
@@ -19,10 +25,10 @@ summarize N_INJURD, detail
 
 tabulate country, summarize(N_INJURD)
 
+* 3. Cleaning, preserving, filtering data
+
 preserve
 bysort year: gen n_yearly_incidents = _N
 collapse (mean) n_yearly_incidents, by(year)
 summarize n_yearly_incidents
 restore
-
-merge n:1 country year using "../data/pwt91.dta" 
