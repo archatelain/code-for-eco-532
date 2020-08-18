@@ -30,7 +30,9 @@ A few disclaimers before we begin:
 
 ## I. The Basics
 
-You get why you're here now. So how do we work with data? Well, if you're Rain Man, I guess you could use a piece of paper. For all the others, I would recommend to have a computer do the work for you. Open Stata to get started.
+You get why you're here now. So how do we work with data? Well, if you're Rain Man, I guess you could use a piece of paper. For all the others, I would recommend to have a computer do the work for you. 
+
+Open Stata to get started.
 
 > **What is Stata?**
 > 
@@ -140,7 +142,7 @@ You will never know all the commands, so learn to search efficiently. Most progr
 In Stata, you may type "help *your_command*" to access the documentation for *your_command*. For example:
 
 ```
-help rnormal
+help display
 ```	
 
 ## II. Exploring a Dataset
@@ -171,10 +173,11 @@ Now that we are going to work with real data, we are likely to create much more 
        |-- pwt91_user_guide_to_data_files.pdf
        |-- pwt91.dta
    |-- code
+       |-- main.do
+       |-- part_2_business_cycles.do
        |-- part_2_essentials.do
        |-- part_2_graphs.do
        |-- part_2_regressions.do
-       |-- main.do
    |-- output
        |-- tables
        |-- graphs
@@ -335,6 +338,26 @@ graph export "../output/graphs/corr_violence_injured.pdf", replace
 
 ``` 
 
+>>>
+**Tips**
+
+Commenting your code for your future self and colleagues is important. To write a comment within your script, combine asterisks and forward slashes:
+
+```
+/* 
+This is a comment. 
+
+It will not be considered as a command for the command line, but may clarify what your code does for the reader. 
+
+Comments can be written over multiple lines and be as long as you wish (but please be concise!).
+*/
+
+* This is also a comment, but for one-liners.
+```
+
+In some cases, adding options to your commands may lead to very long lines. Use "///" to continue a command on the next line!
+>>>
+
 ### 5. Regression Analysis
 
 Create a do-file "part_2_regressions.do".
@@ -444,24 +467,11 @@ Anyone should be able to get a grasp of your code without reading the documentat
  
 - **Clarity**: Name your variables, functions and classes with explicit titles. 
 - **Consistency**: Be consistent in your coding style (e.g. If all the sequences you have coded up-to-now are named "sequ_fibonacci", "sequ_hexagonal", etc. Don't name the next sequence "quadratic_sequ".)
-- **Simplicity**: Add comments when needed, but do not comment obvious operations as this will overburden the reader with superfluous information. In Stata, to write a comment within your script, combine asterisks and forward slashes:
-
-```
-/* 
-This is a comment. 
-
-It will not be considered as a command for the command line, but may clarify what your code does for the reader. 
-
-Comments can be written over multiple lines and be as long as you wish (but please be concise!).
-*/
-
-* This is also a comment, but for one-liners.
-```
+- **Simplicity**: Add comments when needed, but do not comment obvious operations as this will overburden the reader with superfluous information. 
 
 All this may sound ridiculous at first, but consider this: 
 1. You will be working in teams in the future, and many colleagues may have to fix your code at some point. 
 2. Sometimes, you will go back to code you wrote months or years before, and wish you had not called all your economic variables "x","y" and "z", instead of "gdp", "population" and "gini_index". 
-
 
 <details>
 <summary>Click here to see a detailed higher level example.</summary>
@@ -619,7 +629,7 @@ For example, we could make a program out of our killer robot, which takes as inp
 ```
 /*
 This program mimicks a killer robot which comes to life. 
-The robot threatens to destroy the world, counts up to a given integer, and finally says it is actually kidding.
+The robot threatens to destroy the world, counts up to a given integer, and states it is actually kidding.
 
 Input: an integer
 Output: a bad joke
@@ -755,11 +765,11 @@ The key take-aways of this crash course:
 
 1. Don't work directly from the command line: use scripts to keep track of your work.
 2. Projects can be complex: organize your directory accordingly.
-3. For the sake of your future self and of your colleages, write decent, human readable code.
+3. For the sake of your future self and of your colleages, write decent, commented, human readable code.
 
 Finally, though data manipulation is at the core of the economist's toolkit, keep in mind that:
-1. Data is not the absolute, immaculate, objective truth of the world. Always check your data sources and try to understand your database's limitations.
-2. Data by itself is absolutely meaningless. To extract meaningful insights from data, you will need a solid understanding of economic theory and econometrics.
+1. Data is not the absolute, immaculate, objective truth of the world. Check your data sources and try to understand your database's limitations.
+2. Data by itself is meaningless. Economic theory and econometrics will help you extract interesting insights out of your databases.
 
 I hope you found this tutorial interesting. Feel free to send me any comments/questions by mail:
 germain.gauthier[at]polytechnique.edu
