@@ -48,7 +48,6 @@ Open Stata to get started.
 > - Stata is not open-source and costs money.
 > - Stata is a software, not a programming language. It is more limited than R or Python. For web-scraping, machine learning, developing apps... You have knocked on the wrong door.
 > - Stata has its own logic for data manipulation, which makes it easy-to-use but rather counter-intuitive once you look at more advanced alternatives.
-> - Stata is built to analyze structured datasets. If you want to recover unstructured data to later clean it up, output a structured dataset, and analyze it, then you need to consider alternatives (examples of unstructured data: social media data, google queries, online purchases, text data in general). 
 
 ### 1. Key Concepts 
 
@@ -338,25 +337,23 @@ graph export "../output/graphs/corr_violence_injured.pdf", replace
 
 ``` 
 
->>>
-**Tips**
-
-Commenting your code for your future self and colleagues is important. To write a comment within your script, combine asterisks and forward slashes:
-
-```
-/* 
-This is a comment. 
-
-It will not be considered as a command for the command line, but may clarify what your code does for the reader. 
-
-Comments can be written over multiple lines and be as long as you wish (but please be concise!).
-*/
-
-* This is also a comment, but for one-liners.
-```
-
-In some cases, adding options to your commands may lead to very long lines. Use "///" to continue a command on the next line!
->>>
+> **Tips**
+>
+> Commenting your code for your future self and colleagues is important. To write a comment within your script, combine asterisks and forward slashes:
+>
+> ```
+> /* 
+> This is a comment. 
+>
+> It will not be considered as a command for the command line, but may clarify what your code does for the reader. 
+>
+> Comments can be written over multiple lines and be as long as you wish (but please be concise!).
+> */
+>
+> * This is also a comment, but for one-liners.
+> ```
+>
+> In some cases, adding options to your commands may lead to very long lines. Use "///" to continue a command on the next line!
 
 ### 5. Regression Analysis
 
