@@ -35,20 +35,24 @@ You get why you're here now. So how do we work with data? Well, if you're Rain M
 
 Open Stata to get started.
 
-> **What is Stata?**
-> 
-> *"Stata is a general-purpose statistical software package created in 1985 by StataCorp. Most of its users work in research, especially in the fields of economics, sociology, political science, biomedicine, and epidemiology. Stata's capabilities include data management, statistical analysis, graphics, simulations, regression, and custom programming. It also has a system to disseminate user-written programs that lets it grow continuously. The name Stata is a syllabic abbreviation of the words statistics and data." (Wikipedia)*
->
-> It makes sense to begin with Stata for several reasons: 
-> - It is widely used by economists, so you need to understand its logic if you want to read most replication folders in the past decades.
-> - It is super easy-to-use.
-> - The documentation is neat, and commands as well as add-on packages are very reliable.
-> - Most cutting edge econometric techniques are already implemented (which is not necessarily the case in other languages/softwares).	
->
-> Nonetheless, Stata does have some limitations/drawbacks:
-> - Stata is not open-source and costs money.
-> - Stata is a software, not a programming language. It is more limited than R or Python. For web-scraping, machine learning, developing apps... You have knocked on the wrong door.
-> - Stata has its own logic for data manipulation, which makes it easy-to-use but rather counter-intuitive once you look at more advanced alternatives.
+---
+
+**What is Stata?**
+
+*"Stata is a general-purpose statistical software package created in 1985 by StataCorp. Most of its users work in research, especially in the fields of economics, sociology, political science, biomedicine, and epidemiology. Stata's capabilities include data management, statistical analysis, graphics, simulations, regression, and custom programming. It also has a system to disseminate user-written programs that lets it grow continuously. The name Stata is a syllabic abbreviation of the words statistics and data." (Wikipedia)*
+
+It makes sense to begin with Stata for several reasons: 
+- It is widely used by economists, so you need to understand its logic if you want to read most replication folders in the past decades.
+- It is super easy-to-use.
+- The documentation is neat, and commands as well as add-on packages are very reliable.
+- Most cutting edge econometric techniques are already implemented (which is not necessarily the case in other languages/softwares).	
+
+Nonetheless, Stata does have some limitations/drawbacks:
+- Stata is not open-source and costs money.
+- Stata is a software, not a programming language. It is more limited than R or Python. For web-scraping, machine learning, developing apps... You have knocked on the wrong door.
+- Stata has its own logic for data manipulation, which makes it easy-to-use but rather counter-intuitive once you look at more advanced alternatives.
+
+---
 
 You should see a window like this appear:
 
@@ -58,19 +62,17 @@ You should see a window like this appear:
 
 #### 1.1. Directories 
 
-> A directory is a folder in which you store various files related to your project.
+**Definition:** *A directory is a folder in which you store various files related to your project.*
 
 You will need to store your work somewhere (e.g. your data sources, scripts and results). 
 
-<body>
-  <p style="color:orange;">Download the folder code-for-econometrics-101 from this git repo.</p>
-</body> 
+Download the folder code-for-econometrics-101 from this git repo.
 
 This will be the main directory of this mini-course. Then create a subfolder named "basics" in the main directory. We will work in this subdirectory for part I.
 
 #### 1.2. The command line
 
-> *"A command-line interface (CLI) processes commands to a computer program in the form of lines of text." (Wikipedia)*
+**Definition:** *"A command-line interface (CLI) processes commands to a computer program in the form of lines of text." (Wikipedia)*
 
 You interact with the computer through the **command line**. The command line is the interface which translates the operations you would like the computer to perform into something the computer can understand. 
 
@@ -82,7 +84,7 @@ display "This is a test."
 
 #### 1.3 Scripts
 
-> A script is a text file in which are written series of ordered commands to the command line. 
+**Definition:** *A script is a text file in which are written series of ordered commands to the command line.*
 
 In most projects, you will likely ask many things to the computer (e.g. format the data, compute things, output the results, etc.), which will result into multiple commands. **Scripts** help you keep track of the commands sent to the computer through the command line. In Stata, scripts are called "do-files". 
 
@@ -131,7 +133,7 @@ do "and_so_on_and_so_forth.do"
 
 #### 1.4 Log files
 
-> *"In computing, a log file is a file that records [...] events that occur in an operating system or other software runs." (Wikipedia)*
+**Definition:** *"In computing, a log file is a file that records [...] events that occur in an operating system or other software runs." (Wikipedia)*
 
 I hate to break it out to you, but more often than not, things will go wrong. **Log files** help you keep track of what the computer did and whether it flagged some errors. Edit your "main.do" file to look like this:
 
@@ -159,9 +161,7 @@ help display
 
 We are now ready to work with a real data set and explore Stata's functionalities. We will work with the Social, Political and Economic Event Database Project (SPEED).  
 
-> **The SPEED Database**
->
-> *"SPEED is a technology-intensive effort to extract event data from a global archive of news reports covering the Post WWII era. It is designed to provide insights into key behavioral patterns and relationships that are valid across countries and over time. Within SPEED, event data is generated by human analysts using a suite of sophisticated tools to implement carefully structured and pretested protocols. [...] In generating these event data SPEED leverages tens of billions of dollars that have been invested in compiling news reports from throughout the world."*
+**The SPEED Database:** *"SPEED is a technology-intensive effort to extract event data from a global archive of news reports covering the Post WWII era. It is designed to provide insights into key behavioral patterns and relationships that are valid across countries and over time. Within SPEED, event data is generated by human analysts using a suite of sophisticated tools to implement carefully structured and pretested protocols. [...] In generating these event data SPEED leverages tens of billions of dollars that have been invested in compiling news reports from throughout the world."*
 
 In part I, the subdirectory "./part_1_basics" looked like this:
 
@@ -295,9 +295,11 @@ summarize N_INJURD
 restore
 ```
 
-> **Exercise**
->
-> Coding is like LEGOs. You need to look at every piece individually before building something. Tear apart the code above using the "help" command. Do some tests on your own. Let me know which commands remain unclear to you.
+--- 
+
+**Exercise:** Coding is like LEGOs. You need to look at every piece individually before building something. Tear apart the code above using the "help" command. Do some tests on your own. Let me know which commands remain unclear to you.
+
+---
 
 ### 4. Graphs
 
@@ -381,30 +383,35 @@ graphregion(fcolor(white))
 graph export "../output/graphs/corr_violence_injured.pdf", replace
 
 ``` 
+---
 
-> **Tips**
->
-> - Commenting your code for your future self and colleagues is important. To write a comment within your script, combine asterisks and forward slashes:
->
-> ```
-> /* 
-> This is a comment. 
->
-> It will not be considered as a command for the command line, but may clarify what your code does for the reader. 
->
-> Comments can be written over multiple lines and be as long as you wish (but be concise!).
-> */
->
-> * This is also a comment, but for one-liners.
-> ```
->
-> - In some cases, adding options to your commands may lead to very long lines. Use `///` to continue a command on the next line. For graphs, I personally use one for every new specified option (so I can easily know what I added to each graph).
->
-> - Stata's default background color for graphs is AWFUL. Make sure to add `graphregion(fcolor(white))` to remedy this.
+**Tips**
 
-> **Exercise**
->
-> Try to come up with a simple graph on your own. Let me know what you find!
+- Commenting your code for your future self and colleagues is important. To write a comment within your script, combine asterisks and forward slashes:
+
+```
+/* 
+This is a comment. 
+
+It will not be considered as a command for the command line, but may clarify what your code does for the reader. 
+
+Comments can be written over multiple lines and be as long as you wish (but be concise!).
+*/
+
+* This is also a comment, but for one-liners.
+```
+
+- In some cases, adding options to your commands may lead to very long lines. Use `///` to continue a command on the next line. For graphs, I personally use one for every new specified option (so I can easily know what I added to each graph).
+
+- Stata's default background color for graphs is AWFUL. Make sure to add `graphregion(fcolor(white))` to remedy this.
+
+---
+
+---
+
+**Exercise:** Try to come up with a simple graph on your own. Let me know what you find!
+
+---
 
 ### 5. Regression Analysis
 
@@ -431,15 +438,13 @@ To install such packages:
 help ssc install 
 ```
 
-For instance, once you have made tables in Stata, you can save yourself the worry of copying them by hand with add-on packages:
+For instance, once you have made tables in Stata, you can save yourself the worry of copying them by hand with add-on packages: [^1]
 
 ```
 ssc install estout, replace
 ``` 
 
-> **Tip: Making LateX tables with Stata**
->
-> In fact, many options exist depending on your customization needs: https://lukestein.github.io/stata-latex-workflows/
+[^1]: In fact, many options exist depending on your customization needs: https://lukestein.github.io/stata-latex-workflows/
 
 Let's try to dig deeper into our dataset, and ask a "real" research question: is there a relationship between business cycles and social unrest? Create a do-file "computing_business_cycles.do". 
 
@@ -465,9 +470,11 @@ egen double hpres = rowtotal(hp_rgdpe_*)
 drop hp_rgdpe_*
 ```
 
-> **Exercise**
->
-> Tear apart the code above using the "help" command. Do some tests on your own. Let me know which commands remain unclear to you.
+---
+
+**Exercise:** Tear apart the code above using the "help" command. Do some tests on your own. Let me know which commands remain unclear to you.
+
+---
 
 ### 7. Combining Multiple Datasets
 
@@ -511,11 +518,9 @@ graph export "../output/graphs/hp_filter_social_unrest.pdf", replace
 
 We've done a bunch of scripts. To automate the replication of results, let's wrap all these do-files into a "main.do". 
 
-> **Exercise**
->
-> Wrap all the do-files into a single "main.do".
->
-> Hint: Refer to part I and don't forget the log file!
+---
+
+**Exercise:** Wrap all the do-files into a single "main.do" (Hint: Refer to part I and don't forget the log file!).
 
 <details>
 <summary>Click here for the solution.</summary>
@@ -531,6 +536,8 @@ log close
 ```
 
 </details>
+
+---
 
 Congrats! You have just conducted and fully automated your first econometric project!
 
