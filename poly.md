@@ -1,5 +1,7 @@
 # A Gentle Introduction to Working with Data
 
+![alt text](img/IPP_logo.png " ")
+
 ## Why Are We Here?
 
 As for most scientific endeavors, the accumulation of knowledge in economics is based on a permanent "back and forth" movement between economic theory and empirical observations. Researchers typically:
@@ -30,7 +32,7 @@ A few disclaimers before we begin:
 
 ## I. The Basics
 
-You get why you're here now. So how do we work with data? Well, if you're Rain Man, I guess you could use a piece of paper. For all the others, I would recommend to have a computer do the work for you. 
+You get why you're here now. So how do we work with data? Well, if you're Rain Man, I guess you could use a piece of paper. For all the others, I would recommend to have a computer do the work for you. So how do we get the computer to do the work for us?
 
 Open Stata to get started.
 
@@ -48,6 +50,10 @@ Open Stata to get started.
 > - Stata is not open-source and costs money.
 > - Stata is a software, not a programming language. It is more limited than R or Python. For web-scraping, machine learning, developing apps... You have knocked on the wrong door.
 > - Stata has its own logic for data manipulation, which makes it easy-to-use but rather counter-intuitive once you look at more advanced alternatives.
+
+You should see a window like this appear:
+
+![alt text](img/stata16.png "Stata Interface")
 
 ### 1. Key Concepts 
 

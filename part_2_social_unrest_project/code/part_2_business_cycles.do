@@ -23,19 +23,22 @@ merge 1:n country year using "../data/ssp_public.dta"
 
 * Is social unrest correlated to the business cycle?
 
-bysort group_country year: gen n_events = _N
-keep country group_country year hpres hpsm n_events
-duplicates drop
 drop if hpres == 0
 
-graph twoway (line hpres year)(line hpsm year) if country == "United States", ///
-ytitle ("Trend and Cycle") ///
-xtitle ("Year") /// 
+graph twoway (line hpres year)(line hpsm year) if country=="United States", ///
+ytitle("Trend and Cycle") ///
+xtitle("Year") ///
 note("Penn World Table Database")
 graph export "../output/graphs/US_hp_filter.pdf", replace
 
+keep if CLASS_CONFLICT == 1
+
+bysort group_country year: gen n_events = _N
+keep country group_country year hpres hpsm n_events
+duplicates drop
+
 graph twoway (scatter hpres n_events)(lfit hpres n_events), ///
-ytitle ("Business Cycle") /// 
-xtitle ("Number of Social Unrest Episodes") ///
+ytitle("Business Cycle") /// 
+xtitle("Number of Social Unrest Episodes") ///
 note("Penn World Table Database") 
 graph export "../output/graphs/hp_filter_social_unrest.pdf", replace
