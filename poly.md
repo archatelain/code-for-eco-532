@@ -1,6 +1,6 @@
 # A Gentle Introduction to Working with Data
 
-![alt text](img/IPP_logo.png " ")
+![alt text](images/IPP_logo.png " ")
 
 ## Why Are We Here?
 
@@ -53,7 +53,7 @@ Open Stata to get started.
 
 You should see a window like this appear:
 
-![alt text](img/stata16.png "Stata Interface")
+![alt text](images/stata16.png "Stata Interface")
 
 ### 1. Key Concepts 
 
