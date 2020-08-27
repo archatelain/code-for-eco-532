@@ -21,14 +21,7 @@ The purpose of this mini-lecture is to provide you with a gentle introduction to
 A few disclaimers before we begin:
 - This lecture is not intended as an econometrics course. Though a basic understanding of statistics is required, we will not spend time on econometric theory. 
 - This lecture does not pretend to be comprehensive. Among the material which is not covered,  several object-oriented programming languages have gained traction in the private sector as well as in academic circles (in particular Python and R), and you will likely stumble upon such languages during your education and career. In the Master in Economics, several courses are taught in R or Python, which will allow you to get acquainted with these languages. Furthermore, most of the concepts and tips in this lecture may be transposed to more advanced programming languages.
-- Some of the code snippets in this tutorial are **hard** for beginners. They are here to give you a sense of what can be achieved with some experience. These scripts are hidden from the text, but may be consulted by clicking on them:
-
-<details>
-<summary>Click here to see a detailed higher level example.</summary>
-
-"Hard" code snippet in here!
-
-</details>
+- Some of the code snippets in this tutorial are **hard** for beginners. Don't panic. They are here to give you a sense of what can be achieved with some experience. 
 
 ## I. The Basics
 
@@ -290,6 +283,10 @@ summarize N_INJURD
 restore
 ```
 
+> **Exercise**
+>
+> Tear apart the code above using the "help" command. Let me know which commands remain unclear to you.
+
 ### 4. Graphs
 
 Create a do-file "part_2_graphs.do". 
@@ -303,10 +300,6 @@ help graph
 I will let you read this at home. In the meantime, here are some examples:
 
 ```
-/* 
-Training exercises on the database
-*/
-
 clear all
 use "../data/ssp_public.dta", clear
 
@@ -393,9 +386,13 @@ graph export "../output/graphs/corr_violence_injured.pdf", replace
 > * This is also a comment, but for one-liners.
 > ```
 >
-> 2. In some cases, adding options to your commands may lead to very long lines. Use "///" to continue a command on the next line. For graphs, I personally use for every new specified option.
+> 2. In some cases, adding options to your commands may lead to very long lines. Use "///" to continue a command on the next line. For graphs, I personally use one for every new specified option (so I can easily know what I added to each graph).
 >
 > 3. Stata's default background color for graphs is AWFUL. Make sure to add "graphregion(fcolor(white))" to remedy this.
+
+> **Exercise**
+>
+> Try to come up with a simple graph on your own. Let me know what you find!
 
 ### 5. Regression Analysis
 
@@ -434,7 +431,6 @@ help ssc install
 >
 > Note that many other options also exist: https://lukestein.github.io/stata-latex-workflows/
 
-
 Let's investigate the relationship between business cycles and social unrest. Create a do-file "computing_business_cycles.do" and write this working example:
 
 ```
@@ -454,6 +450,10 @@ drop hp_rgdpe_sm_*
 egen double hpres = rowtotal(hp_rgdpe_*)
 drop hp_rgdpe_*
 ```
+
+> **Exercise**
+>
+> Tear apart the code above using the "help" command. Let me know which commands remain unclear to you.
 
 ### 7. Combining Multiple Datasets
 
@@ -499,7 +499,16 @@ graph export "../output/graphs/hp_filter_social_unrest.pdf", replace
 
 ### Putting the Pieces Together
 
-We've done a bunch of scripts. To automate the replication of results, let's wrap all these do-files into a "main.do":
+We've done a bunch of scripts. To automate the replication of results, let's wrap all these do-files into a "main.do". 
+
+> **Exercise**
+>
+> Wrap all the do-files into a single "main.do".
+>
+> Hint: Refer to part I and don't forget the log file!
+
+<details>
+<summary>Click here for the solution.</summary>
 
 ```
 clear all 
@@ -510,6 +519,8 @@ do "part_2_regressions.do"
 do "part_2_business_cycles.do"
 log close
 ```
+
+</details>
 
 Congrats! You have just conducted and fully automated your first econometric project!
 
