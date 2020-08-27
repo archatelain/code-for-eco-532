@@ -33,9 +33,7 @@ A few disclaimers before we begin:
 
 You get why you're here now. So how do we work with data? Well, if you're Rain Man, I guess you could use a piece of paper. For all the others, I would recommend to have a computer do the work for you. So how do we get the computer to do the work for us?
 
-<body>
-  <p style="color:orange;">Open Stata to get started.</p>
-</body> 
+Open Stata to get started.
 
 > **What is Stata?**
 > 
@@ -64,9 +62,7 @@ You should see a window like this appear:
 
 You will need to store your work somewhere (e.g. your data sources, scripts and results). 
 
-<body>
-  <p style="color:orange;">Download the folder code-for-econometrics-101 from this git repo.</p>
-</body> 
+Download the folder code-for-econometrics-101 from this git repo.
 
 This will be the main directory of this mini-course. Then create a subfolder named "basics" in the main directory. We will work in this subdirectory for part I.
 
