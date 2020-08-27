@@ -303,11 +303,24 @@ help graph
 I will let you read this at home. In the meantime, here are some examples:
 
 ```
+/* 
+Training exercises on the database
+*/
+
+clear all
+use "../data/ssp_public.dta", clear
+
 * Number of recorded incidents per year
 
 preserve
 bysort year: gen n_events = _N
-graph twoway (line n_events year), ytitle("Number of Events") xtitle("Year") note("Source: SPEED Database") 
+
+graph twoway (line n_events year), ///
+ytitle("Number of Events") /// 
+xtitle("Year") ///
+note("Source: SPEED Database") ///
+graphregion(fcolor(white))
+
 graph export "../output/graphs/yearly_events.pdf", replace
 restore
 
@@ -315,7 +328,13 @@ restore
 
 preserve
 bysort country year: gen n_events = _N
-graph twoway (line n_events year) if country == "United States", ytitle("Number of Events") xtitle("Year") note("Source: SPEED Database")
+
+graph twoway (line n_events year) if country == "United States", ///
+ytitle("Number of Events") ///
+xtitle("Year") ///
+note("Source: SPEED Database") ///
+graphregion(fcolor(white))
+
 graph export "../output/graphs/yearly_events_US.pdf", replace
 restore
 
@@ -325,27 +344,42 @@ preserve
 bysort EV_TYPE: gen n_events = _N
 keep EV_TYPE n_events
 duplicates drop
-graph bar (mean) n_events, over(EV_TYPE) ytitle("Number of Events") note("Source: SPEED Database")
+
+graph bar (mean) n_events, over(EV_TYPE) ///
+ytitle("Number of Events") /// 
+note("Source: SPEED Database") ///
+graphregion(fcolor(white))
+
 graph export "../output/graphs/event_types.pdf", replace
 restore
 
 * Distribution of injured people
 
-kdensity N_INJURD, ytitle("Density") xtitle ("# of Injured People") 
+kdensity N_INJURD, ///
+ytitle("Density") ///
+xtitle ("# of Injured People") ///
+graphregion(fcolor(white))
+
 graph export "../output/graphs/density_injured.pdf", replace
 
 * Correlation between political violence and number of injured people
 
-graph twoway (scatter POL_VIOL N_INJURD)(lfit POL_VIOL N_INJURD) /// 
-if N_INJURD < 10000, ytitle("Political Violence") ///
-xtitle("# of People Injured") note("Source: SPEED Database") 
+graph twoway ///
+(scatter POL_VIOL N_INJURD) ///
+(lfit POL_VIOL N_INJURD) /// 
+if N_INJURD < 10000, ///
+ytitle("Political Violence") ///
+xtitle("# of People Injured") ///
+note("Source: SPEED Database") ///
+graphregion(fcolor(white))
+
 graph export "../output/graphs/corr_violence_injured.pdf", replace
 
 ``` 
 
 > **Tips**
 >
-> Commenting your code for your future self and colleagues is important. To write a comment within your script, combine asterisks and forward slashes:
+> 1. Commenting your code for your future self and colleagues is important. To write a comment within your script, combine asterisks and forward slashes:
 >
 > ```
 > /* 
@@ -359,13 +393,15 @@ graph export "../output/graphs/corr_violence_injured.pdf", replace
 > * This is also a comment, but for one-liners.
 > ```
 >
-> In some cases, adding options to your commands may lead to very long lines. Use "///" to continue a command on the next line!
+> 2. In some cases, adding options to your commands may lead to very long lines. Use "///" to continue a command on the next line. For graphs, I personally use for every new specified option.
+>
+> 3. Stata's default background color for graphs is AWFUL. Make sure to add "graphregion(fcolor(white))" to remedy this.
 
 ### 5. Regression Analysis
 
 Create a do-file "part_2_regressions.do".
 
-Regression analysis is at the core of econometric theory. You will see the ins and outs of this tool in your econometrics courses. To estimate regression models in Stata:
+Regression analysis is at the core of econometric theory. You will see the ins and outs of this tool in your econometrics courses. In the meantime, to estimate regression models in Stata:
 
 ```
 help regress
@@ -377,8 +413,6 @@ I will let you read this for your econometrics class. In the meantime, here is a
 * What country characteristics could explain social unrest? 
 
 reg y x
-
-output table
 ```
 
 ### 6. Add-on Packages
@@ -390,7 +424,18 @@ To install such packages:
 help ssc install 
 ```
 
-Create a do-file "computing_business_cycles.do" and write this working example:
+> **Tips**
+> 
+> Once you have made tables in Stata, you can save yourself the worry of copying them by hand with add-on packages:
+>
+> ```
+> ssc install estout, replace
+> ``` 
+>
+> Note that many other options also exist: https://lukestein.github.io/stata-latex-workflows/
+
+
+Let's investigate the relationship between business cycles and social unrest. Create a do-file "computing_business_cycles.do" and write this working example:
 
 ```
 ssc install hprescott
@@ -432,14 +477,23 @@ keep country group_country year hpres hpsm n_events
 duplicates drop
 drop if hpres == 0
 
-graph twoway (line hpres year) (line hpsm year) ///
-if country == "United States", ytitle ("Trend and Cycle") /// 
-note("Penn World Table Database")
+graph twoway ///
+(line hpres year) ///
+(line hpsm year) ///
+if country == "United States", ///
+ytitle ("Trend and Cycle") /// 
+note("Penn World Table Database") ///
+graphregion(fcolor(white))
+
 graph export "../output/graphs/US_hp_filter.pdf", replace
 
-graph twoway (scatter hpres n_events) (lfit hpres n_events), ///
+graph twoway /// 
+(scatter hpres n_events) ///
+(lfit hpres n_events), ///
 ytitle ("Business Cycle") ///
-note("Penn World Table Database")
+note("Penn World Table Database") ///
+graphregion(fcolor(white))
+
 graph export "../output/graphs/hp_filter_social_unrest.pdf", replace
 ```
 
