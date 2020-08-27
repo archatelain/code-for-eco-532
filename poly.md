@@ -74,7 +74,7 @@ This will be the main directory of this mini-course. Then create a subfolder nam
 
 **Definition:** *"A command-line interface (CLI) processes commands to a computer program in the form of lines of text." (Wikipedia)*
 
-You interact with the computer through the **command line**. The command line is the interface which translates the operations you would like the computer to perform into something the computer can understand. 
+You interact with the computer through the command line. The command line is the interface which translates the operations you would like the computer to perform into something the computer can understand. 
 
 In Stata, the command line is a box at the bottom of the interface. Type the following command and see what happens:
 
@@ -86,7 +86,7 @@ display "This is a test."
 
 **Definition:** *A script is a text file in which are written series of ordered commands to the command line.*
 
-In most projects, you will likely ask many things to the computer (e.g. format the data, compute things, output the results, etc.), which will result into multiple commands. **Scripts** help you keep track of the commands sent to the computer through the command line. In Stata, scripts are called "do-files". 
+In most projects, you will likely ask many things to the computer (e.g. format the data, compute things, output the results, etc.), which will result into multiple commands. Scripts help you keep track of the commands sent to the computer through the command line. In Stata, scripts are called "do-files". 
 
 At the top on the left of the interface, click on "New Do-File Editor" and write the following chunk of code:
 
@@ -135,7 +135,7 @@ do "and_so_on_and_so_forth.do"
 
 **Definition:** *"In computing, a log file is a file that records [...] events that occur in an operating system or other software runs." (Wikipedia)*
 
-I hate to break it out to you, but more often than not, things will go wrong. **Log files** help you keep track of what the computer did and whether it flagged some errors. Edit your "main.do" file to look like this:
+I hate to break it out to you, but more often than not, things will go wrong. Log files help you keep track of what the computer did and whether it flagged some errors. Edit your "main.do" file to look like this:
 
 ```
 log using "./logs/main_log", replace
