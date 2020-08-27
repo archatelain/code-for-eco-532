@@ -56,16 +56,6 @@ You should see a window like this appear:
 
 ### 1. Key Concepts 
 
-<div class="panel panel-info">
-**Note**
-{: .panel-heading}
-<div class="panel-body">
-
-NOTE DESCRIPTION
-
-</div>
-</div>
-
 #### 1.1. Directories 
 
 > A directory is a folder in which you store various files related to your project.
@@ -145,7 +135,7 @@ do "killer_robot.do"
 log close
 ```
 
-Now run this do-file. Have a look at the file "main_log" in the "logs" subdirectory.
+Now run this do-file. Have a look at the file "main_log.smcl" in the "logs" subdirectory.
 
 Congrats! You've just written your first fully automated code pipeline!
 
@@ -153,7 +143,7 @@ Congrats! You've just written your first fully automated code pipeline!
 
 You will never know all the commands, so learn to search efficiently. Most programming languages or script-based softwares have a dedicated command to access the documentation.
 
-In Stata, you may type "help *your_command*" to access the documentation for *your_command*. For example:
+In Stata, you may type `help *your_command*` to access the documentation for a command. For example:
 
 ```
 help display
