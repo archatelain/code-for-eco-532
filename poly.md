@@ -409,7 +409,7 @@ Comments can be written over multiple lines and be as long as you wish (but be c
 
 ---
 
-### 5. Regression Analysis
+### 5. Regressions
 
 Regression analysis is at the core of econometric theory. You will see the ins and outs of this tool in your econometrics courses. To estimate regression models in Stata:
 
@@ -441,6 +441,8 @@ ssc install estout, replace
 ``` 
 
 [^1]: In fact, many options exist depending on your customization needs: https://lukestein.github.io/stata-latex-workflows/
+
+### 7. Going Further
 
 Let's try to dig deeper into our dataset, and ask a "real" research question: is there a relationship between business cycles and social unrest? 
 
@@ -476,8 +478,6 @@ drop hp_rgdpe_*
 **Exercise:** Tear apart the code above using the "help" command. Do some tests on your own. Let me know which commands remain unclear to you.
 
 ---
-
-### 7. Combining Multiple Datasets
 
 Our business cycle data is from another dataset. To enrich our database with complementary information, we need to merge the two datasets "pwt91.dta" and "ssp_public.dta":
 
