@@ -56,10 +56,19 @@ You should see a window like this appear:
 
 ### 1. Key Concepts 
 
+<div class="panel panel-info">
+**Note**
+{: .panel-heading}
+<div class="panel-body">
+
+NOTE DESCRIPTION
+
+</div>
+</div>
+
 #### 1.1. Directories 
 
-A directory is a folder in which you store various files related to your project.
-{: .alert .alert-info}
+> A directory is a folder in which you store various files related to your project.
 
 You will need to store your work somewhere (e.g. your data sources, scripts and results). Download the folder code-for-econometrics-101 from this git repo. This will be the main directory of this mini-course. Then create a subfolder named "basics" in the main directory. We will work in this subdirectory for part I.
 
