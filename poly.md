@@ -1,6 +1,14 @@
+{::options parse_block_html="true" /}
+
 # A Gentle Introduction to Working with Data
 
 ![alt text](images/IPP_logo.png " ")
+
+---
+
+[[_TOC_]]
+
+---
 
 ## Why Are We Here?
 
@@ -22,12 +30,6 @@ A few disclaimers before we begin:
 - This lecture is not intended as an econometrics course. Though a basic understanding of statistics is required, we will not spend time on econometric theory. 
 - This lecture does not pretend to be comprehensive. Among the material which is not covered,  several object-oriented programming languages have gained traction in the private sector as well as in academic circles (in particular Python and R), and you will likely stumble upon such languages during your education and career. In the Master in Economics, several courses are taught in R or Python, which will allow you to get acquainted with these languages. Furthermore, most of the concepts and tips in this lecture may be transposed to more advanced programming languages.
 - Some of the code snippets in this tutorial are **hard** for beginners. Don't panic. They are here to give you a sense of what can be achieved with some experience. 
-
----
-
-[[_TOC_]]
-
----
 
 ## I. The Basics
 
@@ -505,7 +507,7 @@ graphregion(fcolor(white))
 graph export "../output/graphs/hp_filter_social_unrest.pdf", replace
 ```
 
-### Putting the Pieces Together
+### 8. Putting the Pieces Together
 
 We've done a bunch of scripts. To automate the replication of results, let's wrap all these do-files into a "main.do". 
 
