@@ -1,5 +1,3 @@
-{::options parse_block_html="true" /}
-
 # A Gentle Introduction to Working with Data
 
 ![alt text](images/IPP_logo.png " ")
@@ -60,9 +58,8 @@ You should see a window like this appear:
 
 #### 1.1. Directories 
 
-<div class="alert alert-primary" role="alert">
-  A directory is a folder in which you store various files related to your project.
-</div>
+A directory is a folder in which you store various files related to your project.
+{: .alert .alert-info}
 
 You will need to store your work somewhere (e.g. your data sources, scripts and results). Download the folder code-for-econometrics-101 from this git repo. This will be the main directory of this mini-course. Then create a subfolder named "basics" in the main directory. We will work in this subdirectory for part I.
 
