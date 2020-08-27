@@ -66,9 +66,7 @@ You should see a window like this appear:
 
 You will need to store your work somewhere (e.g. your data sources, scripts and results). 
 
-Download the folder code-for-econometrics-101 from this git repo.
-
-This will be the main directory of this mini-course. Then create a subfolder named "basics" in the main directory. We will work in this subdirectory for part I.
+`HSL(540,70%,50%)` Download the folder code-for-econometrics-101 from this git repo. This will be the main directory of this mini-course. Then create a subfolder named "part_1_basics" in the main directory. We will work in this subdirectory for part I.
 
 #### 1.2. The command line
 
@@ -108,13 +106,13 @@ sleep 1000
 display "Just kidding. See you around, human."
 ```
 
-Now save your do-file as  "killer_robot.do" in your directory. 
-
 You can run the do-file by clicking on "Execute (do)".
+
+`HSL(540,70%,50%)` Save your do-file as "killer_robot.do" in "./part_1_basics". 
 
 As you are likely to write multiple scripts for multiple subtasks in your project, it is good practice to have one script call all the other scripts of your project. In this way, instead of executing manually all your scripts one by one, you can simply execute this overarching script to replicate your results.
 
-Create a script called "main.do" in your directory. 
+`HSL(540,70%,50%)` Create a script called "main.do". 
 
 Write this chunk of code:
 
@@ -195,9 +193,9 @@ Now that we are going to work with real data, we are likely to create much more 
        |-- main_log.smcl
 ```
 
-To follow along, create a do-file "part_2_essentials.do".
+For now, you only have the databases we will need.
 
-Save it in "./part_2_social_unrest_project/code/".
+`HSL(540,70%,50%)` To follow along, create a do-file "part_2_essentials.do". Save it in "./part_2_social_unrest_project/code/".
 
 ### 1. Loading Data 
 
@@ -303,15 +301,13 @@ restore
 
 ### 4. Graphs
 
-Create a do-file "part_2_graphs.do". 
-
 There's nothing like a good graph to get your point across. To have a look at the complete documentation on graphs in Stata, type:
 
 ```
 help graph
 ```
 
-Some examples:
+`HSL(540,70%,50%)` Create a do-file "part_2_graphs.do" and write: 
 
 ```
 clear all
@@ -421,7 +417,7 @@ Regression analysis is at the core of econometric theory. You will see the ins a
 help regress
 ```
 
-Create a do-file "part_2_regressions.do". A working example:
+`HSL(540,70%,50%)` Create a do-file "part_2_regressions.do" and write:
 
 ```
 * What country characteristics could explain social unrest? 
@@ -446,13 +442,18 @@ ssc install estout, replace
 
 [^1]: In fact, many options exist depending on your customization needs: https://lukestein.github.io/stata-latex-workflows/
 
-Let's try to dig deeper into our dataset, and ask a "real" research question: is there a relationship between business cycles and social unrest? Create a do-file "computing_business_cycles.do". 
+Let's try to dig deeper into our dataset, and ask a "real" research question: is there a relationship between business cycles and social unrest? 
 
 In order to answer this question: 
 - We first need global comparable GDP measures, which you will find in "./part_2_social_unrest_project/data/pwt91.dta"
 - We also need a method to compute business cycle fluctuations. We will work with the commonly used Hodrick-Prescott filter. Fortunately, an add-on package "hprescott" exists.
 
+`HSL(540,70%,50%)` Create a do-file "computing_business_cycles.do" and write:
+
 ```
+clear all 
+use "../data/pwt91.dta"
+
 ssc install hprescott
 help hprescott
 
@@ -517,6 +518,8 @@ graph export "../output/graphs/hp_filter_social_unrest.pdf", replace
 ### 8. Putting the Pieces Together
 
 We've done a bunch of scripts. To automate the replication of results, let's wrap all these do-files into a "main.do". 
+
+`HSL(540,70%,50%)` Create a do-file "main.do".
 
 ---
 
