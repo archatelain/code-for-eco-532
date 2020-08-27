@@ -66,7 +66,7 @@ You should see a window like this appear:
 
 You will need to store your work somewhere (e.g. your data sources, scripts and results). 
 
-`HSL(540,70%,50%)` Download the folder code-for-econometrics-101 from this git repo. This will be the main directory of this mini-course. Then create a subfolder named "part_1_basics" in the main directory. We will work in this subdirectory for part I.
+:file_folder: Download the folder code-for-econometrics-101 from this git repo. This will be the main directory of this mini-course. Then create a subfolder named "part_1_basics" in the main directory. We will work in this subdirectory for part I.
 
 #### 1.2. The command line
 
@@ -108,11 +108,11 @@ display "Just kidding. See you around, human."
 
 You can run the do-file by clicking on "Execute (do)".
 
-`HSL(540,70%,50%)` Save your do-file as "killer_robot.do" in "./part_1_basics". 
+:file_folder: Save your do-file as "killer_robot.do" in "./part_1_basics". 
 
 As you are likely to write multiple scripts for multiple subtasks in your project, it is good practice to have one script call all the other scripts of your project. In this way, instead of executing manually all your scripts one by one, you can simply execute this overarching script to replicate your results.
 
-`HSL(540,70%,50%)` Create a script called "main.do". 
+:file_folder: Create a script called "main.do". 
 
 Write this chunk of code:
 
@@ -143,7 +143,7 @@ log close
 
 Now run this do-file. Have a look at the file "main_log.smcl" in the "logs" subdirectory.
 
-Congrats! You've just written your first fully automated code pipeline!
+:trophy: Congrats! You've just written your first fully automated code pipeline!
 
 ### 2. Asking for Help
 
@@ -195,7 +195,7 @@ Now that we are going to work with real data, we are likely to create much more 
 
 For now, you only have the databases we will need.
 
-`HSL(540,70%,50%)` To follow along, create a do-file "part_2_essentials.do". Save it in "./part_2_social_unrest_project/code/".
+:file_folder: To follow along, create a do-file "part_2_essentials.do". Save it in "./part_2_social_unrest_project/code/".
 
 ### 1. Loading Data 
 
@@ -307,7 +307,7 @@ There's nothing like a good graph to get your point across. To have a look at th
 help graph
 ```
 
-`HSL(540,70%,50%)` Create a do-file "part_2_graphs.do" and write: 
+:file_folder: Create a do-file "part_2_graphs.do" and write: 
 
 ```
 clear all
@@ -417,7 +417,7 @@ Regression analysis is at the core of econometric theory. You will see the ins a
 help regress
 ```
 
-`HSL(540,70%,50%)` Create a do-file "part_2_regressions.do" and write:
+:file_folder: Create a do-file "part_2_regressions.do" and write:
 
 ```
 * What country characteristics could explain social unrest? 
@@ -448,7 +448,7 @@ In order to answer this question:
 - We first need global comparable GDP measures, which you will find in "./part_2_social_unrest_project/data/pwt91.dta"
 - We also need a method to compute business cycle fluctuations. We will work with the commonly used Hodrick-Prescott filter. Fortunately, an add-on package "hprescott" exists.
 
-`HSL(540,70%,50%)` Create a do-file "computing_business_cycles.do" and write:
+:file_folder: Create a do-file "computing_business_cycles.do" and write:
 
 ```
 clear all 
@@ -519,7 +519,7 @@ graph export "../output/graphs/hp_filter_social_unrest.pdf", replace
 
 We've done a bunch of scripts. To automate the replication of results, let's wrap all these do-files into a "main.do". 
 
-`HSL(540,70%,50%)` Create a do-file "main.do".
+:file_folder: Create a do-file "main.do".
 
 ---
 
@@ -542,7 +542,7 @@ log close
 
 ---
 
-Congrats! You have just conducted and fully automated your first econometric project!
+:trophy: Congrats! You have just conducted and fully automated your first econometric project!
 
 ## III. Rules to live by
 
