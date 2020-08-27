@@ -248,7 +248,7 @@ help summarize
 summarize N_INJURD, detail
 ```
 
-For tables of descriptive statistics, you can also combine tabulate and summarize if you need to:
+For tables of descriptive statistics, you can also combine `tabulate` and `summarize` if you need to:
 
 ```
 tabulate country, summarize(N_INJURD)
@@ -274,7 +274,7 @@ To keep specific observations:
 keep if country == "United States"
 ```
 
-Sometimes, you will want to do several operations on a database (which will mess it up), but keep a copy of the original data. The commands "preserve" and "restore" serve this purpose. Two examples:
+Sometimes, you will want to do several operations on a database (which will mess it up), but keep a copy of the original data. The commands `preserve` and `restore` serve this purpose. Two examples:
 
 ```
 preserve
@@ -392,9 +392,9 @@ graph export "../output/graphs/corr_violence_injured.pdf", replace
 > * This is also a comment, but for one-liners.
 > ```
 >
-> - In some cases, adding options to your commands may lead to very long lines. Use "///" to continue a command on the next line. For graphs, I personally use one for every new specified option (so I can easily know what I added to each graph).
+> - In some cases, adding options to your commands may lead to very long lines. Use `///` to continue a command on the next line. For graphs, I personally use one for every new specified option (so I can easily know what I added to each graph).
 >
-> - Stata's default background color for graphs is AWFUL. Make sure to add "graphregion(fcolor(white))" to remedy this.
+> - Stata's default background color for graphs is AWFUL. Make sure to add `graphregion(fcolor(white))` to remedy this.
 
 > **Exercise**
 >
@@ -402,15 +402,13 @@ graph export "../output/graphs/corr_violence_injured.pdf", replace
 
 ### 5. Regression Analysis
 
-Create a do-file "part_2_regressions.do".
-
 Regression analysis is at the core of econometric theory. You will see the ins and outs of this tool in your econometrics courses. To estimate regression models in Stata:
 
 ```
 help regress
 ```
 
-A working example:
+Create a do-file "part_2_regressions.do". A working example:
 
 ```
 * What country characteristics could explain social unrest? 
