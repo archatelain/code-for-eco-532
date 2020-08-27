@@ -23,6 +23,12 @@ A few disclaimers before we begin:
 - This lecture does not pretend to be comprehensive. Among the material which is not covered,  several object-oriented programming languages have gained traction in the private sector as well as in academic circles (in particular Python and R), and you will likely stumble upon such languages during your education and career. In the Master in Economics, several courses are taught in R or Python, which will allow you to get acquainted with these languages. Furthermore, most of the concepts and tips in this lecture may be transposed to more advanced programming languages.
 - Some of the code snippets in this tutorial are **hard** for beginners. Don't panic. They are here to give you a sense of what can be achieved with some experience. 
 
+---
+
+[[_TOC_]]
+
+---
+
 ## I. The Basics
 
 You get why you're here now. So how do we work with data? Well, if you're Rain Man, I guess you could use a piece of paper. For all the others, I would recommend to have a computer do the work for you. So how do we get the computer to do the work for us?
@@ -52,7 +58,9 @@ You should see a window like this appear:
 
 #### 1.1. Directories 
 
-> A directory is a folder in which you store various files related to your project.
+<div class="alert alert-primary" role="alert">
+  A directory is a folder in which you store various files related to your project.
+</div>
 
 You will need to store your work somewhere (e.g. your data sources, scripts and results). Download the folder code-for-econometrics-101 from this git repo. This will be the main directory of this mini-course. Then create a subfolder named "basics" in the main directory. We will work in this subdirectory for part I.
 
@@ -268,7 +276,7 @@ To keep specific observations:
 keep if country == "United States"
 ```
 
-Sometimes, you will want to do several operations on a database (which will mess it up), but keep a copy of the original data. Two examples:
+Sometimes, you will want to do several operations on a database (which will mess it up), but keep a copy of the original data. The commands "preserve" and "restore" serve this purpose. Two examples:
 
 ```
 preserve
@@ -285,7 +293,7 @@ restore
 
 > **Exercise**
 >
-> Tear apart the code above using the "help" command. Let me know which commands remain unclear to you.
+> Coding is like LEGOs. You need to look at every piece individually before building something. Tear apart the code above using the "help" command. Do some tests on your own. Let me know which commands remain unclear to you.
 
 ### 4. Graphs
 
@@ -297,7 +305,7 @@ There's nothing like a good graph to get your point across. To have a look at th
 help graph
 ```
 
-I will let you read this at home. In the meantime, here are some examples:
+Some examples:
 
 ```
 clear all
@@ -372,7 +380,7 @@ graph export "../output/graphs/corr_violence_injured.pdf", replace
 
 > **Tips**
 >
-> 1. Commenting your code for your future self and colleagues is important. To write a comment within your script, combine asterisks and forward slashes:
+> - Commenting your code for your future self and colleagues is important. To write a comment within your script, combine asterisks and forward slashes:
 >
 > ```
 > /* 
@@ -380,15 +388,15 @@ graph export "../output/graphs/corr_violence_injured.pdf", replace
 >
 > It will not be considered as a command for the command line, but may clarify what your code does for the reader. 
 >
-> Comments can be written over multiple lines and be as long as you wish (but please be concise!).
+> Comments can be written over multiple lines and be as long as you wish (but be concise!).
 > */
 >
 > * This is also a comment, but for one-liners.
 > ```
 >
-> 2. In some cases, adding options to your commands may lead to very long lines. Use "///" to continue a command on the next line. For graphs, I personally use one for every new specified option (so I can easily know what I added to each graph).
+> - In some cases, adding options to your commands may lead to very long lines. Use "///" to continue a command on the next line. For graphs, I personally use one for every new specified option (so I can easily know what I added to each graph).
 >
-> 3. Stata's default background color for graphs is AWFUL. Make sure to add "graphregion(fcolor(white))" to remedy this.
+> - Stata's default background color for graphs is AWFUL. Make sure to add "graphregion(fcolor(white))" to remedy this.
 
 > **Exercise**
 >
@@ -398,13 +406,13 @@ graph export "../output/graphs/corr_violence_injured.pdf", replace
 
 Create a do-file "part_2_regressions.do".
 
-Regression analysis is at the core of econometric theory. You will see the ins and outs of this tool in your econometrics courses. In the meantime, to estimate regression models in Stata:
+Regression analysis is at the core of econometric theory. You will see the ins and outs of this tool in your econometrics courses. To estimate regression models in Stata:
 
 ```
 help regress
 ```
 
-I will let you read this for your econometrics class. In the meantime, here is a working example:
+A working example:
 
 ```
 * What country characteristics could explain social unrest? 
@@ -421,17 +429,21 @@ To install such packages:
 help ssc install 
 ```
 
-> **Tips**
-> 
-> Once you have made tables in Stata, you can save yourself the worry of copying them by hand with add-on packages:
->
-> ```
-> ssc install estout, replace
-> ``` 
->
-> Note that many other options also exist: https://lukestein.github.io/stata-latex-workflows/
+For instance, once you have made tables in Stata, you can save yourself the worry of copying them by hand with add-on packages:
 
-Let's investigate the relationship between business cycles and social unrest. Create a do-file "computing_business_cycles.do" and write this working example:
+```
+ssc install estout, replace
+``` 
+
+> **Tip: Making LateX tables with Stata**
+>
+> In fact, many options exist depending on your customization needs: https://lukestein.github.io/stata-latex-workflows/
+
+Let's try to dig deeper into our dataset, and ask a "real" research question: is there a relationship between business cycles and social unrest? Create a do-file "computing_business_cycles.do". 
+
+In order to answer this question: 
+- We first need global comparable GDP measures, which you will find in "./part_2_social_unrest_project/data/pwt91.dta"
+- We also need a method to compute business cycle fluctuations. We will work with the commonly used Hodrick-Prescott filter. Fortunately, an add-on package "hprescott" exists.
 
 ```
 ssc install hprescott
@@ -453,25 +465,21 @@ drop hp_rgdpe_*
 
 > **Exercise**
 >
-> Tear apart the code above using the "help" command. Let me know which commands remain unclear to you.
+> Tear apart the code above using the "help" command. Do some tests on your own. Let me know which commands remain unclear to you.
 
 ### 7. Combining Multiple Datasets
 
-If you want to enrich your database with complementary information, you need to merge datasets:
+Our business cycle data is from another dataset. To enrich our database with complementary information, we need to merge the two datasets "pwt91.dta" and "ssp_public.dta":
 
 ```
 help merge
 ```
 
-In the code snippet below, I enrich the SPEED database with yearly GDP measures for each country:
+In the code snippet below, we enrich the SPEED database with yearly GDP measures for each country, and we then investigate the relationship between social unrest and business cycles:
 
 ```
 merge n:1 country year using "../data/pwt91.dta" 
-```
 
-Is civil unrest correlated to business cycle fluctuations?
-
-```
 bysort group_country year: gen n_events = _N
 keep country group_country year hpres hpsm n_events
 duplicates drop
