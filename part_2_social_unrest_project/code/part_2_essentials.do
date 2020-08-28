@@ -1,12 +1,3 @@
-/* 
-In this script, we explore the SPEED Database (1945-2005):
-- We load the database and make usual descriptive statistics.
-- We enrich the database with complementary information on country GDPs
-from the Penn World Table (PWT) database. 
-*/
-
-clear all
-
 * 1. Loading Data 
 
 use "../data/ssp_public.dta", clear
@@ -25,10 +16,25 @@ summarize N_INJURD, detail
 
 tabulate country, summarize(N_INJURD)
 
-* 3. Cleaning, preserving, filtering data
+generate X = rnormal(0,1)
+label variable X "draws from a normal distribution N(0,1)"
+
+ssc install sutex, replace
+
+sutex N_INJURD, ///
+file("../output/tables/descriptive_statistics_injured.tex") /// 
+title("Summary statistics on injured people") ///
+replace
+
+drop X
 
 preserve
 bysort year: gen n_yearly_incidents = _N
 collapse (mean) n_yearly_incidents, by(year)
 summarize n_yearly_incidents
+restore
+
+preserve
+collapse (sum) N_INJURD, by(country)
+summarize N_INJURD
 restore

@@ -2,7 +2,6 @@ clear all
 
 log using "./logs/main_log", replace
 
-do "hello_world.do"
-do "farewell.do"
+do "killer_robot.do"
 
 log close

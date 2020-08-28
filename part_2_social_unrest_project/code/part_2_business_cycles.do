@@ -1,8 +1,8 @@
-use "../data/pwt91.dta", clear
+clear all 
+use "../data/pwt91.dta"
 
-* 6. Add-on Packages
-
-* ssc install hprescott /* /!\ run only once */
+ssc install hprescott, replace
+help hprescott
 
 egen group_country=group(country)
 
@@ -17,11 +17,7 @@ drop hp_rgdpe_sm_*
 egen double hpres = rowtotal(hp_rgdpe_*)
 drop hp_rgdpe_*
 
-* 7. Combining Multiple Datasets
-
 merge 1:n country year using "../data/ssp_public.dta" 
-
-* Is social unrest correlated to the business cycle?
 
 drop if hpres == 0
 

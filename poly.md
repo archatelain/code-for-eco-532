@@ -215,7 +215,7 @@ Now that we are going to work with real data, we are likely to create much more 
        |-- main_log.smcl
 ```
 
-For now, you only have the databases we will need.
+For now, you only have the databases we need in the "./part_2_social_unrest_project/data".
 
 :file_folder: To follow along, create a do-file "part_2_essentials.do". Save it in "./part_2_social_unrest_project/code/".
 
@@ -314,6 +314,8 @@ To keep specific observations:
 ```
 keep if country == "United States"
 ```
+
+Let's keep the whole dataset for now. Erase the two last commands from your do-file and re-run the entire do-file. 
 
 Sometimes, you will want to do several operations on a database (which will mess it up), but keep a copy of the original data. The commands `preserve` and `restore` serve this purpose. Two examples:
 
@@ -445,6 +447,10 @@ help regress
 :file_folder: Create a do-file "part_2_regressions.do" and run the following regressions:
 
 ```
+clear all 
+
+use "../data/ssp_public.dta"
+
 * Is a coup correlated to more injured people? 
 
 reg N_INJURD coup
@@ -516,7 +522,7 @@ In order to answer this question:
 clear all 
 use "../data/pwt91.dta"
 
-ssc install hprescott
+ssc install hprescott, replace
 help hprescott
 
 egen group_country=group(country)
@@ -548,30 +554,28 @@ help merge
 In the code snippet below, we enrich the SPEED database with yearly GDP measures for each country, and we then investigate the relationship between social unrest and business cycles:
 
 ```
-merge n:1 country year using "../data/pwt91.dta" 
+merge 1:n country year using "../data/ssp_public.dta" 
+
+* Is social unrest correlated to the business cycle?
+
+drop if hpres == 0
+
+graph twoway (line hpres year)(line hpsm year) if country=="United States", ///
+ytitle("Trend and Cycle") ///
+xtitle("Year") ///
+note("Penn World Table Database")
+graph export "../output/graphs/US_hp_filter.pdf", replace
+
+keep if CLASS_CONFLICT == 1
 
 bysort group_country year: gen n_events = _N
 keep country group_country year hpres hpsm n_events
 duplicates drop
-drop if hpres == 0
 
-graph twoway ///
-(line hpres year) ///
-(line hpsm year) ///
-if country == "United States", ///
-ytitle ("Trend and Cycle") /// 
-note("Penn World Table Database") ///
-graphregion(fcolor(white))
-
-graph export "../output/graphs/US_hp_filter.pdf", replace
-
-graph twoway /// 
-(scatter hpres n_events) ///
-(lfit hpres n_events), ///
-ytitle ("Business Cycle") ///
-note("Penn World Table Database") ///
-graphregion(fcolor(white))
-
+graph twoway (scatter hpres n_events)(lfit hpres n_events), ///
+ytitle("Business Cycle") /// 
+xtitle("Number of Social Unrest Episodes") ///
+note("Penn World Table Database") 
 graph export "../output/graphs/hp_filter_social_unrest.pdf", replace
 ```
 
@@ -611,7 +615,7 @@ Here are the core rules to have in mind when you write some code.
 
 To follow along, save each code snippet as a separate do-file in "./part_3_advanced_material".
 
-#### 1. Your code should not be hieroglyphs!
+#### 1. Clarity, Consistency, Simplicity
 
 Anyone should be able to get a grasp of your code without reading the documentation. 
  
@@ -710,7 +714,7 @@ compute_hexagonal_sequence 100
 
 </details>
 
-#### 2. More advanced considerations
+#### 2. Automation and Scalability
 
 - **Automation**: It's OK to be lazy, but in a smart way. You should always follow the DRY principle (don't repeat yourself), also known as DIE (duplication is evil). This will allow your code to be *reusable* for other projects by yourself and other people. What looks like a waste of time at first becomes a fruitful investment.
 

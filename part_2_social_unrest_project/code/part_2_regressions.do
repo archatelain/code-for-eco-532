@@ -1,28 +1,18 @@
-use "../data/ssp_public.dta", clear
+clear all 
+use "../data/pwt91.dta"
 
-sutex N_INJURD, ///
-file("../output/tables/descriptive_statistics_injured.tex") /// 
-title("Summary statistics on injured people") ///
-replace
+ssc install hprescott, replace
+help hprescott
 
+egen group_country=group(country)
 
-reg N_INJURD coup
+replace rgdpe=subinstr(rgdpe,",",".",.)
+destring rgdpe, force replace 
+ 
+xtset group_country year
+bys group_country: hprescott rgdpe, stub(hp) smooth(6.25)
 
-xi: reg N_INJURD i.WEAP_GRD
-
-display e(N)
-display e(r2)
-matrix list e(b)
-display _b[_cons]
-
-predict predicted_injured, xb
-
-eststo clear
-
-eststo: xi: reg N_INJURD i.WEAP_GRD
-eststo: xi: reg N_INJURD i.WEAP_GRD i.region
-
-esttab est1 est2, ///
-addnotes("Source: SPEED Database")
-
-esttab using "../output/tables/regression_weapons.tex", replace 
+egen double hpsm = rowtotal(hp_rgdpe_sm_*)
+drop hp_rgdpe_sm_*
+egen double hpres = rowtotal(hp_rgdpe_*)
+drop hp_rgdpe_*
