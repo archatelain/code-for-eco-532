@@ -145,7 +145,9 @@ Now run this do-file. Have a look at the file "main_log.smcl" in the "logs" subd
 
 :trophy: Congrats! You've just written your first fully automated code pipeline!
 
-### 2. Asking for Help
+### 2. General Utility Commands
+
+#### Asking for Help
 
 You will never know all the commands, so learn to search efficiently. Most programming languages or script-based softwares have a dedicated command to access the documentation.
 
@@ -154,6 +156,26 @@ In Stata, you may type `help *your_command*` to access the documentation for a c
 ```
 help display
 ```	
+
+#### Adding Comments
+
+Commenting your code for your future self and colleagues is important. To write a comment within your script. Comments are discarded by the command line, so they won't make your code crash:
+
+```
+/* 
+This is a comment. 
+
+It will not be considered as a command for the command line, but may clarify what your code does for the reader. 
+
+Comments can be written over multiple lines and be as long as you wish (but be concise!).
+*/
+
+* This is also a comment, but for one-liners.
+```
+
+#### Installing Add-on Packages
+
+Some users propose add-on packages to use specific commands which were not originally implemented in Stata. To install such packages, simply type `ssc install *new-package*`. We will see several examples throughout this tutorial.
 
 ## II. Exploring a Dataset
 
@@ -256,6 +278,18 @@ For tables of descriptive statistics, you can also combine `tabulate` and `summa
 
 ```
 tabulate country, summarize(N_INJURD)
+```
+
+No need to copy tables by hand. With the add-on package "sutex", you can also output tables of descriptive statistics for later:
+
+```
+ssc install sutex 
+
+sutex N_INJURD, ///
+file("../output/tables/descriptive_statistics_injured.tex") /// 
+title("Summary statistics on injured people") ///
+replace
+
 ```
 
 ### 3. Cleaning/Preserving/Filtering Data
@@ -383,20 +417,6 @@ graph export "../output/graphs/corr_violence_injured.pdf", replace
 
 **Tips**
 
-- Commenting your code for your future self and colleagues is important. To write a comment within your script, combine asterisks and forward slashes:
-
-```
-/* 
-This is a comment. 
-
-It will not be considered as a command for the command line, but may clarify what your code does for the reader. 
-
-Comments can be written over multiple lines and be as long as you wish (but be concise!).
-*/
-
-* This is also a comment, but for one-liners.
-```
-
 - In some cases, adding options to your commands may lead to very long lines. Use `///` to continue a command on the next line. For graphs, I personally use one for every new specified option (so I can easily know what I added to each graph).
 
 - Stata's default background color for graphs is AWFUL :grimacing:. Make sure to add `graphregion(fcolor(white))` to remedy this.
@@ -405,8 +425,10 @@ Comments can be written over multiple lines and be as long as you wish (but be c
 
 ---
 
-**Exercise:** Try to come up with a simple graph on your own. Let me know what you find!
-
+**Exercise:** 
+1. Run this code by adding options sequentially to see how this changes the resulting graphs.
+2. Try to come up with a simple graph on your own. Let me know what you find!
+ 
 ---
 
 ### 5. Regressions
@@ -455,10 +477,7 @@ predict predicted_injured, xb
 
 Browse to have a look at the new variable "predicted_injured" and compare it to the true number of injured people "N_INJURD".
 
-### 6. Exporting Tables
-
-Some users propose add-on packages to use specific commands which were not originally implemented in Stata. 
-To install such packages, simply type `ssc install *new-package*`. For instance, once you have made tables in Stata, you can save yourself the worry of copying them by hand with the add-on package `estout`: [^1]
+Once you have made tables in Stata, you can save yourself the worry of copying them by hand with the add-on package `estout`: [^1]
 
 ```
 ssc install estout, replace
@@ -479,28 +498,7 @@ esttab using "../output/tables/regression_weapons.tex", replace
 
 [^1]: In fact, many options exist depending on your customization needs: https://lukestein.github.io/stata-latex-workflows/
 
----
-
-**Exercise:** Try to also export summary statistics on the variable N_INJURD. (Hint: `ssc install sutex`)
-
-<details>
-<summary>Click here for the solution.</summary>
-
-```
-ssc install sutex 
-
-sutex N_INJURD, ///
-file("../output/tables/descriptive_statistics_injured.tex") /// 
-title("Summary statistics on injured people") ///
-replace
-
-```
-
-</details>
-
----
-
-### 7. Going Further
+### 6. Going Further
 
 Let's try to dig deeper into our dataset, and ask a "real" research question: is there a relationship between business cycles and social unrest? 
 
@@ -574,7 +572,7 @@ graphregion(fcolor(white))
 graph export "../output/graphs/hp_filter_social_unrest.pdf", replace
 ```
 
-### 8. Putting the Pieces Together
+### 7. Putting the Pieces Together
 
 We've done a bunch of scripts. To automate the replication of results, let's wrap all these do-files into a "main.do". 
 
