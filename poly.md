@@ -159,7 +159,7 @@ help display
 
 #### Adding Comments
 
-Commenting your code for your future self and colleagues is important. To write a comment within your script. Comments are discarded by the command line, so they won't make your code crash:
+Commenting your code for your future self and colleagues is important. Comments are discarded by the command line, so they won't make your code crash. In Stata, they are delimited by: `/*` and `*/` or simply start with `*`:
 
 ```
 /* 
@@ -280,16 +280,19 @@ For tables of descriptive statistics, you can also combine `tabulate` and `summa
 tabulate country, summarize(N_INJURD)
 ```
 
-No need to copy tables by hand. With the add-on package "sutex", you can also output tables of descriptive statistics for later:
+No need to copy tables by hand. With the add-on package "sutex", you can also output tables of descriptive statistics in LateX format. Install the package first:
 
 ```
-ssc install sutex 
+ssc install sutex, replace
+```
 
+And here's an example:
+
+```
 sutex N_INJURD, ///
 file("../output/tables/descriptive_statistics_injured.tex") /// 
 title("Summary statistics on injured people") ///
 replace
-
 ```
 
 ### 3. Cleaning/Preserving/Filtering Data
@@ -606,7 +609,7 @@ log close
 Getting the computer to do what you want is good, but you should also take other factors into consideration. 
 Here are the core rules to have in mind when you write some code.
 
-To follow along, save each code snippet as a do-file in "./part_3_advanced_material".
+To follow along, save each code snippet as a separate do-file in "./part_3_advanced_material".
 
 #### 1. Your code should not be hieroglyphs!
 
