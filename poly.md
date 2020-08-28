@@ -417,42 +417,82 @@ Regression analysis is at the core of econometric theory. You will see the ins a
 help regress
 ```
 
-:file_folder: Create a do-file "part_2_regressions.do" and write:
+:file_folder: Create a do-file "part_2_regressions.do" and run the following regressions:
 
 ```
-* What country characteristics could explain social unrest? 
+* Is a coup correlated to more injured people? 
 
-reg y x
+reg N_INJURD coup
+
+* Is the type of weapon correlated to the number of injured people? 
+
+xi: reg N_INJURD i.WEAP_GRD
+
 ```
+
+Note that Stata automatically stores the results of your last regression, which means you can access those results later (see documentation for further details):
+
+```
+* Number of observations 
+display e(N)
+
+* R-squared
+display e(r2)
+
+* Estimated coefficients
+matrix list e(b)
+
+* One specific estimated coefficient (the 'constant' of the model)
+display _b[_cons]
+
+```
+
+You can also use your model to `predict` the number of injured people per incident given the type of weapons used:
+
+```
+predict predicted_injured, xb
+```
+
+Browse to have a look at the new variable "predicted_injured" and compare it to the true number of injured people "N_INJURD".
 
 ### 6. Exporting Tables
 
 Some users propose add-on packages to use specific commands which were not originally implemented in Stata. 
-To install such packages, simply type `ssc install *new-package*`.
-
-For instance, once you have made tables in Stata, you can save yourself the worry of copying them by hand with the add-on package `estout`: [^1]
+To install such packages, simply type `ssc install *new-package*`. For instance, once you have made tables in Stata, you can save yourself the worry of copying them by hand with the add-on package `estout`: [^1]
 
 ```
 ssc install estout, replace
 ``` 
 
-Let's export our regression results:
+Let's export our second regression results:
 
 ```
+eststo clear
 
+eststo: xi: reg N_INJURD i.WEAP_GRD
+
+esttab est1, ///
+addnotes("Source: SPEED Database")
+
+esttab using "../output/tables/regression_weapons.tex", replace
 ``` 
 
 [^1]: In fact, many options exist depending on your customization needs: https://lukestein.github.io/stata-latex-workflows/
 
 ---
 
-**Exercise:** Try to also export the summary tables we coded in Section II.2.
+**Exercise:** Try to also export summary statistics on the variable N_INJURD. (Hint: `ssc install sutex`)
 
 <details>
 <summary>Click here for the solution.</summary>
 
 ```
+ssc install sutex 
 
+sutex N_INJURD, ///
+file("../output/tables/descriptive_statistics_injured.tex") /// 
+title("Summary statistics on injured people") ///
+replace
 
 ```
 
@@ -580,7 +620,7 @@ Anyone should be able to get a grasp of your code without reading the documentat
 
 All this may sound ridiculous at first, but consider this: 
 1. You will be working in teams in the future, and many colleagues may have to fix your code at some point. 
-2. Sometimes, you will go back to code you wrote months or years before, and wish you had not called all your economic variables "x","y" and "z", instead of "gdp", "population" and "gini_index" :trollface:
+2. Sometimes, you will go back to code you wrote months or years before, and wish you had not called all your economic variables "x","y" and "z", instead of "gdp", "population" and "gini_index".
 
 <details>
 <summary>Click here to see a detailed higher level example.</summary>
