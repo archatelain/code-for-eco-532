@@ -24,7 +24,7 @@ The purpose of this mini-lecture is to provide you with a gentle introduction to
 2. Get a general overview of how an applied econometric project is structured;
 3. Learn to work with the simplest (and commonly used) statistical software, namely Stata.
 
-A few disclaimers before we begin:
+:grey_exclamation: A few disclaimers before we begin:
 - This lecture is not intended as an econometrics course. Though a basic understanding of statistics is required, we will not spend time on econometric theory. 
 - This lecture does not pretend to be comprehensive. Among the material which is not covered,  several object-oriented programming languages have gained traction in the private sector as well as in academic circles (in particular Python and R), and you will likely stumble upon such languages during your education and career. In the Master in Economics, several courses are taught in R or Python, which will allow you to get acquainted with these languages. Furthermore, most of the concepts and tips in this lecture may be transposed to more advanced programming languages.
 - Some of the code snippets in this tutorial are **hard** for beginners. Don't panic. They are here to give you a sense of what can be achieved with some experience. 
@@ -399,7 +399,7 @@ Comments can be written over multiple lines and be as long as you wish (but be c
 
 - In some cases, adding options to your commands may lead to very long lines. Use `///` to continue a command on the next line. For graphs, I personally use one for every new specified option (so I can easily know what I added to each graph).
 
-- Stata's default background color for graphs is AWFUL. Make sure to add `graphregion(fcolor(white))` to remedy this.
+- Stata's default background color for graphs is AWFUL :grimacing:. Make sure to add `graphregion(fcolor(white))` to remedy this.
 
 ---
 
@@ -425,14 +425,10 @@ help regress
 reg y x
 ```
 
-### 6. Add-on Packages
+### 6. Exporting Tables
 
 Some users propose add-on packages to use specific commands which were not originally implemented in Stata. 
-To install such packages:
-
-```
-help ssc install 
-```
+To install such packages, simply type `ssc install *new-package*`.
 
 For instance, once you have made tables in Stata, you can save yourself the worry of copying them by hand with add-on packages: [^1]
 
@@ -449,6 +445,7 @@ Let's try to dig deeper into our dataset, and ask a "real" research question: is
 In order to answer this question: 
 - We first need global comparable GDP measures, which you will find in "./part_2_social_unrest_project/data/pwt91.dta"
 - We also need a method to compute business cycle fluctuations. We will work with the commonly used Hodrick-Prescott filter. Fortunately, an add-on package "hprescott" exists.
+- We need to combine all this data together and plot some preliminary results.
 
 :file_folder: Create a do-file "computing_business_cycles.do" and write:
 
@@ -549,6 +546,8 @@ log close
 Getting the computer to do what you want is good, but you should also take other factors into consideration. 
 Here are the core rules to have in mind when you write some code.
 
+To follow along, save each code snippet as a do-file in "./part_3_advanced_material".
+
 #### 1. Your code should not be hieroglyphs!
 
 Anyone should be able to get a grasp of your code without reading the documentation. 
@@ -559,7 +558,7 @@ Anyone should be able to get a grasp of your code without reading the documentat
 
 All this may sound ridiculous at first, but consider this: 
 1. You will be working in teams in the future, and many colleagues may have to fix your code at some point. 
-2. Sometimes, you will go back to code you wrote months or years before, and wish you had not called all your economic variables "x","y" and "z", instead of "gdp", "population" and "gini_index". 
+2. Sometimes, you will go back to code you wrote months or years before, and wish you had not called all your economic variables "x","y" and "z", instead of "gdp", "population" and "gini_index" :trollface:.
 
 <details>
 <summary>Click here to see a detailed higher level example.</summary>
