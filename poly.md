@@ -19,12 +19,12 @@ Since the 1990s, the amount of data at our disposal has drastically increased, o
 
 Unsurprisingly, as more and more academics work with observational data, standards and best practices are progressively emerging to ensure the transparency and replicability of research papers. In fact, an increasing number of top journals require academics to provide detailed replication folders prior to publication (https://www.aeaweb.org/journals/policies/data-code). **In the future, you will need to meet these standards.**
 
-The purpose of this mini-lecture is to provide you with a gentle introduction to working with data in economics. In this course, you will:
+:clipboard: The purpose of this mini-lecture is to provide you with a gentle introduction to working with data in economics. In this course, you will:
 1. Find general advice on writing and thinking about code;
 2. Get a general overview of how an applied econometric project is structured;
 3. Learn to work with the simplest (and commonly used) statistical software, namely Stata.
 
-:grey_exclamation: A few disclaimers before we begin:
+:warning: A few disclaimers before we begin:
 - This lecture is not intended as an econometrics course. Though a basic understanding of statistics is required, we will not spend time on econometric theory. 
 - This lecture does not pretend to be comprehensive. Among the material which is not covered,  several object-oriented programming languages have gained traction in the private sector as well as in academic circles (in particular Python and R), and you will likely stumble upon such languages during your education and career. In the Master in Economics, several courses are taught in R or Python, which will allow you to get acquainted with these languages. Furthermore, most of the concepts and tips in this lecture may be transposed to more advanced programming languages.
 - Some of the code snippets in this tutorial are **hard** for beginners. Don't panic. They are here to give you a sense of what can be achieved with some experience. 
