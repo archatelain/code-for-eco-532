@@ -430,13 +430,35 @@ reg y x
 Some users propose add-on packages to use specific commands which were not originally implemented in Stata. 
 To install such packages, simply type `ssc install *new-package*`.
 
-For instance, once you have made tables in Stata, you can save yourself the worry of copying them by hand with add-on packages: [^1]
+For instance, once you have made tables in Stata, you can save yourself the worry of copying them by hand with the add-on package `estout`: [^1]
 
 ```
 ssc install estout, replace
 ``` 
 
+Let's export our regression results:
+
+```
+
+``` 
+
 [^1]: In fact, many options exist depending on your customization needs: https://lukestein.github.io/stata-latex-workflows/
+
+---
+
+**Exercise:** Try to also export the summary tables we coded in Section II.2.
+
+<details>
+<summary>Click here for the solution.</summary>
+
+```
+
+
+```
+
+</details>
+
+---
 
 ### 7. Going Further
 
@@ -558,7 +580,7 @@ Anyone should be able to get a grasp of your code without reading the documentat
 
 All this may sound ridiculous at first, but consider this: 
 1. You will be working in teams in the future, and many colleagues may have to fix your code at some point. 
-2. Sometimes, you will go back to code you wrote months or years before, and wish you had not called all your economic variables "x","y" and "z", instead of "gdp", "population" and "gini_index" :trollface:.
+2. Sometimes, you will go back to code you wrote months or years before, and wish you had not called all your economic variables "x","y" and "z", instead of "gdp", "population" and "gini_index" :trollface:
 
 <details>
 <summary>Click here to see a detailed higher level example.</summary>
