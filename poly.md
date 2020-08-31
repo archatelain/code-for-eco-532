@@ -317,7 +317,7 @@ keep if country == "United States"
 
 Let's keep the whole dataset for now. Erase the two last commands from your do-file and re-run the entire do-file. 
 
-Sometimes, you will want to do several operations on a database (which will mess it up), but keep a copy of the original data. The commands `preserve` and `restore` serve this purpose. Two examples:
+Sometimes, you will want to do several operations on a database (which will mess it up), but keep a copy of the original data. The commands `preserve` and `restore` serve this purpose:
 
 ```
 preserve
@@ -563,7 +563,9 @@ drop if hpres == 0
 graph twoway (line hpres year)(line hpsm year) if country=="United States", ///
 ytitle("Trend and Cycle") ///
 xtitle("Year") ///
-note("Penn World Table Database")
+note("Penn World Table Database") ///
+graphregion(fcolor(white))
+
 graph export "../output/graphs/US_hp_filter.pdf", replace
 
 keep if CLASS_CONFLICT == 1
@@ -575,7 +577,9 @@ duplicates drop
 graph twoway (scatter hpres n_events)(lfit hpres n_events), ///
 ytitle("Business Cycle") /// 
 xtitle("Number of Social Unrest Episodes") ///
-note("Penn World Table Database") 
+note("Penn World Table Database") ///
+graphregion(fcolor(white))
+
 graph export "../output/graphs/hp_filter_social_unrest.pdf", replace
 ```
 
