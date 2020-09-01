@@ -21,12 +21,31 @@ merge 1:n country year using "../data/ssp_public.dta"
 
 drop if hpres == 0
 
-graph twoway (line hpres year)(line hpsm year) if country=="United States", ///
-ytitle("Trend and Cycle") ///
+preserve
+keep if country=="United States"
+drop if hpres == 0
+
+graph twoway line hpres year, ///
+ytitle("Business Cycle") ///
 xtitle("Year") ///
 note("Penn World Table Database")
-graph export "../output/graphs/US_hp_filter.pdf", replace
 
+graph export "../output/graphs/US_hp_cycle.pdf", replace
+restore 
+
+preserve
+keep if country=="United States"
+drop if hpsm == 0
+
+graph twoway scatter hpsm year, ///
+ytitle("Business Trend") ///
+xtitle("Year") ///
+note("Penn World Table Database")
+
+graph export "../output/graphs/US_hp_trend.pdf", replace
+restore
+
+preserve
 keep if CLASS_CONFLICT == 1
 
 bysort group_country year: gen n_events = _N
@@ -37,4 +56,6 @@ graph twoway (scatter hpres n_events)(lfit hpres n_events), ///
 ytitle("Business Cycle") /// 
 xtitle("Number of Social Unrest Episodes") ///
 note("Penn World Table Database") 
+
 graph export "../output/graphs/hp_filter_social_unrest.pdf", replace
+restore

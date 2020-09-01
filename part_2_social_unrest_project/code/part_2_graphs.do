@@ -6,9 +6,6 @@ clear all
 
 use "../data/ssp_public.dta", clear
 
-clear all
-use "../data/ssp_public.dta", clear
-
 * Number of recorded incidents per year
 
 preserve
@@ -54,7 +51,7 @@ restore
 
 * Distribution of injured people
 
-kdensity N_INJURD, ///
+kdensity N_INJURD_D, ///
 ytitle("Density") ///
 xtitle ("# of Injured People") ///
 graphregion(fcolor(white))
