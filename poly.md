@@ -2,7 +2,9 @@
 
 ![alt text](images/IPP_logo.png " ")
 
+
 ---
+
 
 [[_TOC_]]
 
@@ -67,6 +69,14 @@ You should see a window like this appear:
 You will need to store your work somewhere (e.g. your data sources, scripts and results). 
 
 :file_folder: Download the folder code-for-econometrics-101 from this git repo. This will be the main directory of this mini-course. Then create a subfolder named "part_1_basics" in the main directory. We will work in this subdirectory for part I.
+
+Let us tell Stata that when looking for files it should start directly in this folder. Type:
+
+```
+cd <path to>\<our folder>
+```
+
+:exclamation: You should note type `<path to>\<our folder>` literally but rather put the path to the folder code-for-econometrics-101.
 
 #### 1.2. The command line
 
