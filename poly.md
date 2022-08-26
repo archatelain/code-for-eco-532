@@ -245,7 +245,7 @@ For now, you only have the databases we need in the "./part_2_social_unrest_proj
 ⚠️ Since we are now working in a different subfolder we need to change the working directory. Start your do-file with:
 
 ```Stata
-cd <path_to>\code-for-econometrics-101\part_2_social_unrest_project
+cd "<path_to>\code-for-econometrics-101\part_2_social_unrest_project"
 ```
 
 ### 1. Loading Data
