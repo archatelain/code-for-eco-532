@@ -70,13 +70,13 @@ You will need to store your work somewhere (e.g. your data sources, scripts and 
 
 :file_folder: Download the folder code-for-econometrics-101 from this git repo. This will be the main directory of this mini-course. Then create a subfolder named "part_1_basics" in the main directory. We will work in this subdirectory for part I.
 
-Let us tell Stata that when looking for files it should start directly in this folder. Type:
+Let us tell Stata that when looking for files it should start directly in the folder "code-for-econometrics-101". Type:
 
 ```
-cd <path to>\<our folder>
+cd <path to>\code-for-econometrics-101\part_1_basics
 ```
 
-:exclamation: You should note type `<path to>\<our folder>` literally but rather put the path to the folder code-for-econometrics-101.
+:exclamation: You should not type `<path to>\` literally but rather put the path to the folder "code-for-econometrics-101".
 
 #### 1.2. The command line
 
@@ -89,6 +89,15 @@ In Stata, the command line is a box at the bottom of the interface. Type the fol
 ```
 display "This is a test."
 ```
+
+Now type:
+
+```
+display error
+```
+
+You should see on the left panel the `display error` appear in red. Do not try to delete this line, this panel simply records everything you type. 
+
 
 #### 1.3 Scripts
 
@@ -143,7 +152,9 @@ do "and_so_on_and_so_forth.do"
 
 **Definition:** *"In computing, a log file is a file that records [...] events that occur in an operating system or other software runs." (Wikipedia)*
 
-I hate to break it out to you, but more often than not, things will go wrong. Log files help you keep track of what the computer did and whether it flagged some errors. Edit your "main.do" file to look like this:
+I hate to break it out to you, but more often than not, things will go wrong. Log files help you keep track of what the computer did and whether it flagged some errors. 
+
+Create a subfolder in "part_1_basics" called "logs" and edit your "main.do" file to look like this:
 
 ```
 log using "./logs/main_log", replace
@@ -225,16 +236,24 @@ Now that we are going to work with real data, we are likely to create much more 
        |-- main_log.smcl
 ```
 
-For now, you only have the databases we need in the "./part_2_social_unrest_project/data".
+For now, you only have the databases we need in the "./part_2_social_unrest_project/data" but you can already create all four subfolders.
 
 :file_folder: To follow along, create a do-file "part_2_essentials.do". Save it in "./part_2_social_unrest_project/code/".
+
+⚠️ Since we are now working in a different subfolder we need to change the working directory. Start your do-file with:
+
+```
+cd <path_to>\code-for-econometrics-101\part_2_social_unrest_project
+```
+
+
 
 ### 1. Loading Data 
 
 You first need to load the database into Stata. In order to do this, run the following command:
 
 ```
-use "../data/ssp_public.dta", clear
+use "./data/ssp_public.dta", clear
 ```
 
 To see the database like an excel spreadsheet, type:
@@ -300,7 +319,7 @@ And here's an example:
 
 ```
 sutex N_INJURD, ///
-file("../output/tables/descriptive_statistics_injured.tex") /// 
+file("./output/tables/descriptive_statistics_injured.tex") /// 
 title("Summary statistics on injured people") ///
 replace
 ```
@@ -360,7 +379,11 @@ help graph
 
 ```
 clear all
-use "../data/ssp_public.dta", clear
+
+cd "<path_to>/part_2_social_unrest_project" 
+* don't forget to adapt the <path_to>
+
+use "./data/ssp_public.dta", clear
 
 * Number of recorded incidents per year
 
@@ -373,7 +396,7 @@ xtitle("Year") ///
 note("Source: SPEED Database") ///
 graphregion(fcolor(white))
 
-graph export "../output/graphs/yearly_events.pdf", replace
+graph export "./output/graphs/yearly_events.pdf", replace
 restore
 
 * Number of recorded incidents per year for the United States
@@ -387,7 +410,7 @@ xtitle("Year") ///
 note("Source: SPEED Database") ///
 graphregion(fcolor(white))
 
-graph export "../output/graphs/yearly_events_US.pdf", replace
+graph export "./output/graphs/yearly_events_US.pdf", replace
 restore
 
 * Bar plot of event types
@@ -402,7 +425,7 @@ ytitle("Number of Events") ///
 note("Source: SPEED Database") ///
 graphregion(fcolor(white))
 
-graph export "../output/graphs/event_types.pdf", replace
+graph export "./output/graphs/event_types.pdf", replace
 restore
 
 * Distribution of injured people
@@ -412,7 +435,7 @@ ytitle("Density") ///
 xtitle ("# of Injured People") ///
 graphregion(fcolor(white))
 
-graph export "../output/graphs/density_injured.pdf", replace
+graph export "./output/graphs/density_injured.pdf", replace
 
 * Correlation between political violence and number of injured people
 
@@ -425,7 +448,7 @@ xtitle("# of People Injured") ///
 note("Source: SPEED Database") ///
 graphregion(fcolor(white))
 
-graph export "../output/graphs/corr_violence_injured.pdf", replace
+graph export "./output/graphs/corr_violence_injured.pdf", replace
 
 ``` 
 ---
@@ -459,7 +482,9 @@ help regress
 ```
 clear all 
 
-use "../data/ssp_public.dta"
+cd "<path_to>/part_2_social_unrest_project"
+
+use "./data/ssp_public.dta"
 
 * Is a coup correlated to more injured people? 
 
@@ -467,7 +492,7 @@ reg N_INJURD coup
 
 * Is the type of weapon correlated to the number of injured people? 
 
-xi: reg N_INJURD i.WEAP_GRD
+reg N_INJURD i.WEAP_GRD
 
 ```
 
@@ -507,12 +532,12 @@ Let's export our second regression results:
 ```
 eststo clear
 
-eststo: xi: reg N_INJURD i.WEAP_GRD
+eststo: reg N_INJURD i.WEAP_GRD
 
 esttab est1, ///
 addnotes("Source: SPEED Database")
 
-esttab using "../output/tables/regression_weapons.tex", replace
+esttab using "./output/tables/regression_weapons.tex", replace
 ``` 
 
 [^1]: In fact, many options exist depending on your customization needs: https://lukestein.github.io/stata-latex-workflows/
@@ -530,7 +555,10 @@ In order to answer this question:
 
 ```
 clear all 
-use "../data/pwt91.dta"
+
+cd "<path_to>\part_2_social_unrest_project"
+
+use "./data/pwt91.dta"
 
 ssc install hprescott, replace
 help hprescott
@@ -548,7 +576,6 @@ drop hp_rgdpe_sm_*
 egen double hpres = rowtotal(hp_rgdpe_*)
 drop hp_rgdpe_*
 ```
-
 ---
 
 **Exercise:** Tear apart the code above using the "help" command. Do some tests on your own. Let me know which commands remain unclear to you.
@@ -954,8 +981,7 @@ Finally, though data manipulation is at the core of the economist's toolkit, kee
 1. Data is not the absolute, immaculate, objective truth of the world. Check your data sources and try to understand your database's limitations.
 2. Data by itself is meaningless. Economic theory and econometrics will help you extract interesting insights out of your databases.
 
-I hope you found this tutorial interesting. Feel free to send me any comments/questions by mail:
-germain.gauthier[at]polytechnique.edu
+I hope you found this tutorial interesting. Feel free to send me any comments/questions by mail: arnault.chatelain[at]ensae.fr
 
 ## Additional Material 
 
