@@ -180,6 +180,9 @@ In Stata, you may type `help *your_command*` to access the documentation for a c
 help display
 ```
 
+💡 Since we are in 2023 now, you can also make us of ChatGPT and comparable Large Language Models (LLMs) to help you code. 
+
+
 #### Adding Comments
 
 Commenting your code for your future self and colleagues is important. Comments are discarded by the command line, so they won't make your code crash. In Stata, they are delimited by: `/*` and `*/` or simply start with `*`:
